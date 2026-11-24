@@ -1,0 +1,16 @@
+{
+  "name": "alsharq-program-finder",
+  "private": true,
+  "description": "Al Sharq Youth Program Finder: a bingo-style survey for Al Sharq Forum 2026.",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "check": "node tests/check-content.mjs",
+    "smoke": "node tests/smoke.mjs",
+    "qr": "node tests/make-qr.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.49.1",
+    "qrcode": "1.5.4"
+  }
+}
