@@ -20,7 +20,19 @@
     "thatsMe": "That’s me!",
     "ticketNo": "No.",
     "draftNote": "",
-    "sound": "Sound on or off"
+    "sound": "Sound on or off",
+    "contactTitle": "Hear when applications open",
+    "contactName": "Your name",
+    "contactEmail": "Email",
+    "contactPhone": "Phone (optional)",
+    "contactConsent": "I agree that Al Sharq Youth may keep these details and contact me about its programs. I can ask for them to be deleted at any time.",
+    "contactPrivacy": "How we use your details",
+    "contactSend": "Send my details",
+    "contactThanks": "Thank you! We’ll be in touch when applications open.",
+    "contactNameError": "Please write your name.",
+    "contactEmailError": "Please check your email address.",
+    "contactPhoneError": "Please check the number, or leave it empty.",
+    "contactConsentError": "Please tick the box so we can keep your details."
   },
   "streams": {
     "F": "Fellowship",

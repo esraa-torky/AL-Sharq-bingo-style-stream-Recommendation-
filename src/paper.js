@@ -52,19 +52,15 @@ let seedN = 7;
   function labelBtn(text) { var w = h('div', 'label-wrap'), b = h('button', 'label-btn', '<span>' + text + '</span>' + ARROW); b.type = 'button'; deckle(b, 1.6, 'r'); w.appendChild(b); return w; }
 
   /* a phone = stacked paper sheets */
-  function phone(extraNext) {
+  function phone() {
     var p = h('div', 'phone');
     ['b2', 'b1'].forEach(function (k) { var l = h('div', 'layer ' + k), s = h('div', 'sheet grain'); deckle(s, 2.6, 'trbl'); l.appendChild(s); p.appendChild(l); });
-    if (extraNext) { var ln = h('div', 'layer next'), sn = h('div', 'sheet grain'); deckle(sn, 2.2, 'rb'); sn.appendChild(h('div', 'content')); ln.appendChild(sn); p.appendChild(ln); }
     var lt = h('div', 'layer top'), st = h('div', 'sheet grain'); deckle(st, 2.2, 'rb');
     var c = h('div', 'content'); st.appendChild(c); lt.appendChild(st); p.appendChild(lt);
-    p.top = st; p.c = c; p.next = extraNext ? p.querySelector('.layer.next .content') : null;
+    p.top = st; p.c = c;
     return p;
-  }
-  function strip(pct) {
-    var t = h('div', 'strip-track'), w = h('div', 'strip-wrap'), s = h('div', 'strip'); deckle(s, 1.1, 'r'); w.style.width = pct + '%'; w.appendChild(s); t.appendChild(w); return t;
   }
   function papered(cls, wrapCls, html, amp) { var w = h('div', wrapCls), n = h('div', cls, html); deckle(n, amp || 1.4, 'trbl'); w.appendChild(n); return w; }
 
   function dot(color, pop) { var d = h('span', 'dot' + (pop ? ' pop' : '')), i = h('i'); i.style.color = color; d.appendChild(i); return d; }
-export { rng, deckle, addRims, h, ARROW, logos, labelBtn, phone, papered, dot };
+export { deckle, addRims, h, logos, labelBtn, phone, papered, dot };

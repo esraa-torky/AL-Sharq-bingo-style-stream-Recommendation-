@@ -42,6 +42,7 @@ export function curl({ stage, flat, flap, shine, fromLeft, ms, done }) {
   let frames = 0, last = start, slow = 0;
 
   function frame() {
+    if (!stage.isConnected) return; // the turn was cut short (a quick second tap, or the page was redrawn)
     const now = performance.now();
     if (frames++ > 0 && now - last > 45) slow++; // a frame that took longer than about 1/22 s
     last = now;

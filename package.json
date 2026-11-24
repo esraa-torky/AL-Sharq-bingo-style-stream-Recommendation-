@@ -6,6 +6,7 @@
   "scripts": {
     "start": "python3 -m http.server 8000",
     "check": "node tests/check-content.mjs",
+    "check:script": "node tests/check-apps-script.mjs",
     "smoke": "node tests/smoke.mjs",
     "qr": "node tests/make-qr.mjs"
   },

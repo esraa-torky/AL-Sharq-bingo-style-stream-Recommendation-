@@ -15,6 +15,7 @@ jobs:
         with:
           node-version: 22
       - run: node tests/check-content.mjs
+      - run: node tests/check-apps-script.mjs
 
   smoke:
     name: Smoke test (phone and iPad, all languages)

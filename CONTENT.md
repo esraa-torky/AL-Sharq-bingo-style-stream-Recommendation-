@@ -37,6 +37,8 @@ Keep each pull request small and about one thing (for example "reword question 3
   `personality.areas` holds the short strength labels.
 - `cells` is the 5 × 5 bingo card. The middle cell is shown as a star, so its text is never displayed.
 - Keep answers short: they sit in squares. About **6 words or fewer** works best on a phone.
+- `ui.contact...` is the contact form on the result screen. `ui.contactConsent` is the consent visitors agree to,
+  and it is saved with their details. Have any change to it checked by whoever handles data protection.
 - `ui.draftNote` is shown under the welcome text while a translation is still a draft.
   Set it to `""` once a native speaker has checked that language.
 
@@ -61,6 +63,8 @@ Keep each pull request small and about one thing (for example "reword question 3
 - `rules`: which time and age answers trigger the special next steps.
 - `idleSeconds`: how long the result stays up at the stand before it goes back to the welcome screen.
 - `resultsUrl`: the Google Apps Script address that saves results (see README.md). Leave empty to save nothing.
+- `privacyUrl`: the address (`https://...`) of Al Sharq Youth's privacy notice. When set, a link to it appears under
+  the consent box. Leave empty for no link.
 - `draftLanguages`: languages that still show the draft note.
 - `pageTurnSound`: the audio file played on each page turn, for example `assets/sounds/page-turn.mp3`. Leave empty for the built-in paper rustle.
 

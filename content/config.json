@@ -123,5 +123,6 @@
   },
   "idleSeconds": 60,
   "resultsUrl": "https://script.google.com/macros/s/AKfycbyq7eApNBImrOQgjbU0LUErO2lA5nqizyR3_NW__qCngo9yWfPMz461uJT38yIsC3X3Xg/exec",
+  "privacyUrl": "",
   "pageTurnSound": "assets/sounds/page-turn.mp3"
 }

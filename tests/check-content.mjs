@@ -31,7 +31,9 @@ for (const s of streams) {
     if (!Number.isInteger(v) || v < 0 || v > 3) err(`config.json: matrix ${s}.${d} must be a whole number from 0 to 3 (found ${v})`);
   }
   for (const k of Object.keys(row)) if (!areas.includes(k)) err(`config.json: matrix ${s} has unknown area "${k}"`);
-  sums.add(areas.reduce((a, d) => a + (row[d] || 0), 0));
+  const sum = areas.reduce((a, d) => a + (row[d] || 0), 0);
+  if (!(sum > 0)) err(`config.json: matrix ${s} has no weights at all (every stream needs some)`);
+  sums.add(sum);
 }
 if (sums.size > 1) err(`config.json: every matrix row must add up to the same total (found ${[...sums].join(', ')}). Use 10 for each.`);
 if ([...streams].sort().join() !== [...(config.tieOrder || [])].sort().join()) err('config.json: tieOrder must list every stream once');
@@ -47,6 +49,7 @@ for (const s of streams) {
 }
 if (!(config.idleSeconds >= 10)) err('config.json: idleSeconds should be at least 10');
 if (config.resultsUrl && !/^https:\/\/script\.google\.com\//.test(config.resultsUrl)) warn('config.json: resultsUrl does not look like a Google Apps Script web app address');
+if (config.privacyUrl && !/^https:\/\/[^\s"<>]+$/.test(config.privacyUrl)) err('config.json: privacyUrl must be a full https:// address, or empty');
 
 /* ---------- questions ---------- */
 const checkPoints = (where, pts) => {
@@ -114,6 +117,8 @@ if (en) {
   for (const s of streams) if (!en.streams?.[s]) err(`en.json: no name for stream ${s}`);
   if (en.cells?.length !== 5 || en.cells.some((row) => row.length !== 5)) err('en.json: cells must be 5 rows of 5');
   if (en.scale?.length !== 4) err('en.json: scale must have 4 labels');
+  for (const k of ['contactTitle', 'contactName', 'contactEmail', 'contactPhone', 'contactConsent', 'contactPrivacy', 'contactSend', 'contactThanks',
+    'contactNameError', 'contactEmailError', 'contactPhoneError', 'contactConsentError']) if (!en.ui?.[k]) err(`en.json: ui.${k} is missing (the contact form needs it)`);
   for (const [l, t] of Object.entries(texts)) if (t && t !== en) compare(en, t, '', l);
 }
 

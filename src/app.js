@@ -1,7 +1,8 @@
 // Program Finder app: welcome, questions, result. All text and points come from content/*.json.
 import { buildQuestions, areaMax, lean, score, profile, nextStepKey, fill } from './scoring.js';
 import { deckle, addRims, h, logos, labelBtn, phone, papered, dot } from './paper.js';
-import { saveResult, flushQueue } from './save.js';
+import { saveRow, flushQueue } from './save.js';
+import { checkContact, LIMITS } from './contact.js';
 import { turn, stamp, soundOn, setSound, useRecording } from './sound.js';
 import { curl } from './curl.js';
 
@@ -14,7 +15,16 @@ const wide = window.matchMedia('(min-width: 900px) and (min-height: 560px) and (
 
 let config, questions, texts = {};
 let lang, QS, MAX;
-let step = -1, picks = [], timer = null, idle = null, saved = false;
+let step = -1, picks = [], idle = null, saved = false;
+// what the visitor has typed in the contact form, kept here so a language switch or rotation does not lose it
+const NO_CONTACT = { name: '', email: '', phone: '', consent: false };
+let contact = { ...NO_CONTACT }, contactErrors = [], contactSent = false;
+
+// The stand's iPad runs the site from the home screen (full screen), or with ?kiosk in the address.
+// There, a survey left half-way also goes back to the welcome screen, and the browser never offers to fill in
+// the previous visitor's name or email.
+const kiosk = window.matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches ||
+  navigator.standalone === true || new URLSearchParams(location.search).has('kiosk');
 
 async function loadJSON(path) {
   const r = await fetch(path, { cache: 'no-cache' });
@@ -129,8 +139,8 @@ function ticket(pr) {
 /* enter: 'fwd' when moving on (the new sheet settles from underneath), 'back' when going back
    (the previous sheet is laid back on top), or nothing for an instant redraw (language, rotation). */
 function render(enter) {
-  clearTimeout(timer); clearTimeout(idle);
-  const t = T(), tab = wide.matches, p = phone(false);
+  clearTimeout(idle);
+  const t = T(), tab = wide.matches, p = phone();
   if (enter) p.classList.add('enter-' + enter);
   let c = p.c, R = null;
   p.setAttribute('lang', lang); p.dir = document.documentElement.dir;
@@ -148,7 +158,7 @@ function render(enter) {
     c.appendChild(h('p', 'lede', t.ui.lede));
     c.appendChild(h('div', 'spacer'));
     const bt = labelBtn(t.ui.begin); bt.id = 'begin';
-    bt.querySelector('button').addEventListener('click', () => { picks = []; saved = false; advance(p); });
+    bt.querySelector('button').addEventListener('click', () => { forget(); advance(p); });
     c.appendChild(bt);
     c.appendChild(h('p', 'fine', fill(t.ui.fine, { n: QS.length })));
     if (config.draftLanguages.includes(lang) && t.ui.draftNote) c.appendChild(h('p', 'draft', t.ui.draftNote));
@@ -198,17 +208,17 @@ function render(enter) {
     c.appendChild(h('div', 'spacer'));
     const key = nextStepKey(config, QS, picks, win);
     c.appendChild(papered('next-card', 'next-wrap', '<b>' + t.ui.nextStep + '</b><span>' + fill(t.steps[key], { stream: name }) + '</span>', 1.4));
-    const so = labelBtn(t.ui.startOver); so.id = 'start-over';
-    so.querySelector('button').addEventListener('click', () => restart(true));
+    c.appendChild(contactForm(win));
+    const so = h('button', 'restart', t.ui.startOver); so.type = 'button'; so.id = 'start-over';
+    so.addEventListener('click', () => restart(true));
     c.appendChild(so);
     c.appendChild(h('p', 'idle', fill(t.ui.idle, { s: config.idleSeconds })));
-    idle = setTimeout(restart, config.idleSeconds * 1000);
     p.classList.add('result');
     p.dataset.win = win; p.dataset.type = pr.type;
     if (!saved) {
       saved = true;
-      saveResult(config.resultsUrl, {
-        time: new Date().toISOString(), lang, style: config.questionStyle,
+      saveRow(config.resultsUrl, {
+        type: 'result', time: new Date().toISOString(), lang, style: config.questionStyle,
         answers: QS.map((q, i) => q.id + '=' + (picks[i] == null ? '' : q.answers[picks[i]].id)).join(' '),
         stream: win, personality: pr.type, strengths: pr.top.join(' '), nextStep: key,
         scores: config.streams.map((s) => s + ':' + res.scores[s].toFixed(3)).join(' '),
@@ -216,7 +226,86 @@ function render(enter) {
     }
   }
   root.innerHTML = ''; root.appendChild(p); addRims(root);
+  armIdle();
+  // after moving to another screen, screen readers start at its heading
+  if (enter) focusOn('h1, h2', true);
 }
+
+function focusOn(sel, quiet) {
+  const el = root.querySelector('.phone > .layer.top ' + sel.split(', ').join(', .phone > .layer.top '));
+  if (!el) return;
+  if (!el.matches('input, button, a')) el.tabIndex = -1;
+  el.focus({ preventScroll: !!quiet });
+}
+
+/* Contact details: optional, and only sent once the visitor ticks the consent box.
+   Typed text only ever goes into input values and the queued row, never into the page's HTML. */
+function contactForm(win) {
+  const ui = T().ui, wrap = h('div', 'contact-wrap');
+  if (contactSent) {
+    const thanks = h('p', 'contact-thanks', ui.contactThanks);
+    thanks.id = 'contact-thanks'; thanks.setAttribute('role', 'status');
+    wrap.appendChild(thanks);
+    return wrap;
+  }
+  const form = h('form', 'contact'); form.id = 'contact'; form.noValidate = true;
+  form.setAttribute('aria-labelledby', 'contact-title');
+  const title = h('h2', 'contact-title', ui.contactTitle); title.id = 'contact-title';
+  form.appendChild(title);
+  const field = (k, type, label, auto, attrs) => {
+    const box = h('div', 'cf'), id = 'c-' + k, bad = contactErrors.includes(k);
+    const lab = h('label', null, label); lab.htmlFor = id;
+    const input = h('input'); input.id = id; input.name = k; input.type = type; input.maxLength = LIMITS[k]; input.value = contact[k];
+    input.autocomplete = kiosk ? 'off' : auto;
+    // on the shared iPad, keep the keyboard from learning (and later suggesting) a visitor's name or email
+    if (kiosk) { input.setAttribute('autocorrect', 'off'); input.spellcheck = false; }
+    for (const a in attrs) input.setAttribute(a, attrs[a]);
+    const err = h('p', 'cf-error', ui['contact' + k[0].toUpperCase() + k.slice(1) + 'Error']); err.id = id + '-error'; err.hidden = !bad;
+    input.setAttribute('aria-describedby', err.id); input.setAttribute('aria-invalid', String(bad));
+    input.addEventListener('input', () => { contact[k] = input.value; });
+    box.appendChild(lab); box.appendChild(input); box.appendChild(err);
+    form.appendChild(box);
+  };
+  field('name', 'text', ui.contactName, 'name', { dir: 'auto', autocapitalize: 'words' });
+  field('email', 'email', ui.contactEmail, 'email', { dir: 'ltr', inputmode: 'email', autocapitalize: 'none' });
+  field('phone', 'tel', ui.contactPhone, 'tel', { dir: 'ltr', inputmode: 'tel' });
+  const cb = h('div', 'cf cf-consent'), tick = h('input'), lab = h('label', null, ui.contactConsent);
+  tick.type = 'checkbox'; tick.id = 'c-consent'; tick.checked = contact.consent; lab.htmlFor = tick.id;
+  tick.addEventListener('change', () => { contact.consent = tick.checked; });
+  const cerr = h('p', 'cf-error', ui.contactConsentError); cerr.id = 'c-consent-error'; cerr.hidden = !contactErrors.includes('consent');
+  tick.setAttribute('aria-describedby', cerr.id); tick.setAttribute('aria-invalid', String(!cerr.hidden));
+  cb.appendChild(tick); cb.appendChild(lab);
+  if (config.privacyUrl) {
+    const a = h('a', 'cf-privacy', ui.contactPrivacy); a.href = config.privacyUrl; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    cb.appendChild(a);
+  }
+  cb.appendChild(cerr);
+  form.appendChild(cb);
+  const send = labelBtn(ui.contactSend); send.id = 'contact-send'; send.querySelector('button').type = 'submit';
+  form.appendChild(send);
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const r = checkContact(contact);
+    contactErrors = r.errors;
+    if (!r.ok) { render(); focusOn('#c-' + r.errors[0]); return; }
+    saveRow(config.resultsUrl, { type: 'contact', lang, stream: win, ...r.value, consent: true, consentText: ui.contactConsent });
+    contact = { ...NO_CONTACT }; contactSent = true;
+    stamp(); render(); focusOn('#contact-thanks');
+  });
+  wrap.appendChild(form);
+  return wrap;
+}
+
+/* Going back to the welcome screen for the next visitor: from the result after idleSeconds without a tap,
+   and (on the stand's iPad only) from a survey left half-way after twice that. Any tap or key press starts the wait again. */
+function armIdle() {
+  clearTimeout(idle); idle = null;
+  if (!config || step < 0) return;
+  const onResult = step >= QS.length;
+  if (!onResult && !kiosk) return; // on a visitor's own phone, a half-finished survey waits for them
+  idle = setTimeout(() => restart(), (window.__idleMs || config.idleSeconds * 1000) * (onResult ? 1 : 2));
+}
+['pointerdown', 'keydown', 'input'].forEach((ev) => document.addEventListener(ev, armIdle, true));
 
 function pick(i, grid) {
   if (picks[step] !== i) stamp();
@@ -278,7 +367,7 @@ function advance(p) {
   const done = () => { book.remove(); if (turning === book) turning = null; };
   const ms = window.__turnMs || TURN_MS; // tests can slow the turn down to inspect it
   if (reduce || lite) {
-    book.addEventListener('animationend', done);
+    book.addEventListener('animationend', (e) => { if (e.target === book) done(); }); // not an animation inside the copied page
     setTimeout(() => { if (book.isConnected) done(); }, 1000);
     return;
   }
@@ -289,7 +378,8 @@ function advance(p) {
   setTimeout(() => { if (book.isConnected) done(); }, ms + 600); // safety net
 }
 
-function restart(fromButton) { if (fromButton === true) turn(); step = -1; picks = []; saved = false; render('fwd'); }
+function forget() { picks = []; saved = false; contact = { ...NO_CONTACT }; contactErrors = []; contactSent = false; }
+function restart(fromButton) { if (fromButton === true) turn(); forget(); step = -1; render('fwd'); }
 
 // Hooks for the automated tests (tests/smoke.mjs).
 window.__finder = { score: (pk) => score(config, QS, pk, MAX), questions: () => QS, setLang: (l) => setLang(l) };

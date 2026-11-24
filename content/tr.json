@@ -20,7 +20,19 @@
     "thatsMe": "Bu benim!",
     "ticketNo": "No.",
     "draftNote": "Taslak çeviri.",
-    "sound": "Sesi aç veya kapat"
+    "sound": "Sesi aç veya kapat",
+    "contactTitle": "Başvurular açılınca haberin olsun",
+    "contactName": "Adın",
+    "contactEmail": "E-posta",
+    "contactPhone": "Telefon (isteğe bağlı)",
+    "contactConsent": "Al Sharq Youth’un bu bilgileri saklamasını ve programları hakkında benimle iletişime geçmesini kabul ediyorum. Bilgilerimin silinmesini istediğim zaman isteyebilirim.",
+    "contactPrivacy": "Bilgilerini nasıl kullanıyoruz",
+    "contactSend": "Bilgilerimi gönder",
+    "contactThanks": "Teşekkürler! Başvurular açıldığında sana haber vereceğiz.",
+    "contactNameError": "Lütfen adını yaz.",
+    "contactEmailError": "Lütfen e-posta adresini kontrol et.",
+    "contactPhoneError": "Lütfen numarayı kontrol et ya da boş bırak.",
+    "contactConsentError": "Bilgilerini saklayabilmemiz için lütfen kutuyu işaretle."
   },
   "streams": {
     "F": "Fellowship",
