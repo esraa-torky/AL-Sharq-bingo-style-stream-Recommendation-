@@ -2,7 +2,7 @@
   "ui": {
     "title": "Programını<br>Keşfet",
     "lede": "Sana benzeyen kareyi işaretle. Kartını doldur, tombala de, akışınla tanış.",
-    "fine": "{n} soru, yaklaşık iki dakika. Anonim: adını asla sormuyoruz.",
+    "fine": "{n} soru, yaklaşık iki dakika. Sonunda, başvurular açıldığında sana haber verebilmemiz için adını, e-postanı ve telefon numaranı soracağız.",
     "begin": "Başla",
     "back": "Geri",
     "next": "İleri",
