@@ -19,7 +19,8 @@
     "idle": "Sonraki ziyaretçi için {s} saniye içinde başa döner.",
     "thatsMe": "Bu benim!",
     "ticketNo": "No.",
-    "draftNote": "Taslak çeviri."
+    "draftNote": "Taslak çeviri.",
+    "sound": "Sesi aç veya kapat"
   },
   "streams": {
     "F": "Fellowship",

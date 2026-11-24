@@ -90,8 +90,24 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .next-card{background:var(--pink);padding:12px 14px;font-size:14px;display:grid;gap:2px;color:var(--ink)}
 .next-card b{font-family:var(--font-display);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--burg)}
 
-/* slide-away sheet */
-.layer.layer.phone.flipped .layer.next .content{justify-content:center;align-items:flex-start;gap:12px}
+/* ---------- page turns ----------
+   Moving on: the top sheet is torn off and slides away (.flipped), then the next sheet settles from underneath (.enter-fwd).
+   Going back: the previous sheet is laid back on top (.enter-back). In Arabic the sheet leaves to the other side. */
+.phone{--away:-1}
+[dir="rtl"] .phone,.phone[dir="rtl"]{--away:1}
+.layer.top{transform-origin:50% 100%;transition:transform .48s cubic-bezier(.55,.05,.55,1),opacity .3s .18s}
+.phone.flipped .layer.top{transform:translate(calc(var(--away) * 115%),40px) rotate(calc(var(--away) * 12deg));opacity:0;pointer-events:none}
+.phone.flipped .layer.b1{transform:rotate(-.6deg) translate(-2px,2px);transition:transform .45s .05s}
+.phone.enter-fwd .layer.top{animation:sheet-settle .42s cubic-bezier(.2,.8,.3,1) both}
+.phone.enter-fwd .content>*{animation:ink-in .4s .12s ease-out both}
+.phone.enter-back .layer.top{animation:sheet-return .45s cubic-bezier(.2,.8,.3,1) both}
+@keyframes sheet-settle{from{transform:translateY(14px) scale(.965) rotate(.8deg);filter:brightness(.97)}to{transform:none;filter:none}}
+@keyframes sheet-return{from{transform:translate(calc(var(--away) * 115%),40px) rotate(calc(var(--away) * 12deg));opacity:0}to{transform:none;opacity:1}}
+@keyframes ink-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.sound-toggle{width:36px;min-height:32px;display:grid;place-items:center;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--burg)}
+.sound-toggle svg{width:18px;height:18px}
+.sound-toggle[aria-pressed="false"]{color:var(--muted)}
+.tablet .sound-toggle{width:44px;min-height:40px}
 .replay{font-family:var(--font-hand);font-size:22px;color:var(--burg);text-decoration:underline;text-underline-offset:4px;min-height:40px}
 
 /* ---------- E: bingo card ---------- */
@@ -149,8 +165,9 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .q-big{font-size:22px;font-weight:700;line-height:1.2;letter-spacing:-0.02em;font-family:var(--font-display)}
 .sq-grid .sq button{min-height:112px}
 .sq-grid .sq .ans{font-size:15px;font-weight:500;line-height:1.25}
-.sq .ink-ring{position:absolute;left:50%;top:50%;width:92px;height:92px;margin:-46px 0 0 -46px;border-radius:50%;border:4px solid var(--gold);color:var(--gold);display:grid;place-items:center;text-align:center;padding:10px;font-family:var(--font-hand);font-size:19px;line-height:.95;opacity:0;transform:scale(1.6) rotate(-14deg);pointer-events:none;transition:opacity .15s,transform .3s cubic-bezier(.2,1.6,.4,1)}
-.sq.ink.on .ink-ring{opacity:.95;transform:scale(1) rotate(-14deg)}
+.sq .ink-ring{position:absolute;left:50%;top:50%;height:calc(100% - 16px);max-height:92px;width:auto;aspect-ratio:1;border-radius:50%;border:4px solid var(--gold);color:var(--gold);display:grid;place-items:center;text-align:center;padding:6px;font-family:var(--font-hand);font-size:17px;line-height:.95;opacity:0;transform:translate(-50%,-50%) scale(1.6) rotate(-14deg);pointer-events:none;transition:opacity .15s,transform .3s cubic-bezier(.2,1.6,.4,1)}
+/* the ring always fits inside its square: its size follows the square's height, up to 92px */
+.sq.ink.on .ink-ring{opacity:.95;transform:translate(-50%,-50%) scale(1) rotate(-14deg)}
 .sq.on{z-index:2}
 .sq button:active{transform:translateY(1px)}
 .result-card .mycard-row .ms{height:54px;font-size:22px}
@@ -161,7 +178,8 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .result-card .mycard-row.many .ms{height:40px;font-size:17px}
 .sq-grid .sq.wide{grid-column:1 / -1}
 .sq-grid .sq.wide button{min-height:0;flex-direction:row;align-items:center;justify-content:flex-start;gap:12px;padding:12px 14px}
-.sq-grid .sq.wide .ink-ring{width:58px;height:58px;margin:-29px 0 0 0;left:auto;right:12px;font-size:14px;padding:6px}
+.sq-grid .sq.wide .ink-ring{max-height:58px;left:auto;right:10px;font-size:12px;padding:3px;border-width:3px}
+.sq-grid .sq.wide .ink-ring,.sq-grid .sq.wide.on .ink-ring{translate:50% 0}
 .bcard{display:grid;gap:5px;position:relative}
 .bgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px}
 .bhead{font-family:var(--font-display);font-weight:800;color:var(--burg);text-align:center;font-size:12px;line-height:1.2}
@@ -204,9 +222,9 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .tablet .sq-grid .sq button{min-height:140px;padding:16px 16px 18px}
 .tablet .sq .letter{font-size:30px}
 .tablet .sq-grid .sq .ans{font-size:19.5px}
-.tablet .sq .ink-ring{width:118px;height:118px;margin:-59px 0 0 -59px;font-size:24px}
+.tablet .sq .ink-ring{max-height:118px;font-size:24px;padding:10px}
 .tablet .sq-grid .sq.wide button{min-height:0;padding:14px 20px}
-.tablet .sq-grid .sq.wide .ink-ring{width:70px;height:70px;margin:-35px 0 0 0;font-size:16px}
+.tablet .sq-grid .sq.wide .ink-ring{max-height:70px;font-size:16px}
 .tablet .restart{font-size:26px;align-self:flex-start}
 .tablet .mycard-head,.tablet .mycard-head b{font-size:14px}
 .tablet .bcard.big .bhead{font-size:28px}
@@ -242,7 +260,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 [lang="ar"] .q-big,[lang="ar"] .res-name{line-height:1.3}
 [dir="rtl"] .sq button{text-align:right}
 [dir="rtl"] .label-btn svg{transform:scaleX(-1)}
-[dir="rtl"] .sq-grid .sq.wide .ink-ring{right:auto;left:12px}
+[dir="rtl"] .sq-grid .sq.wide .ink-ring{right:auto;left:10px}
 [dir="rtl"] .bingo-word,[dir="rtl"] .bgrid{direction:ltr}
 [dir="rtl"] .bc{direction:rtl}
 [dir="rtl"] .bcard.big .dot{place-items:start start}

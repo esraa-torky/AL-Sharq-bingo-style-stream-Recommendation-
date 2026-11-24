@@ -2,6 +2,7 @@
 import { buildQuestions, areaMax, lean, score, profile, nextStepKey, fill } from './scoring.js';
 import { deckle, addRims, h, logos, labelBtn, phone, papered, dot } from './paper.js';
 import { saveResult, flushQueue } from './save.js';
+import { turn, stamp, soundOn, setSound } from './sound.js';
 
 const LETTERS = ['B', 'I', 'N', 'G', 'O'];
 // The centre square: an eight-point star (khatam), the same in every language.
@@ -26,7 +27,7 @@ async function start() {
   config.languages.forEach((l, i) => { texts[l] = loaded[i]; });
   const fromUrl = new URLSearchParams(location.search).get('lang');
   setLang(config.languages.includes(fromUrl) ? fromUrl : config.defaultLanguage);
-  wide.addEventListener('change', render);
+  wide.addEventListener('change', () => render());
   flushQueue(config.resultsUrl);
   window.addEventListener('online', () => flushQueue(config.resultsUrl));
 }
@@ -80,6 +81,15 @@ function bingoCard(big, win) {
   return card;
 }
 
+function soundToggle() {
+  const on = soundOn(), b = h('button', 'sound-toggle', on ? SPEAKER_ON : SPEAKER_OFF);
+  b.type = 'button'; b.id = 'sound'; b.setAttribute('aria-pressed', String(on)); b.setAttribute('aria-label', T().ui.sound || 'Sound');
+  b.addEventListener('click', () => { setSound(!soundOn()); if (soundOn()) turn(); render(); });
+  return b;
+}
+const SPEAKER_ON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>';
+const SPEAKER_OFF = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 9l6 6M22 9l-6 6"/></svg>';
+
 function langChips() {
   const box = h('div', 'lang-chips');
   const names = { en: ['EN', 'English'], tr: ['TR', 'Türkçe'], ar: ['ع', 'العربية'] };
@@ -90,6 +100,7 @@ function langChips() {
     b.addEventListener('click', () => setLang(l));
     box.appendChild(b);
   });
+  box.appendChild(soundToggle());
   return box;
 }
 
@@ -113,9 +124,12 @@ function ticket(pr) {
   return tw;
 }
 
-function render() {
+/* enter: 'fwd' when moving on (the new sheet settles from underneath), 'back' when going back
+   (the previous sheet is laid back on top), or nothing for an instant redraw (language, rotation). */
+function render(enter) {
   clearTimeout(timer); clearTimeout(idle);
   const t = T(), tab = wide.matches, p = phone(false);
+  if (enter) p.classList.add('enter-' + enter);
   let c = p.c, R = null;
   p.setAttribute('lang', lang); p.dir = document.documentElement.dir;
   if (tab) {
@@ -132,7 +146,7 @@ function render() {
     c.appendChild(h('p', 'lede', t.ui.lede));
     c.appendChild(h('div', 'spacer'));
     const bt = labelBtn(t.ui.begin); bt.id = 'begin';
-    bt.querySelector('button').addEventListener('click', () => { step = 0; picks = []; saved = false; render(); });
+    bt.querySelector('button').addEventListener('click', () => { picks = []; saved = false; advance(p); });
     c.appendChild(bt);
     c.appendChild(h('p', 'fine', fill(t.ui.fine, { n: QS.length })));
     if (config.draftLanguages.includes(lang) && t.ui.draftNote) c.appendChild(h('p', 'draft', t.ui.draftNote));
@@ -168,7 +182,7 @@ function render() {
     c.appendChild(nb);
     if (step > 0) {
       const back = h('button', 'restart', t.ui.back); back.type = 'button'; back.id = 'back';
-      back.addEventListener('click', () => { step--; render(); });
+      back.addEventListener('click', () => { turn(); step--; render('back'); });
       c.appendChild(back);
     }
   } else {
@@ -183,7 +197,7 @@ function render() {
     const key = nextStepKey(config, QS, picks, win);
     c.appendChild(papered('next-card', 'next-wrap', '<b>' + t.ui.nextStep + '</b><span>' + fill(t.steps[key], { stream: name }) + '</span>', 1.4));
     const so = labelBtn(t.ui.startOver); so.id = 'start-over';
-    so.querySelector('button').addEventListener('click', restart);
+    so.querySelector('button').addEventListener('click', () => restart(true));
     c.appendChild(so);
     c.appendChild(h('p', 'idle', fill(t.ui.idle, { s: config.idleSeconds })));
     idle = setTimeout(restart, config.idleSeconds * 1000);
@@ -203,19 +217,26 @@ function render() {
 }
 
 function pick(i, grid) {
+  if (picks[step] !== i) stamp();
   picks[step] = i;
   [...grid.children].forEach((w, j) => { w.classList.toggle('on', j === i); w.querySelector('button').setAttribute('aria-pressed', String(j === i)); });
   const nb = root.querySelector('#next-wrap');
   if (nb) { nb.querySelector('button').disabled = false; nb.style.opacity = '1'; }
 }
 
+/* the top sheet tears off and slides away, then the next one settles into place */
 function advance(p) {
+  if (p.classList.contains('flipped')) return;
+  turn();
+  // drop the arrival animation first, or it would keep holding the sheet in place
+  p.classList.remove('enter-fwd', 'enter-back');
+  void p.offsetWidth;
   p.classList.add('flipped');
   clearTimeout(timer);
-  timer = setTimeout(() => { step++; render(); }, 520);
+  timer = setTimeout(() => { step++; render('fwd'); }, 480);
 }
 
-function restart() { step = -1; picks = []; saved = false; render(); }
+function restart(fromButton) { if (fromButton === true) turn(); step = -1; picks = []; saved = false; render('fwd'); }
 
 // Hooks for the automated tests (tests/smoke.mjs).
 window.__finder = { score: (pk) => score(config, QS, pk, MAX), questions: () => QS, setLang: (l) => setLang(l) };

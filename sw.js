@@ -1,6 +1,6 @@
 // Offline cache so the iPad at the stand keeps working if the venue Wi-Fi drops.
 // Content files are fetched fresh when online (network first), and the cached copy is used offline.
-const VERSION = 'finder-v1';
+const VERSION = 'finder-v2';
 const SHELL = [
   './',
   'index.html',
@@ -10,6 +10,7 @@ const SHELL = [
   'src/paper.js',
   'src/scoring.js',
   'src/save.js',
+  'src/sound.js',
   'content/config.json',
   'content/questions.json',
   'content/en.json',

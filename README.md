@@ -10,6 +10,8 @@ Visitors answer 12 short questions on their phone (from a QR code) or on the iPa
 
 It runs in English, Turkish and Arabic (right to left), works offline after the first visit, and saves
 anonymous results to a Google Sheet.
+Each page turn tears the paper sheet away with a soft paper sound (made in the browser, no audio files);
+visitors can switch sound off with the speaker button on the welcome screen.
 
 ## Who edits what
 
