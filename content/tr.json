@@ -169,16 +169,16 @@
     }
   },
   "statements": {
-    "why-first": "Bir sorunu çözmeye koşmaktansa neden var olduğunu anlamayı tercih ederim.",
+    "why-first": "Bir sorunu çözmeden önce neden var olduğunu anlamak isterim.",
     "conversations": "Dünyayı farklı gören insanlarla uzun sohbetlerden keyif alırım.",
     "direction": "Bir grup tıkandığında insanlar yön belirlemem için bana bakar.",
-    "sketch-fix": "Bir sorun gördüğümde hemen bir çözüm çizmeye başlarım.",
-    "idea-project": "Gerçek bir projeye dönüştürmek istediğim bir fikrim var.",
-    "show-up": "Önemli bir şey için insanları bir araya getirebilirim.",
-    "decisions": "Şehrimde kararların nasıl alındığını merak ediyorum.",
-    "local-group": "Düzenli buluştuğum yerel bir grup istiyorum.",
+    "sketch-fix": "Bir sorun gördüğümde onu çözecek bir proje planlamaya başlarım.",
+    "idea-project": "Kendi girişimim olarak hayata geçirmek istediğim bir fikrim var.",
+    "show-up": "Çevremdeki insanları bir buluşmaya getirebilirim.",
+    "decisions": "Yaşadığım yerin nasıl yönetildiğinde söz sahibi olmak istiyorum.",
+    "local-group": "Buluşup konuştuğum ve birlikte işler yürüttüğüm yerel bir grup istiyorum.",
     "build-learn": "En iyi bir şey inşa edip işe yarayıp yaramadığını görerek öğrenirim.",
-    "public-life": "Komşularımı kamusal hayata katmayı önemsiyorum."
+    "public-life": "Komşularımı yerel bir mesele etrafında örgütlemek isterim."
   },
   "practical": {
     "time": {

@@ -169,16 +169,16 @@
     }
   },
   "statements": {
-    "why-first": "I would rather understand why a problem exists than rush to fix it.",
+    "why-first": "I want to understand why a problem exists before fixing it.",
     "conversations": "I enjoy long conversations with people who see the world differently.",
     "direction": "When a group is stuck, people look to me to set the direction.",
-    "sketch-fix": "When I see a problem, I start sketching a fix.",
-    "idea-project": "I have an idea I would like to turn into a real project.",
-    "show-up": "I can get people to show up for something that matters.",
-    "decisions": "I am curious about how decisions get made in my city.",
-    "local-group": "I want a local group I meet with regularly.",
+    "sketch-fix": "When I see a problem, I start planning a project to fix it.",
+    "idea-project": "I have an idea I want to launch as my own initiative.",
+    "show-up": "I can get people in my area to come to a meet-up.",
+    "decisions": "I want a say in how things are run where I live.",
+    "local-group": "I want a local group I meet, talk and run things with.",
     "build-learn": "I learn best by building something and seeing if it works.",
-    "public-life": "I care about bringing my neighbours into public life."
+    "public-life": "I would organise my neighbours around a local issue."
   },
   "practical": {
     "time": {
