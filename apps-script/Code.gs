@@ -1,11 +1,10 @@
-/**
- * Program Finder results: receives one finished survey per request and adds a row to this spreadsheet.
- * Setup steps are in README.md ("Saving results to a Google Sheet").
- * Nothing personal is received: time, language, question style, answer ids, match, personality and scores.
- *
- * First time only: choose `setup` in the function list above and press Run. Google then asks you to allow
- * the script to edit this spreadsheet. Without that permission every survey fails to save.
- */
+// Program Finder results: receives one finished survey per request and adds a row to this spreadsheet.
+// Setup steps are in README.md ("Saving results to a Google Sheet").
+// Nothing personal is received: time, language, question style, answer ids, match, personality and scores.
+//
+// First time only: choose "setup" in the function list above and press Run. Google then asks you to allow
+// the script to edit this spreadsheet. Without that permission every survey fails to save.
+
 var SHEET_NAME = 'Results';
 var COLUMNS = ['time', 'lang', 'style', 'stream', 'personality', 'strengths', 'nextStep', 'scores', 'answers'];
 
@@ -16,7 +15,7 @@ function resultsSheet() {
   return sheet;
 }
 
-/** Run once from the editor: asks for permission and creates the Results tab with its headings. */
+// Run once from the editor: asks for permission and creates the Results tab with its headings.
 function setup() {
   resultsSheet();
   Logger.log('Ready: the "' + SHEET_NAME + '" tab exists and the script may write to it.');
