@@ -13,7 +13,8 @@ function writeQueue(q) {
 }
 
 export function saveResult(url, row) {
-  if (!url) return;
+  // automated browsers (our tests) never write to the real results sheet
+  if (!url || (typeof navigator !== 'undefined' && navigator.webdriver)) return;
   const q = readQueue();
   q.push(row);
   writeQueue(q.slice(-500));

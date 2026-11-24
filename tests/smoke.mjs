@@ -21,6 +21,8 @@ try {
   for (const lang of config.languages) {
     for (const dev of devices) {
       const page = await browser.newPage({ viewport: dev.viewport });
+      // never send test surveys to the real results sheet
+      await page.route(/script\.google(usercontent)?\.com/, (r) => r.abort());
       const errs = [];
       page.on('pageerror', (e) => errs.push(e.message));
       // our own files must load; other sites (Google Fonts) may be unreachable from a test machine, and the site falls back to system fonts
