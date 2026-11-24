@@ -231,29 +231,59 @@ function pick(i, grid) {
    showing the back of the paper, until the whole page is lifted off. See src/curl.js. */
 const TURN_MS = 1300;
 let turning = null;
+
+/* Light mode keeps the survey smooth on slower phones: a simple slide instead of the corner curl, and no paper grain.
+   It starts on for low-memory or data-saver devices (or with ?lite in the address), and switches on by itself
+   if a page curl runs slowly on this device. */
+const lowEnd = (navigator.deviceMemory && navigator.deviceMemory <= 2) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) ||
+  (navigator.connection && navigator.connection.saveData) || new URLSearchParams(location.search).has('lite');
+let lite = !!lowEnd;
+try { if (sessionStorage.getItem('finder-lite') === '1') lite = true; } catch (e) { /* not stored */ }
+document.documentElement.classList.toggle('lite', lite);
+function goLite() {
+  lite = true;
+  document.documentElement.classList.add('lite');
+  try { sessionStorage.setItem('finder-lite', '1'); } catch (e) { /* not stored */ }
+}
+
 function advance(p) {
   if (turning) turning.remove(); // a quick second tap finishes the previous turn at once
   turn();
   const old = p.querySelector('.layer.top');
-  const book = h('div', 'peel');
-  const flat = h('div', 'peel-flat'); flat.appendChild(old.cloneNode(true));
-  const backPage = old.cloneNode(true); const bc = backPage.querySelector('.content'); if (bc) bc.innerHTML = '';
-  const flapWrap = h('div', 'peel-flap-wrap');
-  const flap = h('div', 'peel-flap'); flap.appendChild(backPage);
-  const shine = h('div', 'peel-shine');
-  flapWrap.appendChild(flap); flapWrap.appendChild(shine);
-  book.appendChild(flat); book.appendChild(flapWrap);
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let book, flat, flap, shine;
+  if (lite) {
+    // the old page simply slides away; only its position and opacity change, which every phone handles well
+    book = h('div', 'slide-out'); book.appendChild(old.cloneNode(true));
+  } else {
+    book = h('div', 'peel');
+    flat = h('div', 'peel-flat'); flat.appendChild(old.cloneNode(true));
+    const backPage = old.cloneNode(true); const bc = backPage.querySelector('.content'); if (bc) bc.innerHTML = '';
+    const flapWrap = h('div', 'peel-flap-wrap');
+    flap = h('div', 'peel-flap'); flap.appendChild(backPage);
+    shine = h('div', 'peel-shine');
+    flapWrap.appendChild(flap); flapWrap.appendChild(shine);
+    book.appendChild(flat); book.appendChild(flapWrap);
+  }
   // the copy is only a picture of the old page: no duplicate ids, nothing to tap or read out
   book.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
   book.setAttribute('aria-hidden', 'true'); book.inert = true;
   step++;
   render('under');
+  if (reduce) return;
   root.querySelector('.phone').appendChild(book);
   turning = book;
   const done = () => { book.remove(); if (turning === book) turning = null; };
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { done(); return; }
-  const ms = window.__turnMs || TURN_MS; // tests can slow the curl down to inspect it
-  curl({ stage: book, flat, flap, shine, fromLeft: document.documentElement.dir === 'rtl', ms, done });
+  const ms = window.__turnMs || TURN_MS; // tests can slow the turn down to inspect it
+  if (lite) {
+    book.addEventListener('animationend', done);
+    setTimeout(() => { if (book.isConnected) done(); }, 1000);
+    return;
+  }
+  curl({
+    stage: book, flat, flap, shine, fromLeft: document.documentElement.dir === 'rtl', ms,
+    done: (stats) => { done(); if (stats && stats.frames > 8 && stats.slow / stats.frames > 0.25) goLite(); },
+  });
   setTimeout(() => { if (book.isConnected) done(); }, ms + 600); // safety net
 }
 

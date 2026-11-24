@@ -5,7 +5,7 @@ let seedN = 7;
   /* torn paper: fine jagged teeth on torn sides, clean straight sides elsewhere.
      Each torn piece gets a light "rim" layer behind it, so the paper core shows along the tear. */
   function tearSide(R, scale) {
-    var n = 64, rim = [], inner = [];
+    var n = 30, rim = [], inner = []; // 30 teeth per torn side: jagged enough to read as torn, light enough for slower phones
     for (var i = 0; i <= n; i++) {
       var pos = i === 0 ? 0 : i === n ? 100 : Math.min(100, Math.max(0, i * 100 / n + (R() - .5) * 0.9));
       var bite = R() < 0.06 ? 2 + R() * 3 : 0;
@@ -34,12 +34,14 @@ let seedN = 7;
   }
   /* after a sample is drawn, put a rim layer behind every torn piece */
   function addRims(root) {
-    Array.prototype.forEach.call(root.querySelectorAll('*'), function (n) {
-      if (!n._rim || n._rimDone || !n.parentNode) return;
-      var par = n.parentNode, rim = document.createElement('span');
+    // read every position first, then make all the changes: one style check instead of one per torn piece
+    var torn = Array.prototype.filter.call(root.querySelectorAll('*'), function (n) { return n._rim && !n._rimDone && n.parentNode; });
+    var plan = torn.map(function (n) { return [n, getComputedStyle(n.parentNode).position === 'static', getComputedStyle(n).position === 'static']; });
+    plan.forEach(function (x) {
+      var n = x[0], par = n.parentNode, rim = document.createElement('span');
       rim.className = 'rim'; rim.style.clipPath = n._rim; rim.setAttribute('aria-hidden', 'true');
-      if (getComputedStyle(par).position === 'static') par.style.position = 'relative';
-      if (getComputedStyle(n).position === 'static') n.style.position = 'relative';
+      if (x[1]) par.style.position = 'relative';
+      if (x[2]) n.style.position = 'relative';
       par.insertBefore(rim, n); n._rimDone = true;
     });
   }

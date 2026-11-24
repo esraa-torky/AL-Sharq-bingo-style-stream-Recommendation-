@@ -13,6 +13,10 @@ anonymous results to a Google Sheet.
 Each page turn tears the paper sheet away with a soft paper sound (made in the browser, no audio files);
 visitors can switch sound off with the speaker button on the welcome screen.
 
+On slower phones the site switches to a light mode: a short slide instead of the page curl, and no paper grain.
+It starts on for low-memory or data-saver devices, turns on by itself if a page curl runs slowly, and can be
+forced by adding `?lite` to the address. Devices set to reduce motion get no page-turn animation at all.
+
 ## Who edits what
 
 | Area | Files | Guide |
