@@ -19,7 +19,8 @@
     "idle": "Back to the welcome screen in {s} seconds for the next visitor.",
     "thatsMe": "That’s me!",
     "ticketNo": "No.",
-    "draftNote": ""
+    "draftNote": "",
+    "sound": "Sound on or off"
   },
   "streams": {
     "F": "Fellowship",
