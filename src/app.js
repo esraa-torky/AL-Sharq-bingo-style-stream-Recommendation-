@@ -225,35 +225,33 @@ function pick(i, grid) {
   if (nb) { nb.querySelector('button').disabled = false; nb.style.opacity = '1'; }
 }
 
-/* Moving on: the next page is drawn underneath, and a copy of the old sheet is laid on top of it.
-   That copy creases across the middle, its top half folds down over the bottom half (showing the
-   plain back of the paper), and the folded sheet drops away to reveal the new page. */
-let folding = null;
+/* Moving on, like turning a page in a book: the next page is drawn underneath, and a copy of the old
+   page is laid on top of it. That copy turns over on its spine (the left edge, or the right edge in Arabic),
+   shows the plain back of the paper as it goes, and lands face down beside the book. */
+const TURN_MS = 1150;
+let turning = null;
 function advance(p) {
-  if (folding) folding.remove(); // a quick second tap finishes the previous fold at once
+  if (turning) turning.remove(); // a quick second tap finishes the previous turn at once
   turn();
   const old = p.querySelector('.layer.top');
-  const fold = h('div', 'fold');
-  const paper = h('div', 'fold-paper');
-  const bottom = h('div', 'fold-half fold-bottom'); bottom.appendChild(old.cloneNode(true));
-  const shade = h('div', 'fold-shade');
-  const flap = h('div', 'fold-flap');
-  const front = h('div', 'fold-half fold-front'); front.appendChild(old.cloneNode(true));
-  const back = h('div', 'fold-half fold-back');
-  flap.appendChild(front); flap.appendChild(back);
-  paper.appendChild(bottom); paper.appendChild(shade); paper.appendChild(flap);
-  fold.appendChild(paper);
+  const book = h('div', 'book');
+  const leaf = h('div', 'leaf');
+  const front = h('div', 'leaf-face leaf-front'); front.appendChild(old.cloneNode(true)); front.appendChild(h('div', 'leaf-shade'));
+  const backPage = old.cloneNode(true); const bc = backPage.querySelector('.content'); if (bc) bc.innerHTML = '';
+  const back = h('div', 'leaf-face leaf-back'); back.appendChild(backPage); back.appendChild(h('div', 'leaf-shade'));
+  leaf.appendChild(front); leaf.appendChild(back);
+  book.appendChild(h('div', 'leaf-gutter'));
+  book.appendChild(leaf);
   // the copy is only a picture of the old page: no duplicate ids, nothing to tap or read out
-  fold.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
-  fold.setAttribute('aria-hidden', 'true'); fold.inert = true;
+  book.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+  book.setAttribute('aria-hidden', 'true'); book.inert = true;
   step++;
   render('under');
-  const next = root.querySelector('.phone');
-  next.appendChild(fold);
-  folding = fold;
-  const done = () => { fold.remove(); if (folding === fold) folding = null; };
-  paper.addEventListener('animationend', (e) => { if (e.target === paper) done(); });
-  setTimeout(() => { if (fold.isConnected) done(); }, 1200); // safety net, e.g. when motion is reduced
+  root.querySelector('.phone').appendChild(book);
+  turning = book;
+  const done = () => { book.remove(); if (turning === book) turning = null; };
+  leaf.addEventListener('animationend', (e) => { if (e.target === leaf) done(); });
+  setTimeout(() => { if (book.isConnected) done(); }, TURN_MS + 400); // safety net, e.g. when motion is reduced
 }
 
 function restart(fromButton) { if (fromButton === true) turn(); step = -1; picks = []; saved = false; render('fwd'); }
