@@ -62,6 +62,7 @@ Keep each pull request small and about one thing (for example "reword question 3
 - `idleSeconds`: how long the result stays up at the stand before it goes back to the welcome screen.
 - `resultsUrl`: the Google Apps Script address that saves results (see README.md). Leave empty to save nothing.
 - `draftLanguages`: languages that still show the draft note.
+- `pageTurnSound`: the audio file played on each page turn, for example `assets/sounds/page-turn.mp3`. Leave empty for the built-in paper rustle.
 
 ## What the check catches
 

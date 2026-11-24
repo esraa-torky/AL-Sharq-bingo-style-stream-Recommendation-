@@ -2,7 +2,7 @@
 import { buildQuestions, areaMax, lean, score, profile, nextStepKey, fill } from './scoring.js';
 import { deckle, addRims, h, logos, labelBtn, phone, papered, dot } from './paper.js';
 import { saveResult, flushQueue } from './save.js';
-import { turn, stamp, soundOn, setSound } from './sound.js';
+import { turn, stamp, soundOn, setSound, useRecording } from './sound.js';
 
 const LETTERS = ['B', 'I', 'N', 'G', 'O'];
 // The centre square: an eight-point star (khatam), the same in every language.
@@ -25,6 +25,7 @@ async function start() {
   [config, questions] = await Promise.all([loadJSON('content/config.json'), loadJSON('content/questions.json')]);
   const loaded = await Promise.all(config.languages.map((l) => loadJSON('content/' + l + '.json')));
   config.languages.forEach((l, i) => { texts[l] = loaded[i]; });
+  useRecording(config.pageTurnSound);
   const fromUrl = new URLSearchParams(location.search).get('lang');
   setLang(config.languages.includes(fromUrl) ? fromUrl : config.defaultLanguage);
   wide.addEventListener('change', () => render());
@@ -224,16 +225,35 @@ function pick(i, grid) {
   if (nb) { nb.querySelector('button').disabled = false; nb.style.opacity = '1'; }
 }
 
-/* the top sheet tears off and slides away, then the next one settles into place */
+/* Moving on: the next page is drawn underneath, and a copy of the old sheet is laid on top of it.
+   That copy creases across the middle, its top half folds down over the bottom half (showing the
+   plain back of the paper), and the folded sheet drops away to reveal the new page. */
+let folding = null;
 function advance(p) {
-  if (p.classList.contains('flipped')) return;
+  if (folding) folding.remove(); // a quick second tap finishes the previous fold at once
   turn();
-  // drop the arrival animation first, or it would keep holding the sheet in place
-  p.classList.remove('enter-fwd', 'enter-back');
-  void p.offsetWidth;
-  p.classList.add('flipped');
-  clearTimeout(timer);
-  timer = setTimeout(() => { step++; render('fwd'); }, 480);
+  const old = p.querySelector('.layer.top');
+  const fold = h('div', 'fold');
+  const paper = h('div', 'fold-paper');
+  const bottom = h('div', 'fold-half fold-bottom'); bottom.appendChild(old.cloneNode(true));
+  const shade = h('div', 'fold-shade');
+  const flap = h('div', 'fold-flap');
+  const front = h('div', 'fold-half fold-front'); front.appendChild(old.cloneNode(true));
+  const back = h('div', 'fold-half fold-back');
+  flap.appendChild(front); flap.appendChild(back);
+  paper.appendChild(bottom); paper.appendChild(shade); paper.appendChild(flap);
+  fold.appendChild(paper);
+  // the copy is only a picture of the old page: no duplicate ids, nothing to tap or read out
+  fold.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+  fold.setAttribute('aria-hidden', 'true'); fold.inert = true;
+  step++;
+  render('under');
+  const next = root.querySelector('.phone');
+  next.appendChild(fold);
+  folding = fold;
+  const done = () => { fold.remove(); if (folding === fold) folding = null; };
+  paper.addEventListener('animationend', (e) => { if (e.target === paper) done(); });
+  setTimeout(() => { if (fold.isConnected) done(); }, 1200); // safety net, e.g. when motion is reduced
 }
 
 function restart(fromButton) { if (fromButton === true) turn(); step = -1; picks = []; saved = false; render('fwd'); }
