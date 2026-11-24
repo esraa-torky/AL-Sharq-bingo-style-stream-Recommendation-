@@ -58,10 +58,14 @@ The code is in `src/scoring.js`.
 
 ## Publishing (GitHub Pages)
 
-1. In the repository on GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. Every merge into `main` runs `.github/workflows/pages.yml`, which checks the content and publishes the site.
-3. The address is shown on the workflow run and in Settings → Pages
-   (usually `https://<owner>.github.io/<repo>/`).
+The site is published by GitHub Pages straight from the `main` branch
+(**Settings → Pages → Source: Deploy from a branch**, branch `main`, folder `/ (root)`).
+Every merge into `main` goes live a minute or two later at
+https://esraa-torky.github.io/AL-Sharq-bingo-style-stream-Recommendation-/
+
+Because merging publishes, only merge a pull request once its **Checks** (content check and smoke test) are green.
+To make GitHub enforce this, add a branch rule for `main` in **Settings → Branches** that requires the
+"Content check" and "Smoke test" status checks to pass.
 
 ## Saving results to a Google Sheet
 
