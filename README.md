@@ -75,10 +75,22 @@ To make GitHub enforce this, add a branch rule for `main` in **Settings → Bran
 
 1. Create a Google Sheet owned by the Al Sharq Youth account, for example "Program Finder results".
 2. In the sheet: **Extensions → Apps Script**. Replace the code with `apps-script/Code.gs` and save.
-3. **Deploy → New deployment → type: Web app**. Execute as: **Me**. Who has access: **Anyone**. Deploy and approve access.
-4. Copy the web app address (it starts with `https://script.google.com/macros/s/`) into
+3. **Give it permission (needed once):** in the function list at the top choose **setup**, press **Run**, then
+   **Review permissions** → choose the account → **Advanced** → **Go to … (unsafe)** → **Allow**.
+   The log should say "Ready". This also creates the **Results** tab.
+4. **Deploy → New deployment → type: Web app**. Execute as: **Me**. Who has access: **Anyone**. Deploy.
+5. Copy the web app address (it starts with `https://script.google.com/macros/s/`) into
    `content/config.json` → `resultsUrl`, and merge it.
-5. Finish one survey on the live site; a row appears in the **Results** tab.
+6. Finish one survey on the live site; a row appears in the **Results** tab.
+
+**After changing the script**, publish the change without changing the address:
+**Deploy → Manage deployments → ✏️ Edit → Version: New version → Deploy**.
+
+**If saving fails:** open **Executions** (the list icon on the left of the Apps Script page) and click a failed run
+to see its error. "Authorization is required" means step 3 was skipped.
+
+Automated tests never send results: the smoke test blocks the Apps Script address, and the site does not save
+when it runs inside an automated browser.
 
 Each row holds the time, language, question style, matched stream, personality, strengths, next step,
 scores and answer ids. No names or contact details are collected. If the device is offline, finished
