@@ -50,8 +50,8 @@ function playRecording(c) {
   src.buffer = recording;
   g.gain.value = 0.8;
   src.connect(g).connect(c.destination);
-  // short recordings play whole; long ones are cut to the first 0.9 s with a quick fade
-  const len = Math.min(recording.duration, 0.9);
+  // short recordings play whole (the page-turn sound is 1.2 s); anything longer is cut at 1.4 s with a quick fade
+  const len = Math.min(recording.duration, 1.4);
   g.gain.setValueAtTime(0.8, c.currentTime + Math.max(0, len - 0.12));
   g.gain.linearRampToValueAtTime(0.0001, c.currentTime + len);
   src.start(c.currentTime, 0, len);

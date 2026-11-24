@@ -342,3 +342,9 @@ body{margin:0;overflow:hidden;-webkit-tap-highlight-color:transparent}
 .slide-out{position:absolute;inset:0;z-index:5;pointer-events:none;will-change:transform,opacity;animation:slide-out .45s cubic-bezier(.4,0,.6,1) both}
 .slide-out>.layer{transform:none!important;animation:none!important}
 @keyframes slide-out{to{transform:translate(calc(var(--away) * 105%),24px) rotate(calc(var(--away) * 6deg));opacity:0}}
+
+/* Devices set to reduce motion: the page turn is a short fade with no movement.
+   The !important rules win over the reduced-motion rule above that switches other animations off. */
+.fade-out{position:absolute;inset:0;z-index:5;pointer-events:none;animation:fade-out .35s ease-out both!important}
+.fade-out>.layer{transform:none!important;animation:none!important}
+@keyframes fade-out{to{opacity:0}}

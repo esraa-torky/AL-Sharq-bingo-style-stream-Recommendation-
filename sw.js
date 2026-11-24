@@ -1,6 +1,6 @@
 // Offline cache so the iPad at the stand keeps working if the venue Wi-Fi drops.
 // Content files are fetched fresh when online (network first), and the cached copy is used offline.
-const VERSION = 'finder-v6';
+const VERSION = 'finder-v7';
 const SHELL = [
   './',
   'index.html',
@@ -20,6 +20,7 @@ const SHELL = [
   'assets/logo-light.png',
   'assets/logo-dark.png',
   'assets/icon.svg',
+  'assets/sounds/page-turn.mp3',
 ];
 
 self.addEventListener('install', (e) => {
