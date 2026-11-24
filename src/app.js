@@ -252,7 +252,10 @@ function advance(p) {
   const old = p.querySelector('.layer.top');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let book, flat, flap, shine;
-  if (lite) {
+  if (reduce) {
+    // devices set to reduce motion: no movement, the old page just fades out over the new one
+    book = h('div', 'fade-out'); book.appendChild(old.cloneNode(true));
+  } else if (lite) {
     // the old page simply slides away; only its position and opacity change, which every phone handles well
     book = h('div', 'slide-out'); book.appendChild(old.cloneNode(true));
   } else {
@@ -270,12 +273,11 @@ function advance(p) {
   book.setAttribute('aria-hidden', 'true'); book.inert = true;
   step++;
   render('under');
-  if (reduce) return;
   root.querySelector('.phone').appendChild(book);
   turning = book;
   const done = () => { book.remove(); if (turning === book) turning = null; };
   const ms = window.__turnMs || TURN_MS; // tests can slow the turn down to inspect it
-  if (lite) {
+  if (reduce || lite) {
     book.addEventListener('animationend', done);
     setTimeout(() => { if (book.isConnected) done(); }, 1000);
     return;

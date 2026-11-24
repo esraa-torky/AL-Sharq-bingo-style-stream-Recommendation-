@@ -1,5 +1,7 @@
 # Sounds
 
+`page-turn.mp3` is "Newspaper Foley 4" by floraphonic from Pixabay (Pixabay Content License, free to use without credit).
+
 Put the page-turn recording here as `page-turn.mp3` (for example "Newspaper Foley 4" from Pixabay,
 which can be used without credit under the Pixabay Content License). Then set `"pageTurnSound": "assets/sounds/page-turn.mp3"` in `content/config.json`.
 The site plays it on every page turn. While `pageTurnSound` is empty, the site uses a paper rustle it makes itself.

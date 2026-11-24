@@ -23,7 +23,13 @@ try {
       const page = await browser.newPage({ viewport: dev.viewport });
       const errs = [];
       page.on('pageerror', (e) => errs.push(e.message));
-      page.on('console', (m) => { if (m.type() === 'error' && !/fonts\.g/.test(m.text())) errs.push(m.text()); });
+      // our own files must load; other sites (Google Fonts) may be unreachable from a test machine, and the site falls back to system fonts
+      page.on('console', (m) => {
+        if (m.type() !== 'error') return;
+        const src = (m.location() && m.location().url) || '';
+        if (/^Failed to load resource/.test(m.text()) && src && !src.startsWith(BASE)) return;
+        errs.push(m.text() + (src ? ' (' + src + ')' : ''));
+      });
       await page.goto(`${BASE}?lang=${lang}`);
       await page.waitForSelector('#begin button');
       const dir = await page.evaluate(() => document.documentElement.dir);
