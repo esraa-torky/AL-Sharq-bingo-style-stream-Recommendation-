@@ -3,6 +3,7 @@ import { buildQuestions, areaMax, lean, score, profile, nextStepKey, fill } from
 import { deckle, addRims, h, logos, labelBtn, phone, papered, dot } from './paper.js';
 import { saveResult, flushQueue } from './save.js';
 import { turn, stamp, soundOn, setSound, useRecording } from './sound.js';
+import { curl } from './curl.js';
 
 const LETTERS = ['B', 'I', 'N', 'G', 'O'];
 // The centre square: an eight-point star (khatam), the same in every language.
@@ -225,23 +226,23 @@ function pick(i, grid) {
   if (nb) { nb.querySelector('button').disabled = false; nb.style.opacity = '1'; }
 }
 
-/* Moving on, like turning a page in a book: the next page is drawn underneath, and a copy of the old
-   page is laid on top of it. That copy turns over on its spine (the left edge, or the right edge in Arabic),
-   shows the plain back of the paper as it goes, and lands face down beside the book. */
-const TURN_MS = 1150;
+/* Moving on: the next page is drawn underneath, and a copy of the old page is laid on top of it.
+   The bottom corner of that copy curls up and folds back diagonally (bottom-right, or bottom-left in Arabic),
+   showing the back of the paper, until the whole page is lifted off. See src/curl.js. */
+const TURN_MS = 1300;
 let turning = null;
 function advance(p) {
   if (turning) turning.remove(); // a quick second tap finishes the previous turn at once
   turn();
   const old = p.querySelector('.layer.top');
-  const book = h('div', 'book');
-  const leaf = h('div', 'leaf');
-  const front = h('div', 'leaf-face leaf-front'); front.appendChild(old.cloneNode(true)); front.appendChild(h('div', 'leaf-shade'));
+  const book = h('div', 'peel');
+  const flat = h('div', 'peel-flat'); flat.appendChild(old.cloneNode(true));
   const backPage = old.cloneNode(true); const bc = backPage.querySelector('.content'); if (bc) bc.innerHTML = '';
-  const back = h('div', 'leaf-face leaf-back'); back.appendChild(backPage); back.appendChild(h('div', 'leaf-shade'));
-  leaf.appendChild(front); leaf.appendChild(back);
-  book.appendChild(h('div', 'leaf-gutter'));
-  book.appendChild(leaf);
+  const flapWrap = h('div', 'peel-flap-wrap');
+  const flap = h('div', 'peel-flap'); flap.appendChild(backPage);
+  const shine = h('div', 'peel-shine');
+  flapWrap.appendChild(flap); flapWrap.appendChild(shine);
+  book.appendChild(flat); book.appendChild(flapWrap);
   // the copy is only a picture of the old page: no duplicate ids, nothing to tap or read out
   book.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
   book.setAttribute('aria-hidden', 'true'); book.inert = true;
@@ -250,8 +251,10 @@ function advance(p) {
   root.querySelector('.phone').appendChild(book);
   turning = book;
   const done = () => { book.remove(); if (turning === book) turning = null; };
-  leaf.addEventListener('animationend', (e) => { if (e.target === leaf) done(); });
-  setTimeout(() => { if (book.isConnected) done(); }, TURN_MS + 400); // safety net, e.g. when motion is reduced
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { done(); return; }
+  const ms = window.__turnMs || TURN_MS; // tests can slow the curl down to inspect it
+  curl({ stage: book, flat, flap, shine, fromLeft: document.documentElement.dir === 'rtl', ms, done });
+  setTimeout(() => { if (book.isConnected) done(); }, ms + 600); // safety net
 }
 
 function restart(fromButton) { if (fromButton === true) turn(); step = -1; picks = []; saved = false; render('fwd'); }

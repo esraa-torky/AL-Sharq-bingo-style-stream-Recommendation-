@@ -91,33 +91,17 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .next-card b{font-family:var(--font-display);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--burg)}
 
 /* ---------- page turns ----------
-   Moving on (.book): like a book, the old page turns over on its spine (left edge, or right edge in Arabic),
-   showing the plain back of the paper, and the next page is revealed underneath. About 1.1 s, gently eased.
+   Moving on (.peel): the bottom corner of the old page curls up and folds back diagonally (bottom-right,
+   or bottom-left in Arabic) until the page is lifted off. Shapes are set frame by frame by src/curl.js.
    Going back (.enter-back): the previous sheet is laid back on top. */
-.phone{--away:-1;--spine:0%}
-[dir="rtl"] .phone,.phone[dir="rtl"]{--away:1;--spine:100%}
-.book{position:absolute;inset:0;z-index:5;pointer-events:none;perspective:2400px;perspective-origin:var(--spine) 50%}
-.leaf{position:absolute;inset:0;transform-style:preserve-3d;transform-origin:var(--spine) 50%;animation:leaf-turn 1.15s cubic-bezier(.45,.05,.35,1) both}
-.leaf-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.leaf-face>.layer{position:absolute;inset:0;transform:none!important;animation:none!important}
-.leaf-back{transform:rotateY(180deg)}
-.leaf-back .sheet{background:var(--paper-2)}
-.leaf-shade{position:absolute;inset:0;pointer-events:none;opacity:0}
-.leaf-front .leaf-shade{background:linear-gradient(90deg,rgba(40,10,20,.0) 30%,rgba(40,10,20,.22));animation:leaf-shade-front 1.15s ease-in both}
-[dir="rtl"] .leaf-front .leaf-shade{background:linear-gradient(270deg,rgba(40,10,20,0) 30%,rgba(40,10,20,.22))}
-.leaf-back .leaf-shade{background:linear-gradient(270deg,rgba(40,10,20,.0) 40%,rgba(40,10,20,.18));animation:leaf-shade-back 1.15s ease-out both}
-[dir="rtl"] .leaf-back .leaf-shade{background:linear-gradient(90deg,rgba(40,10,20,0) 40%,rgba(40,10,20,.18))}
-.leaf-gutter{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(40,10,20,.25),rgba(40,10,20,0) 35%);opacity:0;animation:leaf-gutter 1.15s ease-in-out both}
-[dir="rtl"] .leaf-gutter{background:linear-gradient(270deg,rgba(40,10,20,.25),rgba(40,10,20,0) 35%)}
-@keyframes leaf-turn{
-  0%{transform:rotateY(0) translateZ(0);opacity:1}
-  45%{transform:rotateY(calc(var(--away) * 80deg)) translateZ(14px)}
-  85%{transform:rotateY(calc(var(--away) * 170deg)) translateZ(4px);opacity:1}
-  100%{transform:rotateY(calc(var(--away) * 180deg));opacity:0}
-}
-@keyframes leaf-shade-front{0%{opacity:0}45%{opacity:1}100%{opacity:1}}
-@keyframes leaf-shade-back{0%,50%{opacity:1}100%{opacity:0}}
-@keyframes leaf-gutter{0%{opacity:0}40%{opacity:1}100%{opacity:0}}
+.phone{--away:-1}
+[dir="rtl"] .phone,.phone[dir="rtl"]{--away:1}
+.peel{position:absolute;inset:0;z-index:5;pointer-events:none}
+.peel-flat,.peel-flap,.peel-shine{position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:0 0}
+.peel-flat>.layer,.peel-flap>.layer{position:absolute;inset:0;transform:none!important;animation:none!important}
+.peel-flap .sheet{background:var(--paper-2)}
+.peel-flap-wrap{position:absolute;inset:0;filter:drop-shadow(-6px 8px 10px rgba(40,10,20,.28)) drop-shadow(0 1px 2px rgba(40,10,20,.25))}
+[dir="rtl"] .peel-flap-wrap{filter:drop-shadow(6px 8px 10px rgba(40,10,20,.28)) drop-shadow(0 1px 2px rgba(40,10,20,.25))}
 .phone.enter-fwd .layer.top{animation:sheet-settle .42s cubic-bezier(.2,.8,.3,1) both}
 .phone.enter-fwd .content>*{animation:ink-in .4s .12s ease-out both}
 .phone.enter-back .layer.top{animation:sheet-return .45s cubic-bezier(.2,.8,.3,1) both}
