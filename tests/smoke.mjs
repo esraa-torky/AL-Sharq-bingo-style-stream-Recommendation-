@@ -31,7 +31,7 @@ try {
       const n = await page.evaluate(() => window.__finder.questions().length);
       for (let q = 0; q < n; q++) {
         await page.waitForSelector('#ans-0');
-        const count = await page.locator('.sq').count();
+        const count = await page.evaluate(() => document.querySelectorAll('.sq:not(.fold .sq)').length); // ignore the folding copy of the last page
         if (!(await page.locator('#next-wrap button').isDisabled())) failures.push(`${lang} ${dev.name}: Next is enabled before picking (q${q + 1})`);
         await page.click(`#ans-${(q * 3 + 1) % count}`);
         await page.click('#next-wrap button');

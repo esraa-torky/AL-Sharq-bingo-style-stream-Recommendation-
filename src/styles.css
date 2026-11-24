@@ -91,17 +91,28 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .next-card b{font-family:var(--font-display);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--burg)}
 
 /* ---------- page turns ----------
-   Moving on: the top sheet is torn off and slides away (.flipped), then the next sheet settles from underneath (.enter-fwd).
-   Going back: the previous sheet is laid back on top (.enter-back). In Arabic the sheet leaves to the other side. */
+   Moving on (.fold): the old sheet creases across the middle, its top half folds down over the bottom half,
+   then the folded sheet drops away to the side (left, or right in Arabic) and reveals the next page.
+   Going back (.enter-back): the previous sheet is laid back on top. */
 .phone{--away:-1}
 [dir="rtl"] .phone,.phone[dir="rtl"]{--away:1}
-.layer.top{transform-origin:50% 100%;transition:transform .48s cubic-bezier(.55,.05,.55,1),opacity .3s .18s}
-.phone.flipped .layer.top{transform:translate(calc(var(--away) * 115%),40px) rotate(calc(var(--away) * 12deg));opacity:0;pointer-events:none}
-.phone.flipped .layer.b1{transform:rotate(-.6deg) translate(-2px,2px);transition:transform .45s .05s}
+.fold{position:absolute;inset:0;z-index:5;pointer-events:none;perspective:1600px}
+.fold-paper{position:absolute;inset:0;transform-style:preserve-3d;animation:fold-away .78s cubic-bezier(.5,0,.6,1) both}
+.fold-half{position:absolute;inset:0}
+.fold-half>.layer{position:absolute;inset:0;transform:none!important;animation:none!important}
+.fold-bottom{clip-path:inset(50% -40px -40px -40px)}
+.fold-front{clip-path:inset(-40px -40px 50% -40px);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.fold-back{clip-path:inset(50% 0 0 0);background:linear-gradient(to top,var(--paper-2),var(--paper) 70%);transform:rotateX(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:inset 0 -18px 24px -18px var(--shadow)}
+.fold-flap{position:absolute;inset:0;transform-origin:50% 50%;transform-style:preserve-3d;animation:fold-flap .42s cubic-bezier(.45,.05,.55,.95) both}
+.fold-shade{position:absolute;inset:50% 0 0 0;background:linear-gradient(to bottom,rgba(40,10,20,.28),rgba(40,10,20,0) 70%);animation:fold-shade .42s ease-in both}
+@keyframes fold-flap{from{transform:rotateX(0)}to{transform:rotateX(-180deg)}}
+@keyframes fold-shade{from{opacity:0}60%{opacity:1}to{opacity:.25}}
+@keyframes fold-away{0%,52%{transform:none;opacity:1}100%{transform:translate(calc(var(--away) * 40%),70%) rotate(calc(var(--away) * 14deg)) scale(.86);opacity:0}}
+.phone.enter-under .layer.top{animation:sheet-settle .5s .3s cubic-bezier(.2,.8,.3,1) both}
 .phone.enter-fwd .layer.top{animation:sheet-settle .42s cubic-bezier(.2,.8,.3,1) both}
 .phone.enter-fwd .content>*{animation:ink-in .4s .12s ease-out both}
 .phone.enter-back .layer.top{animation:sheet-return .45s cubic-bezier(.2,.8,.3,1) both}
-@keyframes sheet-settle{from{transform:translateY(14px) scale(.965) rotate(.8deg);filter:brightness(.97)}to{transform:none;filter:none}}
+@keyframes sheet-settle{from{transform:translateY(10px) scale(.975);filter:brightness(.96)}to{transform:none;filter:none}}
 @keyframes sheet-return{from{transform:translate(calc(var(--away) * 115%),40px) rotate(calc(var(--away) * 12deg));opacity:0}to{transform:none;opacity:1}}
 @keyframes ink-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .sound-toggle{width:36px;min-height:32px;display:grid;place-items:center;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--burg)}

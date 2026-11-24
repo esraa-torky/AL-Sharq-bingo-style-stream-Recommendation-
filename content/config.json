@@ -124,5 +124,6 @@
     ]
   },
   "idleSeconds": 60,
-  "resultsUrl": ""
+  "resultsUrl": "",
+  "pageTurnSound": ""
 }
