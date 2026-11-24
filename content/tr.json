@@ -1,0 +1,249 @@
+{
+  "ui": {
+    "title": "Programını<br>Keşfet",
+    "lede": "Sana benzeyen kareyi işaretle. Kartını doldur, tombala de, akışınla tanış.",
+    "fine": "{n} soru, yaklaşık iki dakika. Anonim: adını asla sormuyoruz.",
+    "begin": "Başla",
+    "back": "Geri",
+    "next": "İleri",
+    "seeMatch": "Eşleşmemi gör",
+    "startOver": "Baştan başla",
+    "questionOf": "Soru {i} / {n}",
+    "practicalNote": " · puan yok, sadece kurallar",
+    "scaleAsk": "Bu sana ne kadar benziyor?",
+    "yourCard": "KARTIN",
+    "answered": "{a} / {n} cevaplandı",
+    "cardHint": "Her akışın yıldızdan geçen bir sırası var. Doldur ve tombala de.",
+    "yourMatch": "Eşleşmen",
+    "nextStep": "Sonraki adımın",
+    "idle": "Sonraki ziyaretçi için {s} saniye içinde başa döner.",
+    "thatsMe": "Bu benim!",
+    "ticketNo": "No.",
+    "draftNote": "Taslak çeviri."
+  },
+  "streams": {
+    "F": "Fellowship",
+    "I": "Impact",
+    "H": "Hub’lar"
+  },
+  "steps": {
+    "apply": "Başvurular Al Sharq Forum 2026’dan sonra açılıyor. 2027 ilgi formuna bilgilerini bırak. Ağ üyelerine özel kontenjan var.",
+    "under18": "Şimdi yerel hub’ına katıl. {stream} için 18 yaşına girince başvurabilirsin.",
+    "over35": "Bir hub’a profesyonel olarak katkı sun: mentorluk, konuşma ya da eğitim. {stream}’ı bir arkadaşına öner.",
+    "lowTime": "Yerel hub’ınla başla. {stream} haftada 5 ila 10 saat istiyor; daha çok vaktin olduğunda başvur."
+  },
+  "scale": [
+    "Bana hiç benzemiyor",
+    "Biraz",
+    "Çoğunlukla",
+    "Tam olarak ben"
+  ],
+  "cells": [
+    [
+      "Büyük fikir",
+      "Podcast",
+      "Çay",
+      "Notlar",
+      "Kıvılcım"
+    ],
+    [
+      "Gece yarısı",
+      "Tartışma",
+      "Listeler",
+      "Planlar",
+      "Atıştırma"
+    ],
+    [
+      "İnsanlar",
+      "Buluşma",
+      "JOKER",
+      "Hub",
+      "Politika"
+    ],
+    [
+      "Grup sohbeti",
+      "İnşa",
+      "Pazar",
+      "Liderlik",
+      "Mentor"
+    ],
+    [
+      "Başlat",
+      "Hikâyeler",
+      "Şehir",
+      "Neden?",
+      "Kitaplar"
+    ]
+  ],
+  "choices": {
+    "late-night": {
+      "q": "Gece geç saatlerde aklım genellikle…",
+      "answers": {
+        "a": "Dünyanın neden böyle olduğuna dair büyük sorularda",
+        "b": "Bugünkü bir tartışmada ve ne cevap vereceğimde",
+        "c": "İnşa etmeye başlamak istediğim bir fikirde",
+        "d": "Şehrimdeki bir sonraki buluşmanın planında"
+      }
+    },
+    "friends": {
+      "q": "Arkadaşlarım bana genellikle şu lazım olduğunda gelir…",
+      "answers": {
+        "a": "Büyük bir karar için tavsiye",
+        "b": "Dağınık bir fikri plana dönüştürmek için yardım",
+        "c": "Bir etkinlik için insanları toplayacak biri",
+        "d": "Şehirde doğru insanları tanıyan biri"
+      }
+    },
+    "conference": {
+      "q": "Böyle bir konferansta büyük ihtimalle…",
+      "answers": {
+        "a": "Ön sırada not alıyorum",
+        "b": "Koridorda bir konuşmacıyla sohbet ediyorum",
+        "c": "Kendi projemi çiziyorum",
+        "d": "Şehrimden insanlarla numara alışverişi yapıyorum"
+      }
+    },
+    "funding": {
+      "q": "Topluluğumun bir bütçesi olsa ilk olarak…",
+      "answers": {
+        "a": "Önce asıl sorunu anlardım",
+        "b": "Gelecek hafta küçük bir çözümü denerdim",
+        "c": "Net hedefleri olan bir proje tasarlardım",
+        "d": "Karar vermek için komşuları bir araya getirirdim"
+      }
+    },
+    "group-work": {
+      "q": "Grup çalışmasında genellikle…",
+      "answers": {
+        "a": "Bunu neden yaptığımızı soran benim",
+        "b": "Fikri adım adım bir plana dönüştüren benim",
+        "c": "Herkesi ekibin parçası hissettiren benim",
+        "d": "Sonunda onu inşa eden benim"
+      }
+    },
+    "city-problem": {
+      "q": "Şehrimde bir şey yolunda gitmediğinde…",
+      "answers": {
+        "a": "Nedenini anlamaya çalışırım",
+        "b": "Bir çözüm tasarlamaya başlarım",
+        "c": "İnsanları bu konuda bir araya getiririm",
+        "d": "Sorumluyu bulup onunla konuşurum"
+      }
+    },
+    "saturday": {
+      "q": "İyi geçmiş dediğim bir cumartesi…",
+      "answers": {
+        "a": "Bir kitap kulübü ya da güzel bir tartışma",
+        "b": "Bir ekiple proje üzerinde üretim günü",
+        "c": "Mahallemde gönüllülük",
+        "d": "Yerel topluluk grubumla buluşma"
+      }
+    },
+    "topic": {
+      "q": "İlk okuyacağım konu…",
+      "answers": {
+        "a": "Siyaset ve kamu kararları",
+        "b": "Sosyal girişimler ve yeni fikirler",
+        "c": "Liderlik ve öğrenme",
+        "d": "Dünya gündemi",
+        "e": "Şehrimdeki hayat ve projeler"
+      }
+    },
+    "leader": {
+      "q": "Bence iyi bir lider çoğunlukla…",
+      "answers": {
+        "a": "Karar vermeden önce dinler",
+        "b": "Büyük resmi görür",
+        "c": "İşleri hayata geçirir",
+        "d": "Tüm topluluğu yanında götürür"
+      }
+    },
+    "this-year": {
+      "q": "Bu yılın değdiğini hissettiren ne olurdu?",
+      "answers": {
+        "a": "Liderlik etmeyi öğrendim",
+        "b": "Kendi girişimimi başlattım",
+        "c": "Şehrimde kendi insanlarımı buldum",
+        "d": "Büyük bir konuyu derinlemesine anladım"
+      }
+    }
+  },
+  "statements": {
+    "why-first": "Bir sorunu çözmeye koşmaktansa neden var olduğunu anlamayı tercih ederim.",
+    "conversations": "Dünyayı farklı gören insanlarla uzun sohbetlerden keyif alırım.",
+    "direction": "Bir grup tıkandığında insanlar yön belirlemem için bana bakar.",
+    "sketch-fix": "Bir sorun gördüğümde hemen bir çözüm çizmeye başlarım.",
+    "idea-project": "Gerçek bir projeye dönüştürmek istediğim bir fikrim var.",
+    "show-up": "Önemli bir şey için insanları bir araya getirebilirim.",
+    "decisions": "Şehrimde kararların nasıl alındığını merak ediyorum.",
+    "local-group": "Düzenli buluştuğum yerel bir grup istiyorum.",
+    "build-learn": "En iyi bir şey inşa edip işe yarayıp yaramadığını görerek öğrenirim.",
+    "public-life": "Komşularımı kamusal hayata katmayı önemsiyorum."
+  },
+  "practical": {
+    "time": {
+      "q": "Dürüst olalım: haftada kaç saat ayırabilirsin?",
+      "answers": {
+        "h1-2": "Bir iki saat",
+        "h3-4": "3 ila 4 saat",
+        "h5-10": "5 ila 10 saat",
+        "h10-plus": "10’dan fazla"
+      }
+    },
+    "age": {
+      "q": "Peki kaç yaşındasın?",
+      "answers": {
+        "under-18": "18 altı",
+        "18-21": "18 ila 21",
+        "22-35": "22 ila 35",
+        "over-35": "35 üstü"
+      }
+    }
+  },
+  "personality": {
+    "types": {
+      "big": {
+        "name": "Büyük Resmi Gören",
+        "line": "Hep nedenini sorar, noktaları birleştirirsin."
+      },
+      "dial": {
+        "name": "Sohbet Başlatan",
+        "line": "En iyi konuşarak düşünürsün."
+      },
+      "lead": {
+        "name": "Sakin Lider",
+        "line": "İnsanlar sana bakar, sen önce dinlersin."
+      },
+      "design": {
+        "name": "Sorun Çözücü",
+        "line": "Bir sorun görür, çözümünü çizersin."
+      },
+      "launch": {
+        "name": "Başlatıcı",
+        "line": "Konuşmaktansa yapmayı seçersin."
+      },
+      "mobil": {
+        "name": "Harekete Geçiren",
+        "line": "Önemli olduğunda insanları harekete geçirirsin."
+      },
+      "civic": {
+        "name": "Değişim Arayan",
+        "line": "Kimin, neden karar verdiğini bilmek istersin."
+      },
+      "hub": {
+        "name": "Köprü Kuran",
+        "line": "Yaşadığın yeri bir topluluğa dönüştürürsün."
+      }
+    },
+    "areas": {
+      "big": "Büyük resim",
+      "dial": "Diyalog",
+      "lead": "Liderlik",
+      "design": "Tasarım",
+      "launch": "Başlatma",
+      "mobil": "Harekete geçirme",
+      "civic": "Sivil",
+      "hub": "Topluluk"
+    }
+  }
+}

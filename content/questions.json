@@ -1,0 +1,402 @@
+{
+  "_note": "Question and answer ids with their points. Text lives in the language files. See CONTENT.md.",
+  "choices": [
+    {
+      "id": "late-night",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "big": 3
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "dial": 3
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "launch": 3
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "hub": 2,
+            "mobil": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "friends",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "lead": 2,
+            "big": 1
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "design": 3
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "mobil": 3
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "hub": 2,
+            "civic": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "conference",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "big": 3
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "dial": 3
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "design": 2,
+            "launch": 1
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "hub": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "funding",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "big": 2,
+            "design": 1
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "launch": 3
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "design": 3
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "mobil": 2,
+            "hub": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "group-work",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "big": 2,
+            "dial": 1
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "design": 3
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "hub": 2,
+            "mobil": 1
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "launch": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-problem",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "big": 3
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "design": 3
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "mobil": 3
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "civic": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "saturday",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "dial": 2,
+            "big": 1
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "launch": 2,
+            "design": 1
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "mobil": 2,
+            "civic": 1
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "hub": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "topic",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "civic": 3
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "launch": 2,
+            "design": 1
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "lead": 3
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "big": 2,
+            "dial": 1
+          }
+        },
+        {
+          "id": "e",
+          "points": {
+            "mobil": 2,
+            "hub": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "leader",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "lead": 3
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "big": 2,
+            "lead": 1
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "launch": 2,
+            "lead": 1
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "mobil": 2,
+            "hub": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "this-year",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "lead": 3
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "launch": 3
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "hub": 3
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "big": 3
+          }
+        }
+      ]
+    }
+  ],
+  "statements": [
+    {
+      "id": "why-first",
+      "points": {
+        "big": 3
+      }
+    },
+    {
+      "id": "conversations",
+      "points": {
+        "dial": 3
+      }
+    },
+    {
+      "id": "direction",
+      "points": {
+        "lead": 3
+      }
+    },
+    {
+      "id": "sketch-fix",
+      "points": {
+        "design": 3
+      }
+    },
+    {
+      "id": "idea-project",
+      "points": {
+        "launch": 3
+      }
+    },
+    {
+      "id": "show-up",
+      "points": {
+        "mobil": 3
+      }
+    },
+    {
+      "id": "decisions",
+      "points": {
+        "civic": 3
+      }
+    },
+    {
+      "id": "local-group",
+      "points": {
+        "hub": 3
+      }
+    },
+    {
+      "id": "build-learn",
+      "points": {
+        "launch": 2,
+        "design": 1
+      }
+    },
+    {
+      "id": "public-life",
+      "points": {
+        "mobil": 2,
+        "civic": 1
+      }
+    }
+  ],
+  "practical": [
+    {
+      "id": "time",
+      "answers": [
+        "h1-2",
+        "h3-4",
+        "h5-10",
+        "h10-plus"
+      ]
+    },
+    {
+      "id": "age",
+      "answers": [
+        "under-18",
+        "18-21",
+        "22-35",
+        "over-35"
+      ]
+    }
+  ]
+}

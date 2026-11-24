@@ -1,0 +1,249 @@
+{
+  "ui": {
+    "title": "Find<br>Your<br>Program",
+    "lede": "Stamp the square that sounds like you. Fill your card, shout bingo, meet your stream.",
+    "fine": "{n} questions, about two minutes. Anonymous: we never ask your name.",
+    "begin": "Begin",
+    "back": "Back",
+    "next": "Next",
+    "seeMatch": "See my match",
+    "startOver": "Start over",
+    "questionOf": "Question {i} of {n}",
+    "practicalNote": " · no points, just the rules",
+    "scaleAsk": "How much is this like you?",
+    "yourCard": "YOUR CARD",
+    "answered": "{a} of {n} answered",
+    "cardHint": "Each stream owns one line through the star. Fill it and shout bingo.",
+    "yourMatch": "Your match",
+    "nextStep": "Your next step",
+    "idle": "Back to the welcome screen in {s} seconds for the next visitor.",
+    "thatsMe": "That’s me!",
+    "ticketNo": "No.",
+    "draftNote": ""
+  },
+  "streams": {
+    "F": "Fellowship",
+    "I": "Impact",
+    "H": "Hubs"
+  },
+  "steps": {
+    "apply": "Applications open after Al Sharq Forum 2026. Leave your details on the 2027 interest form. Network members get special places.",
+    "under18": "Join your local hub now. {stream} is one to apply to when you turn 18.",
+    "over35": "Contribute to a hub as a professional: mentor, speak or train. Pass {stream} on to a friend.",
+    "lowTime": "Start at your local hub. {stream} asks 5 to 10 hours a week, so keep it for when you have more time."
+  },
+  "scale": [
+    "Not like me",
+    "A little",
+    "Mostly",
+    "Very much like me"
+  ],
+  "cells": [
+    [
+      "Big ideas",
+      "Podcast",
+      "Tea",
+      "Notes",
+      "Spark"
+    ],
+    [
+      "Late night",
+      "Debate",
+      "Lists",
+      "Plans",
+      "Snacks"
+    ],
+    [
+      "People",
+      "Rally",
+      "FREE",
+      "Hub",
+      "Policy"
+    ],
+    [
+      "Group chat",
+      "Build",
+      "Sunday",
+      "Lead",
+      "Mentor"
+    ],
+    [
+      "Launch",
+      "Stories",
+      "City",
+      "Why?",
+      "Books"
+    ]
+  ],
+  "choices": {
+    "late-night": {
+      "q": "Late at night, my mind usually goes to…",
+      "answers": {
+        "a": "Big questions about why the world is the way it is",
+        "b": "A debate from today and what I’d say next",
+        "c": "An idea I want to start building",
+        "d": "Plans for the next meet-up with people in my city"
+      }
+    },
+    "friends": {
+      "q": "Friends usually come to me when they need…",
+      "answers": {
+        "a": "Advice on a big decision",
+        "b": "Help turning a messy idea into a plan",
+        "c": "Someone to get people together for an event",
+        "d": "Someone who knows the right people around town"
+      }
+    },
+    "conference": {
+      "q": "At a conference like this one, I am most likely…",
+      "answers": {
+        "a": "Taking notes in the front row",
+        "b": "Talking with a speaker in the corridor",
+        "c": "Sketching my own project",
+        "d": "Swapping numbers with people from my city"
+      }
+    },
+    "funding": {
+      "q": "If my community had funding, I would start by…",
+      "answers": {
+        "a": "Understanding the real problem first",
+        "b": "Testing a small solution next week",
+        "c": "Designing a project with clear goals",
+        "d": "Bringing the neighbours together to decide"
+      }
+    },
+    "group-work": {
+      "q": "In group work, I am usually the one who…",
+      "answers": {
+        "a": "Asks why we are doing this",
+        "b": "Turns the idea into a step-by-step plan",
+        "c": "Makes sure everyone feels part of the team",
+        "d": "Builds it in the end"
+      }
+    },
+    "city-problem": {
+      "q": "When something in my city isn’t working, I…",
+      "answers": {
+        "a": "Try to understand why",
+        "b": "Start designing a fix",
+        "c": "Bring people together about it",
+        "d": "Find out who is responsible and talk to them"
+      }
+    },
+    "saturday": {
+      "q": "A Saturday I would call well spent…",
+      "answers": {
+        "a": "A book club or a good debate",
+        "b": "A build day on a project with a team",
+        "c": "Volunteering in my neighbourhood",
+        "d": "A meet-up with my local community group"
+      }
+    },
+    "topic": {
+      "q": "The topic I would read about first…",
+      "answers": {
+        "a": "Politics and public decisions",
+        "b": "Social startups and new ideas",
+        "c": "Leadership and learning",
+        "d": "World affairs",
+        "e": "Life and projects in my city"
+      }
+    },
+    "leader": {
+      "q": "For me, a good leader mostly…",
+      "answers": {
+        "a": "Listens before deciding",
+        "b": "Sees the bigger picture",
+        "c": "Gets things built",
+        "d": "Brings the whole community along"
+      }
+    },
+    "this-year": {
+      "q": "What would make you feel this year was worth it?",
+      "answers": {
+        "a": "I learned to lead",
+        "b": "I launched my own initiative",
+        "c": "I found my people in my city",
+        "d": "I understood a big issue deeply"
+      }
+    }
+  },
+  "statements": {
+    "why-first": "I would rather understand why a problem exists than rush to fix it.",
+    "conversations": "I enjoy long conversations with people who see the world differently.",
+    "direction": "When a group is stuck, people look to me to set the direction.",
+    "sketch-fix": "When I see a problem, I start sketching a fix.",
+    "idea-project": "I have an idea I would like to turn into a real project.",
+    "show-up": "I can get people to show up for something that matters.",
+    "decisions": "I am curious about how decisions get made in my city.",
+    "local-group": "I want a local group I meet with regularly.",
+    "build-learn": "I learn best by building something and seeing if it works.",
+    "public-life": "I care about bringing my neighbours into public life."
+  },
+  "practical": {
+    "time": {
+      "q": "Honestly, how many hours a week could you give?",
+      "answers": {
+        "h1-2": "An hour or two",
+        "h3-4": "3 to 4 hours",
+        "h5-10": "5 to 10 hours",
+        "h10-plus": "More than 10"
+      }
+    },
+    "age": {
+      "q": "And how old are you?",
+      "answers": {
+        "under-18": "Under 18",
+        "18-21": "18 to 21",
+        "22-35": "22 to 35",
+        "over-35": "Over 35"
+      }
+    }
+  },
+  "personality": {
+    "types": {
+      "big": {
+        "name": "The Big-Picture Thinker",
+        "line": "You always ask why, and connect the dots."
+      },
+      "dial": {
+        "name": "The Conversation Starter",
+        "line": "You think best by talking it through."
+      },
+      "lead": {
+        "name": "The Steady Leader",
+        "line": "People look to you, and you listen first."
+      },
+      "design": {
+        "name": "The Problem Solver",
+        "line": "You see a problem and sketch a fix."
+      },
+      "launch": {
+        "name": "The Starter",
+        "line": "You’d rather build it than talk about it."
+      },
+      "mobil": {
+        "name": "The Rallier",
+        "line": "When it matters, you get people moving."
+      },
+      "civic": {
+        "name": "The Change Seeker",
+        "line": "You want to know who decides, and why."
+      },
+      "hub": {
+        "name": "The Bridge Builder",
+        "line": "You turn where you live into a community."
+      }
+    },
+    "areas": {
+      "big": "Big picture",
+      "dial": "Dialogue",
+      "lead": "Leading",
+      "design": "Designing",
+      "launch": "Launching",
+      "mobil": "Rallying",
+      "civic": "Civic",
+      "hub": "Community"
+    }
+  }
+}
