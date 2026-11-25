@@ -1,8 +1,8 @@
 {
   "ui": {
     "title": "Programını<br>Keşfet",
-    "lede": "Sana benzeyen kareyi işaretle. Kartını doldur, tombala de, akışınla tanış.",
-    "fine": "{n} soru, yaklaşık iki dakika. Sonunda, başvurular açıldığında sana haber verebilmemiz için adını, e-postanı ve telefon numaranı soracağız.",
+    "lede": "Sana yakın olan kareyi işaretle, kartı doldur ve tombala! Ait olduğun yerle tanış.",
+    "fine": "{n} soru, 2 dakika. Testin sonunda, başvurular açıldığında sana haber verebilmemiz için adını, e-postanı ve telefon numaranı soracağız.",
     "begin": "Başla",
     "back": "Geri",
     "next": "İleri",
@@ -13,7 +13,7 @@
     "scaleAsk": "Bu sana ne kadar benziyor?",
     "yourCard": "KARTIN",
     "answered": "{a} / {n} cevaplandı",
-    "cardHint": "Her akışın yıldızdan geçen bir sırası var. Doldur ve tombala de.",
+    "cardHint": "Her bir cevap yıldıza giden bir yola çıkıyor. Soruları doldur ve tombala de.",
     "yourMatch": "Eşleşmen",
     "nextStep": "Sonraki adımın",
     "idle": "Sonraki ziyaretçi için {s} saniye içinde başa döner.",
@@ -41,38 +41,38 @@
   ],
   "cells": [
     [
-      "Büyük fikir",
+      "Etkileyici bir fikir",
       "Podcast",
-      "Çay sohbeti",
+      "Çay ve çekirdek",
       "Notlar",
-      "Kıvılcım"
+      "Harekete geçmek"
     ],
     [
-      "Gece yarısı",
-      "Tartışma",
+      "Gece kuşu",
+      "Münazara",
       "Listeler",
-      "Planlar",
-      "Atıştırma"
+      "Planlama",
+      "Abur cubur"
     ],
     [
       "İnsanlar",
       "Buluşma",
       "JOKER",
-      "Hub",
-      "Politika"
+      "Ekip",
+      "Siyaset"
     ],
     [
-      "Grup sohbeti",
-      "İnşa",
-      "Hafta sonu",
+      "Grup çalışması",
+      "İnşa etmek",
+      "Hafta sonu aktivitesi",
       "Liderlik",
-      "Mentor"
+      "Eğitimci"
     ],
     [
       "Başlat",
-      "Hikâyeler",
-      "Şehir",
-      "Neden?",
+      "Farklı hikâyeler",
+      "Şehir hayatı",
+      "Niçin?",
       "Kitaplar"
     ]
   ],
@@ -170,14 +170,14 @@
     }
   },
   "statements": {
-    "why-first": "Ümmetin bugün neden bu durumda olduğunu anlamak isterim.",
-    "conversations": "Ümmetin farklı yerlerinden gençlerle derin sohbetler etmekten keyif alırım.",
+    "why-first": "Ümmetin neden bugünkü durumda olduğunu derinlemesine incelemeyi severim.",
+    "conversations": "Ümmetin farklı yerlerinden gençlerle derin sohbetler yapmaktan keyif alırım.",
     "direction": "Ekibim ya da arkadaşlarım anlaşamadığında, ortak bir noktada buluşmamıza yardım ederim.",
     "sketch-fix": "Ümmetin karşılaştığı bir sorunu gördüğümde onu nasıl çözebileceğimi düşünmeye başlarım.",
     "idea-project": "Ümmete hizmet edebilecek bir girişim fikrim var.",
     "show-up": "Topluluğum için bir etkinlik düzenlediğimde insanlar katılır.",
     "decisions": "Ümmetin ihtiyaç duyduğu değişimin bir parçası olmak isterim, önce kendi topluluğumdan başlayarak.",
-    "local-group": "Buluşup konuştuğumuz ve ümmet için birlikte çalıştığımız yerel bir grup istiyorum.",
+    "local-group": "Birlikte tanışıp konuşabileceğimiz; ümmet için çalışabileceğimiz bir yerel grubumun olmasını isterim.",
     "build-learn": "Bir fikri hızlıca deneyip işe yarayıp yaramadığını görmeyi severim.",
     "public-life": "Topluluğumla birlikte ümmetin bir meselesi hakkında farkındalık kampanyası başlatmak isterim."
   },
@@ -204,8 +204,8 @@
   "personality": {
     "types": {
       "big": {
-        "name": "Büyük Resmi Gören",
-        "line": "Hep nedenini sorar, noktaları birleştirirsin."
+        "name": "Bütüncül Düşünen",
+        "line": "Sebepleri sorgular ve ipuçlarını birleştirirsin."
       },
       "dial": {
         "name": "Sohbet Başlatan",
@@ -237,13 +237,13 @@
       }
     },
     "areas": {
-      "big": "Büyük resim",
+      "big": "Büyük resmi görmek",
       "dial": "Diyalog",
       "lead": "Liderlik",
       "design": "Tasarım",
-      "launch": "Başlatma",
+      "launch": "Harekete geçmek",
       "mobil": "Harekete geçirme",
-      "civic": "Sivil",
+      "civic": "Sivil toplum",
       "hub": "Topluluk"
     }
   }
