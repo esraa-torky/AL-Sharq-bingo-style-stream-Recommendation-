@@ -1,12 +1,14 @@
 # Al Sharq Youth Program Finder
 
-The site has two pages:
+The site has three pages:
 
-- **`index.html`, the landing page:** a header about Al Sharq Youth, the Program Finder test at the top,
-  the three support streams, and three forms: **Join a hub**, **Open a hub** and **Join a program**.
-  The test opens full screen on top of the page; its result offers "Apply to …", which opens the
-  Join a program form with the matched stream already chosen.
-- **`test.html`, the Program Finder on its own:** for the iPad at the stand.
+- **`index.html`, the landing page:** who Al Sharq Youth are, values, the path to impact, the three
+  support streams, "Your journey starts here" (Join a hub, Establish a hub, Join a program) and
+  "Take the next step" with a link to the test. A moving network drawing sits next to the headline.
+  It uses its own calm style (`src/site.css`), separate from the test's paper look.
+- **`form.html?f=<form>`, one page per form:** `join-hub`, `establish-hub` or `join-program`.
+- **`test.html`, the Program Finder:** on its own for the iPad at the stand. Opened from the website
+  (`test.html?site=1`), its result offers "Apply to …", which opens the Join a program form showing the match.
 
 The Program Finder is a two-minute, bingo-style survey for visitors at Al Sharq Forum 2026 (Istanbul, 28–29 November).
 Visitors answer 12 short questions on their phone (from a QR code) or on the iPad at the stand, and get:
@@ -30,7 +32,7 @@ forced by adding `?lite` to the address. Devices set to reduce motion get a shor
 | Area | Files | Guide |
 |---|---|---|
 | Content: text, translations, questions, points, settings | `content/` | [CONTENT.md](CONTENT.md) |
-| Code: screens, design, scoring, saving, tests, publishing | `index.html`, `test.html`, `src/`, `sw.js`, `tests/`, `.github/` | this file |
+| Code: screens, design, scoring, saving, tests, publishing | `index.html`, `form.html`, `test.html`, `src/`, `sw.js`, `tests/`, `.github/` | this file |
 
 Work on a branch (`content/...` or `code/...`) and open a pull request into `main`. Every pull request
 runs the content check and a browser smoke test. Merging into `main` publishes the site.
@@ -42,8 +44,8 @@ python3 -m http.server 8000
 ```
 
 Open http://localhost:8000 for the landing page and http://localhost:8000/test.html for the test on its own.
-Add `?lang=tr` or `?lang=ar` to start in another language. Add `#join-hub`, `#open-hub` or `#join-program`
-to the landing page address to open that form directly.
+Add `?lang=tr` or `?lang=ar` to start in another language. A form opens directly at, for example,
+http://localhost:8000/form.html?f=join-hub.
 
 ## Checks
 
@@ -87,7 +89,7 @@ To make GitHub enforce this, add a branch rule for `main` in **Settings → Bran
 2. In the sheet: **Extensions → Apps Script**. Replace the code with `apps-script/Code.gs` and save.
 3. **Give it permission (needed once):** in the function list at the top choose **setup**, press **Run**, then
    **Review permissions** → choose the account → **Advanced** → **Go to … (unsafe)** → **Allow**.
-   The log should say "Ready". This also creates the **Results**, **Join a hub**, **Open a hub** and
+   The log should say "Ready". This also creates the **Results**, **Join a hub**, **Establish a hub** and
    **Join a program** tabs.
 4. **Deploy → New deployment → type: Web app**. Execute as: **Me**. Who has access: **Anyone**. Deploy.
 5. Copy the web app address (it starts with `https://script.google.com/macros/s/`) into
@@ -107,8 +109,7 @@ when it runs inside an automated browser.
 **Results** rows hold the time, language, question style, matched stream, personality, strengths, next step,
 scores and answer ids, with no names or contact details.
 
-The three form tabs **do hold personal details** (name, email, WhatsApp number, city, age and what people
-wrote), so share the spreadsheet only with the team. Each tab takes its column headings from the first form
+The three form tabs **do hold personal details** (name, email, phone number and what people wrote), so share the spreadsheet only with the team. Each tab takes its column headings from the first form
 sent to it, in English whatever language the visitor used; if a field is added to `content/forms.json`
 later, a new column appears at the end. `testMatch` and `testPersonality` are filled when the visitor
 came to the program form from the test. A hidden spam-trap field drops most bot submissions.

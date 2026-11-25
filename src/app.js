@@ -10,8 +10,9 @@ const LETTERS = ['B', 'I', 'N', 'G', 'O'];
 const STAR = '<svg class="star" viewBox="0 0 24 24" role="img" aria-label="free square"><path fill="currentColor" d="M12 1 L15.22 4.22 L19.78 4.22 L19.78 8.78 L23 12 L19.78 15.22 L19.78 19.78 L15.22 19.78 L12 23 L8.78 19.78 L4.22 19.78 L4.22 15.22 L1 12 L4.22 8.78 L4.22 4.22 L8.78 4.22Z"/><path fill="none" stroke="var(--burg)" stroke-width="1.2" d="M12 1 L15.22 4.22 L19.78 4.22 L19.78 8.78 L23 12 L19.78 15.22 L19.78 19.78 L15.22 19.78 L12 23 L8.78 19.78 L4.22 19.78 L4.22 15.22 L1 12 L4.22 8.78 L4.22 4.22 L8.78 4.22Z" transform="translate(12 12) scale(.62) translate(-12 -12)"/><circle cx="12" cy="12" r="2.2" fill="var(--burg)"/></svg>';
 
 const root = document.getElementById('app');
-// Inside the landing page (test.html?embed=1 in a full-screen frame) the result offers "Apply to …" instead of the kiosk reset.
-const embedded = new URLSearchParams(location.search).has('embed');
+// Opened from the website (test.html?site=1) the result offers "Apply to …", which goes to the program form,
+// instead of the stand's automatic reset.
+const fromSite = new URLSearchParams(location.search).has('site');
 const wide = window.matchMedia('(min-width: 900px) and (min-height: 560px) and (orientation: landscape)');
 
 let config, questions, texts = {};
@@ -200,11 +201,11 @@ function render(enter) {
     c.appendChild(h('div', 'spacer'));
     const key = nextStepKey(config, QS, picks, win);
     c.appendChild(papered('next-card', 'next-wrap', '<b>' + t.ui.nextStep + '</b><span>' + fill(t.steps[key], { stream: name }) + '</span>', 1.4));
-    if (embedded) {
-      // hand the match to the landing page, which opens the program form with this stream chosen
+    if (fromSite) {
+      // go on to the website's "Join a program" form, which shows and saves this match
       const ap = labelBtn(fill(t.ui.applyTo, { stream: name })); ap.id = 'apply';
       ap.querySelector('button').addEventListener('click', () => {
-        if (window.parent !== window) window.parent.postMessage({ type: 'finder-result', stream: win, personality: pr.type, lang }, location.origin);
+        location.href = 'form.html?' + new URLSearchParams({ f: 'join-program', match: win, type: pr.type, lang });
       });
       c.appendChild(ap);
       const again = h('button', 'restart', t.ui.startOver); again.type = 'button'; again.id = 'start-over';
