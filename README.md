@@ -116,15 +116,24 @@ came to the program form from the test. A hidden spam-trap field drops most bot 
 
 If the device is offline, finished surveys and forms wait on the device and are sent when the connection returns.
 
-## The QR code
+## The QR codes
 
-The QR code for posters and cards should open the landing page (the site address). Once the site is live:
+There are two, already made for the live address (in `assets/`, SVG for print and PNG):
+
+| File | Opens | Use |
+|---|---|---|
+| `qr-site.svg` / `.png` | the landing page | posters, cards, "Get involved" |
+| `qr-test.svg` / `.png` | the test (`test.html?site=1`): its result offers "Apply to …" | "Find your program" at the stand |
+
+To make them again, for example after the address changes:
 
 ```bash
-npm install && npm run qr -- https://<owner>.github.io/<repo>/
+npm install && npm run qr -- https://<owner>.github.io/<repo>/ site
 ```
 
-This writes `assets/qr.svg` (for print) and `assets/qr.png`.
+```bash
+npm run qr -- "https://<owner>.github.io/<repo>/test.html?site=1" test
+```
 
 ## The iPad at the stand
 
