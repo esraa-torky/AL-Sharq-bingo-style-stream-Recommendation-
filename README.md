@@ -1,6 +1,14 @@
 # Al Sharq Youth Program Finder
 
-A two-minute, bingo-style survey for visitors at Al Sharq Forum 2026 (Istanbul, 28–29 November).
+The site has two pages:
+
+- **`index.html`, the landing page:** a header about Al Sharq Youth, the Program Finder test at the top,
+  the three support streams, and three forms: **Join a hub**, **Open a hub** and **Join a program**.
+  The test opens full screen on top of the page; its result offers "Apply to …", which opens the
+  Join a program form with the matched stream already chosen.
+- **`test.html`, the Program Finder on its own:** for the iPad at the stand.
+
+The Program Finder is a two-minute, bingo-style survey for visitors at Al Sharq Forum 2026 (Istanbul, 28–29 November).
 Visitors answer 12 short questions on their phone (from a QR code) or on the iPad at the stand, and get:
 
 - their matched support stream: **Fellowship**, **Impact** or **Hubs**
@@ -22,7 +30,7 @@ forced by adding `?lite` to the address. Devices set to reduce motion get a shor
 | Area | Files | Guide |
 |---|---|---|
 | Content: text, translations, questions, points, settings | `content/` | [CONTENT.md](CONTENT.md) |
-| Code: screens, design, scoring, saving, tests, publishing | `index.html`, `src/`, `sw.js`, `tests/`, `.github/` | this file |
+| Code: screens, design, scoring, saving, tests, publishing | `index.html`, `test.html`, `src/`, `sw.js`, `tests/`, `.github/` | this file |
 
 Work on a branch (`content/...` or `code/...`) and open a pull request into `main`. Every pull request
 runs the content check and a browser smoke test. Merging into `main` publishes the site.
@@ -33,7 +41,9 @@ runs the content check and a browser smoke test. Merging into `main` publishes t
 python3 -m http.server 8000
 ```
 
-Open http://localhost:8000. Add `?lang=tr` or `?lang=ar` to start in another language.
+Open http://localhost:8000 for the landing page and http://localhost:8000/test.html for the test on its own.
+Add `?lang=tr` or `?lang=ar` to start in another language. Add `#join-hub`, `#open-hub` or `#join-program`
+to the landing page address to open that form directly.
 
 ## Checks
 
@@ -77,11 +87,13 @@ To make GitHub enforce this, add a branch rule for `main` in **Settings → Bran
 2. In the sheet: **Extensions → Apps Script**. Replace the code with `apps-script/Code.gs` and save.
 3. **Give it permission (needed once):** in the function list at the top choose **setup**, press **Run**, then
    **Review permissions** → choose the account → **Advanced** → **Go to … (unsafe)** → **Allow**.
-   The log should say "Ready". This also creates the **Results** tab.
+   The log should say "Ready". This also creates the **Results**, **Join a hub**, **Open a hub** and
+   **Join a program** tabs.
 4. **Deploy → New deployment → type: Web app**. Execute as: **Me**. Who has access: **Anyone**. Deploy.
 5. Copy the web app address (it starts with `https://script.google.com/macros/s/`) into
    `content/config.json` → `resultsUrl`, and merge it.
-6. Finish one survey on the live site; a row appears in the **Results** tab.
+6. Finish one survey on the live site; a row appears in the **Results** tab. Send one landing-page form;
+   a row appears in its tab.
 
 **After changing the script**, publish the change without changing the address:
 **Deploy → Manage deployments → ✏️ Edit → Version: New version → Deploy**.
@@ -92,13 +104,20 @@ to see its error. "Authorization is required" means step 3 was skipped.
 Automated tests never send results: the smoke test blocks the Apps Script address, and the site does not save
 when it runs inside an automated browser.
 
-Each row holds the time, language, question style, matched stream, personality, strengths, next step,
-scores and answer ids. No names or contact details are collected. If the device is offline, finished
-surveys wait on the device and are sent when the connection returns.
+**Results** rows hold the time, language, question style, matched stream, personality, strengths, next step,
+scores and answer ids, with no names or contact details.
+
+The three form tabs **do hold personal details** (name, email, WhatsApp number, city, age and what people
+wrote), so share the spreadsheet only with the team. Each tab takes its column headings from the first form
+sent to it, in English whatever language the visitor used; if a field is added to `content/forms.json`
+later, a new column appears at the end. `testMatch` and `testPersonality` are filled when the visitor
+came to the program form from the test. A hidden spam-trap field drops most bot submissions.
+
+If the device is offline, finished surveys and forms wait on the device and are sent when the connection returns.
 
 ## The QR code
 
-Once the site is live:
+The QR code for posters and cards should open the landing page (the site address). Once the site is live:
 
 ```bash
 npm install && npm run qr -- https://<owner>.github.io/<repo>/
@@ -108,7 +127,7 @@ This writes `assets/qr.svg` (for print) and `assets/qr.png`.
 
 ## The iPad at the stand
 
-- Open the site in Safari, then **Share → Add to Home Screen**. It opens full screen like an app.
+- Open `test.html` in Safari (the site address followed by `test.html`), then **Share → Add to Home Screen**. It opens full screen like an app.
 - Load it once on Wi-Fi; after that it also works offline.
 - Turn on **Guided Access** (Settings → Accessibility) to keep visitors inside the survey.
 - The result screen returns to the welcome screen by itself after `idleSeconds`.

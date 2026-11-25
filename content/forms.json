@@ -1,0 +1,459 @@
+{
+  "_note": "The three landing-page forms: field ids, types and options. Labels and option text live in landing.<lang>.json under the same ids. See CONTENT.md.",
+  "shared": [
+    {
+      "id": "full_name",
+      "type": "text",
+      "required": true,
+      "autocomplete": "name"
+    },
+    {
+      "id": "email",
+      "type": "email",
+      "required": true,
+      "autocomplete": "email"
+    },
+    {
+      "id": "phone",
+      "type": "tel",
+      "required": false,
+      "autocomplete": "tel"
+    },
+    {
+      "id": "country",
+      "type": "text",
+      "required": true,
+      "autocomplete": "country-name"
+    },
+    {
+      "id": "city",
+      "type": "text",
+      "required": true,
+      "autocomplete": "address-level2"
+    },
+    {
+      "id": "age",
+      "type": "select",
+      "required": true,
+      "options": [
+        "under-18",
+        "18-21",
+        "22-35",
+        "over-35"
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "id": "join-hub",
+      "sheet": "Join a hub",
+      "fields": [
+        {
+          "id": "hub",
+          "type": "hub",
+          "required": true
+        },
+        {
+          "id": "team",
+          "type": "checkboxes",
+          "required": false,
+          "options": [
+            "projects",
+            "pr",
+            "creative",
+            "team-dev",
+            "resources",
+            "community"
+          ]
+        },
+        {
+          "id": "hours",
+          "type": "select",
+          "required": true,
+          "options": [
+            "under-5",
+            "5-10",
+            "over-10"
+          ]
+        },
+        {
+          "id": "motivation",
+          "type": "textarea",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "open-hub",
+      "sheet": "Open a hub",
+      "fields": [
+        {
+          "id": "hub_city",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "hub_country",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "why_city",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "experience",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "people",
+          "type": "select",
+          "required": true,
+          "options": [
+            "just-me",
+            "2-4",
+            "5-9",
+            "10-plus"
+          ]
+        },
+        {
+          "id": "link",
+          "type": "url",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "join-program",
+      "sheet": "Join a program",
+      "fields": [
+        {
+          "id": "program",
+          "type": "radios",
+          "required": true,
+          "options": [
+            "F",
+            "I",
+            "H",
+            "unsure"
+          ]
+        },
+        {
+          "id": "motivation",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "idea",
+          "type": "textarea",
+          "required": false,
+          "showWhen": {
+            "program": "I"
+          }
+        },
+        {
+          "id": "hours",
+          "type": "select",
+          "required": true,
+          "options": [
+            "under-5",
+            "5-10",
+            "over-10"
+          ]
+        },
+        {
+          "id": "member",
+          "type": "radios",
+          "required": true,
+          "options": [
+            "yes",
+            "no",
+            "applied"
+          ]
+        }
+      ]
+    }
+  ],
+  "regions": [
+    "me",
+    "na",
+    "af",
+    "as",
+    "eu",
+    "nam"
+  ],
+  "hubs": [
+    {
+      "id": "gaziantep",
+      "city": "Gaziantep",
+      "country": "tr",
+      "region": "me"
+    },
+    {
+      "id": "ankara",
+      "city": "Ankara",
+      "country": "tr",
+      "region": "me"
+    },
+    {
+      "id": "erbil",
+      "city": "Erbil",
+      "country": "iq",
+      "region": "me"
+    },
+    {
+      "id": "sulaymaniyah",
+      "city": "Sulaymaniyah",
+      "country": "iq",
+      "region": "me"
+    },
+    {
+      "id": "amman",
+      "city": "Amman",
+      "country": "jo",
+      "region": "me"
+    },
+    {
+      "id": "nablus",
+      "city": "Nablus",
+      "country": "ps",
+      "region": "me"
+    },
+    {
+      "id": "doha",
+      "city": "Doha",
+      "country": "qa",
+      "region": "me"
+    },
+    {
+      "id": "aleppo",
+      "city": "Aleppo",
+      "country": "sy",
+      "region": "me"
+    },
+    {
+      "id": "damascus",
+      "city": "Damascus",
+      "country": "sy",
+      "region": "me"
+    },
+    {
+      "id": "homs",
+      "city": "Homs",
+      "country": "sy",
+      "region": "me"
+    },
+    {
+      "id": "hama",
+      "city": "Hama",
+      "country": "sy",
+      "region": "me"
+    },
+    {
+      "id": "daraa",
+      "city": "Daraa",
+      "country": "sy",
+      "region": "me"
+    },
+    {
+      "id": "idlib",
+      "city": "Idlib",
+      "country": "sy",
+      "region": "me"
+    },
+    {
+      "id": "latakia",
+      "city": "Latakia",
+      "country": "sy",
+      "region": "me"
+    },
+    {
+      "id": "saida",
+      "city": "Saida",
+      "country": "lb",
+      "region": "me"
+    },
+    {
+      "id": "beirut",
+      "city": "Beirut",
+      "country": "lb",
+      "region": "me"
+    },
+    {
+      "id": "tripoli-lb",
+      "city": "Tripoli",
+      "country": "lb",
+      "region": "me"
+    },
+    {
+      "id": "tripoli-ly",
+      "city": "Tripoli",
+      "country": "ly",
+      "region": "na"
+    },
+    {
+      "id": "rabat",
+      "city": "Rabat",
+      "country": "ma",
+      "region": "na"
+    },
+    {
+      "id": "algiers",
+      "city": "Algiers",
+      "country": "dz",
+      "region": "na"
+    },
+    {
+      "id": "tunis",
+      "city": "Tunis",
+      "country": "tn",
+      "region": "na"
+    },
+    {
+      "id": "nouakchott",
+      "city": "Nouakchott",
+      "country": "mr",
+      "region": "na"
+    },
+    {
+      "id": "moroni",
+      "city": "Moroni",
+      "country": "km",
+      "region": "af"
+    },
+    {
+      "id": "addis-ababa",
+      "city": "Addis Ababa",
+      "country": "et",
+      "region": "af"
+    },
+    {
+      "id": "nairobi",
+      "city": "Nairobi",
+      "country": "ke",
+      "region": "af"
+    },
+    {
+      "id": "abuja",
+      "city": "Abuja",
+      "country": "ng",
+      "region": "af"
+    },
+    {
+      "id": "kano",
+      "city": "Kano",
+      "country": "ng",
+      "region": "af"
+    },
+    {
+      "id": "johannesburg",
+      "city": "Johannesburg",
+      "country": "za",
+      "region": "af"
+    },
+    {
+      "id": "burao",
+      "city": "Burao",
+      "country": "so",
+      "region": "af"
+    },
+    {
+      "id": "kuala-lumpur",
+      "city": "Kuala Lumpur",
+      "country": "my",
+      "region": "as"
+    },
+    {
+      "id": "jakarta",
+      "city": "Jakarta",
+      "country": "id",
+      "region": "as"
+    },
+    {
+      "id": "lahore",
+      "city": "Lahore",
+      "country": "pk",
+      "region": "as"
+    },
+    {
+      "id": "islamabad",
+      "city": "Islamabad",
+      "country": "pk",
+      "region": "as"
+    },
+    {
+      "id": "dhaka",
+      "city": "Dhaka",
+      "country": "bd",
+      "region": "as"
+    },
+    {
+      "id": "new-delhi",
+      "city": "New Delhi",
+      "country": "in",
+      "region": "as"
+    },
+    {
+      "id": "istanbul",
+      "city": "Istanbul",
+      "country": "tr",
+      "region": "eu"
+    },
+    {
+      "id": "london",
+      "city": "London",
+      "country": "gb",
+      "region": "eu"
+    },
+    {
+      "id": "budapest",
+      "city": "Budapest",
+      "country": "hu",
+      "region": "eu"
+    },
+    {
+      "id": "milan",
+      "city": "Milan",
+      "country": "it",
+      "region": "eu"
+    },
+    {
+      "id": "frankfurt",
+      "city": "Frankfurt",
+      "country": "de",
+      "region": "eu"
+    },
+    {
+      "id": "paris",
+      "city": "Paris",
+      "country": "fr",
+      "region": "eu"
+    },
+    {
+      "id": "barcelona",
+      "city": "Barcelona",
+      "country": "es",
+      "region": "eu"
+    },
+    {
+      "id": "sarajevo",
+      "city": "Sarajevo",
+      "country": "ba",
+      "region": "eu"
+    },
+    {
+      "id": "chicago",
+      "city": "Chicago",
+      "country": "us",
+      "region": "nam"
+    },
+    {
+      "id": "toronto",
+      "city": "Toronto",
+      "country": "ca",
+      "region": "nam"
+    }
+  ]
+}
