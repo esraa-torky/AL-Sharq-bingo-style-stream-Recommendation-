@@ -20,7 +20,8 @@
     "thatsMe": "That’s me!",
     "ticketNo": "No.",
     "draftNote": "",
-    "sound": "Sound on or off"
+    "sound": "Sound on or off",
+    "applyTo": "Apply to {stream}"
   },
   "streams": {
     "F": "Fellowship",

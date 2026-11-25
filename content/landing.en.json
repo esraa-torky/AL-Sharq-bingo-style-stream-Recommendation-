@@ -1,0 +1,304 @@
+{
+  "meta": {
+    "title": "Al Sharq Youth · Get involved",
+    "description": "Find your Al Sharq Youth program, join or open a hub, or register your interest in a program."
+  },
+  "nav": {
+    "test": "Find your program",
+    "involve": "Get involved",
+    "site": "youth.sharqforum.org"
+  },
+  "hero": {
+    "eyebrow": "Al Sharq Youth",
+    "title": "Young people building change where they live",
+    "lede": "Al Sharq Youth is a network of young changemakers in hubs across more than 40 countries. Members meet in their city, learn together and run projects for their communities, with three support streams to help them grow.",
+    "stats": [
+      [
+        "45",
+        "hubs"
+      ],
+      [
+        "800+",
+        "members"
+      ],
+      [
+        "40+",
+        "countries"
+      ],
+      [
+        "3",
+        "support streams"
+      ]
+    ],
+    "ctaTest": "Take the 2-minute test",
+    "ctaForms": "Get involved"
+  },
+  "test": {
+    "eyebrow": "Not sure where you fit?",
+    "title": "Find your program in two minutes",
+    "lede": "Rate ten short statements, fill your bingo card and see which support stream suits you, with your personality and strengths. Then apply in one tap.",
+    "button": "Start the test",
+    "close": "Close the test",
+    "languages": "English, Türkçe, العربية"
+  },
+  "streams": {
+    "eyebrow": "Three support streams",
+    "title": "Ways to grow with Al Sharq Youth",
+    "F": {
+      "name": "Fellowship",
+      "line": "A 3-month leadership journey: six modules on ideas, systems, media and leading in uncertain times, with thinkers and practitioners.",
+      "time": "5 to 10 hours a week"
+    },
+    "I": {
+      "name": "Impact",
+      "line": "Three months to turn an idea into a community initiative in your hub, with workshops and mentors. No existing project needed.",
+      "time": "5 to 10 hours a week"
+    },
+    "H": {
+      "name": "Hubs",
+      "line": "Local, city-based spaces where members meet, host discussions and run projects that create local and regional impact.",
+      "time": "Join any time"
+    },
+    "note": "Applications for the support streams open after Al Sharq Forum 2026. Register your interest below and we will contact you."
+  },
+  "involve": {
+    "eyebrow": "Get involved",
+    "title": "What would you like to do?",
+    "lede": "Choose one. Each form takes about three minutes.",
+    "cards": {
+      "join-hub": {
+        "title": "Join a hub",
+        "line": "Become a member of a hub in your city."
+      },
+      "open-hub": {
+        "title": "Open a hub",
+        "line": "No hub near you? Start one with us."
+      },
+      "join-program": {
+        "title": "Join a program",
+        "line": "Fellowship, Impact or Hubs: register your interest."
+      }
+    }
+  },
+  "fields": {
+    "full_name": {
+      "label": "Full name"
+    },
+    "email": {
+      "label": "Email"
+    },
+    "phone": {
+      "label": "WhatsApp number",
+      "hint": "With your country code, for example +90 …"
+    },
+    "country": {
+      "label": "Country you live in"
+    },
+    "city": {
+      "label": "City you live in"
+    },
+    "age": {
+      "label": "Age"
+    },
+    "hub": {
+      "label": "Which hub would you like to join?",
+      "hint": "Only one hub can be chosen."
+    },
+    "team": {
+      "label": "Which hub teams interest you?",
+      "hint": "Choose any that fit."
+    },
+    "hours": {
+      "label": "Hours a week you can give"
+    },
+    "motivation": {
+      "label": "Why do you want to join?",
+      "hint": "A few sentences are enough."
+    },
+    "hub_city": {
+      "label": "City where you would open the hub"
+    },
+    "hub_country": {
+      "label": "Country"
+    },
+    "why_city": {
+      "label": "Why a hub in this city?"
+    },
+    "experience": {
+      "label": "Groups, teams or projects you have led",
+      "hint": "Volunteering, student clubs and community work all count."
+    },
+    "people": {
+      "label": "How many people would start it with you?"
+    },
+    "link": {
+      "label": "LinkedIn or a link to your work"
+    },
+    "program": {
+      "label": "Which program interests you?"
+    },
+    "idea": {
+      "label": "Your idea in one or two sentences",
+      "hint": "If you are interested in Impact"
+    },
+    "member": {
+      "label": "Are you an Al Sharq Youth Network member?"
+    }
+  },
+  "options": {
+    "age": {
+      "under-18": "Under 18",
+      "18-21": "18 to 21",
+      "22-35": "22 to 35",
+      "over-35": "Over 35"
+    },
+    "hours": {
+      "under-5": "Less than 5",
+      "5-10": "5 to 10",
+      "over-10": "More than 10"
+    },
+    "team": {
+      "projects": "Project management",
+      "pr": "PR and communications",
+      "creative": "Creative and media",
+      "team-dev": "Team development",
+      "resources": "Resource mobilisation",
+      "community": "Community management"
+    },
+    "people": {
+      "just-me": "Just me for now",
+      "2-4": "2 to 4",
+      "5-9": "5 to 9",
+      "10-plus": "10 or more"
+    },
+    "program": {
+      "F": "Fellowship",
+      "I": "Impact",
+      "H": "Hubs",
+      "unsure": "Not sure yet"
+    },
+    "member": {
+      "yes": "Yes",
+      "no": "No",
+      "applied": "I have applied"
+    }
+  },
+  "hubs": {
+    "choose": "Choose a hub",
+    "notListed": "My city isn’t listed",
+    "regions": {
+      "me": "Middle East",
+      "na": "North Africa",
+      "af": "Africa",
+      "as": "Asia",
+      "eu": "Europe",
+      "nam": "North America"
+    },
+    "cities": {
+      "gaziantep": "Gaziantep",
+      "ankara": "Ankara",
+      "erbil": "Erbil",
+      "sulaymaniyah": "Sulaymaniyah",
+      "amman": "Amman",
+      "nablus": "Nablus",
+      "doha": "Doha",
+      "aleppo": "Aleppo",
+      "damascus": "Damascus",
+      "homs": "Homs",
+      "hama": "Hama",
+      "daraa": "Daraa",
+      "idlib": "Idlib",
+      "latakia": "Latakia",
+      "saida": "Saida",
+      "beirut": "Beirut",
+      "tripoli-lb": "Tripoli",
+      "tripoli-ly": "Tripoli",
+      "rabat": "Rabat",
+      "algiers": "Algiers",
+      "tunis": "Tunis",
+      "nouakchott": "Nouakchott",
+      "moroni": "Moroni",
+      "addis-ababa": "Addis Ababa",
+      "nairobi": "Nairobi",
+      "abuja": "Abuja",
+      "kano": "Kano",
+      "johannesburg": "Johannesburg",
+      "burao": "Burao",
+      "kuala-lumpur": "Kuala Lumpur",
+      "jakarta": "Jakarta",
+      "lahore": "Lahore",
+      "islamabad": "Islamabad",
+      "dhaka": "Dhaka",
+      "new-delhi": "New Delhi",
+      "istanbul": "Istanbul",
+      "london": "London",
+      "budapest": "Budapest",
+      "milan": "Milan",
+      "frankfurt": "Frankfurt",
+      "paris": "Paris",
+      "barcelona": "Barcelona",
+      "sarajevo": "Sarajevo",
+      "chicago": "Chicago",
+      "toronto": "Toronto"
+    },
+    "countries": {
+      "tr": "Türkiye",
+      "iq": "Iraq",
+      "jo": "Jordan",
+      "ps": "Palestine",
+      "qa": "Qatar",
+      "sy": "Syria",
+      "lb": "Lebanon",
+      "ly": "Libya",
+      "ma": "Morocco",
+      "dz": "Algeria",
+      "tn": "Tunisia",
+      "mr": "Mauritania",
+      "km": "Comoros",
+      "et": "Ethiopia",
+      "ke": "Kenya",
+      "ng": "Nigeria",
+      "za": "South Africa",
+      "so": "Somalia",
+      "my": "Malaysia",
+      "id": "Indonesia",
+      "pk": "Pakistan",
+      "bd": "Bangladesh",
+      "in": "India",
+      "gb": "United Kingdom",
+      "hu": "Hungary",
+      "it": "Italy",
+      "de": "Germany",
+      "fr": "France",
+      "es": "Spain",
+      "ba": "Bosnia and Herzegovina",
+      "us": "United States",
+      "ca": "Canada"
+    }
+  },
+  "form": {
+    "required": "Required",
+    "optional": "optional",
+    "choose": "Choose…",
+    "consent": "I agree that Al Sharq Youth may keep these details and contact me about this request.",
+    "privacy": "Your details go only to the Al Sharq Youth team and are used only for this request.",
+    "submit": "Send",
+    "sending": "Sending…",
+    "fixErrors": "Please check the highlighted fields.",
+    "missing": "Please fill this in.",
+    "badEmail": "Please enter a valid email address.",
+    "badUrl": "Please enter a full link starting with https://",
+    "fromTest": "Your test match: {stream}",
+    "success": {
+      "title": "Thank you, {name}!",
+      "body": "We have your details. The Al Sharq Youth team will be in touch by email.",
+      "again": "Fill another form"
+    },
+    "offline": "You’re offline. Your form is saved on this device and will be sent when you’re back online."
+  },
+  "footer": {
+    "line": "Al Sharq Youth is part of Al Sharq Forum.",
+    "site": "Visit youth.sharqforum.org"
+  },
+  "draftNote": ""
+}

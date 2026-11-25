@@ -20,7 +20,8 @@
     "thatsMe": "Bu benim!",
     "ticketNo": "No.",
     "draftNote": "Taslak çeviri.",
-    "sound": "Sesi aç veya kapat"
+    "sound": "Sesi aç veya kapat",
+    "applyTo": "{stream} için başvur"
   },
   "streams": {
     "F": "Fellowship",
