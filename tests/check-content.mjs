@@ -134,26 +134,20 @@ function simulate(style) {
   return { n, share: Object.fromEntries(streams.map((s) => [s, (wins[s] / n) * 100])) };
 }
 
-/* ---------- landing page: forms.json and landing.<lang>.json ---------- */
+/* ---------- website: forms.json and landing.<lang>.json ---------- */
 const forms = load('forms.json');
 const landing = Object.fromEntries((config.languages || []).map((l) => [l, load(`landing.${l}.json`)]));
 if (forms && landing.en) {
-  const TYPES = ['text', 'email', 'tel', 'url', 'select', 'textarea', 'checkboxes', 'radios', 'hub'];
-  const ids = new Set(), sheets = new Set();
-  const allFields = [...(forms.shared || [])];
+  const TYPES = ['text', 'email', 'tel', 'url', 'select', 'textarea', 'checkboxes', 'radios'];
+  const sheets = new Set(), allFields = [...(forms.shared || [])];
   for (const f of forms.forms || []) {
-    if (!f.id || !f.sheet) err(`forms.json: every form needs an id and a sheet name`);
+    if (!/^[a-z][a-z-]*$/.test(f.id || '') || !f.sheet) err('forms.json: every form needs an id (lower case letters and -) and a sheet name');
     if (sheets.has(f.sheet)) err(`forms.json: two forms write to the sheet "${f.sheet}"`);
     sheets.add(f.sheet);
     const own = new Set((forms.shared || []).map((x) => x.id));
     for (const fd of f.fields || []) {
       if (own.has(fd.id)) err(`forms.json: ${f.id} has the field "${fd.id}" twice`);
       own.add(fd.id); allFields.push(fd);
-      if (fd.showWhen) for (const [k, v] of Object.entries(fd.showWhen)) {
-        const ref = (f.fields || []).concat(forms.shared || []).find((x) => x.id === k);
-        if (!ref) err(`forms.json: ${f.id}.${fd.id} showWhen refers to an unknown field "${k}"`);
-        else if (!(ref.options || []).includes(v)) err(`forms.json: ${f.id}.${fd.id} showWhen uses "${v}", not an option of ${k}`);
-      }
     }
   }
   if (sheets.has('Results')) err('forms.json: the "Results" tab is kept for the test; use another sheet name');
@@ -161,32 +155,26 @@ if (forms && landing.en) {
   for (const f of forms.forms || []) if (!APPS.includes(`'${f.id}': '${f.sheet}'`)) err(`apps-script/Code.gs: FORM_SHEETS must contain '${f.id}': '${f.sheet}' (then publish a new version of the script)`);
   for (const fd of allFields) {
     if (!/^[a-z][a-z0-9_]*$/.test(fd.id || '')) err(`forms.json: field id "${fd.id}" must be lower case letters, digits and _`);
-    if (!TYPES.includes(fd.type)) err(`forms.json: field ${fd.id} has unknown type "${fd.type}"`);
+    if (!TYPES.includes(fd.type)) err(`forms.json: field ${fd.id} has unknown type "${fd.type}" (use ${TYPES.join(', ')})`);
     if (['select', 'checkboxes', 'radios'].includes(fd.type) && !(fd.options || []).length) err(`forms.json: field ${fd.id} needs options`);
-    ids.add(fd.id);
-  }
-  const hubIds = new Set();
-  for (const hub of forms.hubs || []) {
-    if (hubIds.has(hub.id)) err(`forms.json: hub "${hub.id}" is listed twice`);
-    hubIds.add(hub.id);
-    if (!(forms.regions || []).includes(hub.region)) err(`forms.json: hub ${hub.id} has unknown region "${hub.region}"`);
   }
   // every text a visitor can see, in every language
-  const need = [];
-  for (const fd of allFields) {
-    need.push(`fields.${fd.id}.label`);
-    for (const o of fd.options || []) need.push(`options.${fd.id}.${o}`);
+  const need = ['links.learnMore'];
+  for (const f of forms.forms || []) {
+    need.push(`forms.${f.id}.title`, `forms.${f.id}.line`);
+    for (const fd of (forms.shared || []).concat(f.fields || [])) {
+      need.push(landing.en.forms?.[f.id]?.labels?.[fd.id] ? `forms.${f.id}.labels.${fd.id}` : `fields.${fd.id}.label`);
+      for (const o of fd.options || []) need.push(`options.${fd.id}.${o}`);
+    }
   }
-  for (const f of forms.forms || []) need.push(`involve.cards.${f.id}.title`, `involve.cards.${f.id}.line`);
-  for (const r of forms.regions || []) need.push(`hubs.regions.${r}`);
-  for (const hub of forms.hubs || []) need.push(`hubs.cities.${hub.id}`, `hubs.countries.${hub.country}`);
-  for (const s of streams) need.push(`streams.${s}.name`, `options.program.${s}`);
+  for (const s of streams) need.push(`streams.${s}.name`, `streams.${s}.line`, `streams.${s}.time`);
   const get = (o, path) => path.split('.').reduce((a, k) => (a == null ? a : a[k]), o);
   const leaves = (o, p = '') => Object.entries(o).flatMap(([k, v]) => (v && typeof v === 'object' && !Array.isArray(v) ? leaves(v, p + k + '.') : [[p + k, v]]));
   const holes = (s) => (String(s).match(/\{\w+\}/g) || []).sort().join();
   for (const l of config.languages || []) {
     const t = landing[l]; if (!t) continue;
     for (const k of need) { const v = get(t, k); if (typeof v !== 'string' || !v.trim()) err(`landing.${l}.json: missing text for ${k}`); }
+    if (!/^https:\/\//.test(get(t, 'links.learnMore') || '')) err(`landing.${l}.json: links.learnMore must be a full https:// address`);
     if (l === 'en') continue;
     for (const [k, v] of leaves(landing.en)) {
       const mine = get(t, k);
@@ -195,7 +183,6 @@ if (forms && landing.en) {
       if (Array.isArray(v) && (!Array.isArray(mine) || mine.length !== v.length)) err(`landing.${l}.json: ${k} must have ${v.length} items`);
     }
   }
-  for (const [k] of leaves(landing.en.fields || {})) if (!ids.has(k.split('.')[0])) warn(`landing.en.json: fields.${k} is not used by any form`);
 }
 
 if (!errors.length && en) {

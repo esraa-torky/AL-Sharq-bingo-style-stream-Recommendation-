@@ -1,5 +1,6 @@
 // Smoke test: plays the survey (test.html) to a result in every language, on a phone and an iPad in landscape,
-// then checks the landing page (index.html): each form validates and sends, and the test inside it hands its match to the program form.
+// then checks the website: the landing page (index.html), each form page (form.html) validates and sends,
+// and the test opened from the site hands its match to the program form.
 // Run `npm run smoke` (starts a local server on port 4173 and uses Playwright's Chromium).
 import { createRequire } from 'node:module';
 import { spawn } from 'node:child_process';
@@ -88,45 +89,51 @@ try {
       await page.close();
     }
   }
-  // ---------- the landing page ----------
+  // ---------- the website: landing page, the three form pages, and the test → program form ----------
   const forms = JSON.parse(readFileSync(new URL('../content/forms.json', import.meta.url), 'utf8'));
+  const sideways = (page) => page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
   for (const lang of config.languages) {
     for (const dev of [devices[0], { name: 'laptop', viewport: { width: 1280, height: 800 } }]) {
-      const label = `landing ${lang} ${dev.name}`;
+      const label = `site ${lang} ${dev.name}`;
       const page = await browser.newPage({ viewport: dev.viewport });
       await page.route(/script\.google(usercontent)?\.com/, (r) => r.abort());
       const errs = watchErrors(page);
       await page.goto(`${BASE}?lang=${lang}`);
-      await page.waitForSelector('#start-test button');
+      await page.waitForSelector('#take-test');
       if (lang === 'ar' && (await page.evaluate(() => document.documentElement.dir)) !== 'rtl') failures.push(`${label}: not right to left`);
+      if (await sideways(page)) failures.push(`${label}: landing page scrolls sideways`);
+      if (!(await page.isVisible('.network svg'))) failures.push(`${label}: the network art is missing`);
       for (const f of forms.forms) {
-        await page.click(`#choose-${f.id}`);
+        await page.goto(`${BASE}?lang=${lang}`);
+        await page.click(`#go-${f.id}`);
         await page.waitForSelector(`#form-${f.id}`);
+        if (!page.url().includes('form.html')) failures.push(`${label}: ${f.id} did not open its own page`);
+        if (!page.url().includes(`lang=${lang}`) && lang !== config.defaultLanguage) failures.push(`${label}: ${f.id} page lost the language`);
         await page.click('#send');
         if (!(await page.isVisible('.summary'))) failures.push(`${label}: ${f.id} sent with empty required fields`);
-        if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) failures.push(`${label}: ${f.id} form makes the page scroll sideways`);
+        if (await sideways(page)) failures.push(`${label}: ${f.id} form scrolls sideways`);
         await fillForm(page);
         await page.check('#f-consent');
         await page.click('#send');
         await page.waitForSelector('.success', { timeout: 3000 }).catch(() => failures.push(`${label}: ${f.id} did not reach the thank-you message`));
-        const last = await page.evaluate(() => window.__landing.submissions.at(-1));
+        const last = await page.evaluate(() => window.__site.submissions.at(-1));
         if (!last || last.form !== f.id || last.sheet !== f.sheet || last.email !== 'test@example.com') failures.push(`${label}: ${f.id} sent the wrong row ${JSON.stringify(last)}`);
-        if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) failures.push(`${label}: ${f.id} page scrolls sideways`);
       }
       let match = '';
       if (dev.name === 'phone') {
-        // the test opens on top of the page; its "Apply" button opens the program form with the match chosen
-        await page.click('#start-test button');
-        const frame = page.frameLocator('#test-frame');
-        await frame.locator('#begin button').waitFor();
-        const fr = page.frames().find((x) => x.url().includes('test.html'));
-        await playSurvey(fr, label);
-        await fr.waitForSelector('#apply button');
-        await fr.click('#apply button');
+        // the test opens as its own page; "Apply to …" on its result opens the program form showing the match
+        await page.goto(`${BASE}?lang=${lang}`);
+        await page.click('#take-test');
+        await page.waitForSelector('#begin button');
+        await playSurvey(page, label);
+        await page.click('#apply button');
         await page.waitForSelector('#form-join-program');
-        const st = await page.evaluate(() => ({ overlay: !!document.querySelector('.overlay'), checked: (document.querySelector('[name="program"]:checked') || {}).value, note: !!document.querySelector('.from-test') }));
-        if (st.overlay || !st.checked || !st.note) failures.push(`${label}: the test result did not open the program form with the match chosen ${JSON.stringify(st)}`);
-        match = ' · test → ' + st.checked;
+        const st = await page.evaluate(() => ({ note: (document.querySelector('.from-test') || {}).textContent || '', lang: document.documentElement.lang }));
+        if (!st.note || st.lang !== lang) failures.push(`${label}: the test result did not open the program form with the match ${JSON.stringify(st)}`);
+        await fillForm(page); await page.check('#f-consent'); await page.click('#send');
+        const last = await page.evaluate(() => window.__site.submissions.at(-1));
+        if (!last || !last.testMatch) failures.push(`${label}: the program form did not save the test match`);
+        match = ' · test → ' + (last && last.testMatch);
       }
       if (errs.length) failures.push(`${label}: ${errs.join(' | ')}`);
       console.log(`${label.padEnd(24)} ${forms.forms.length} forms sent${match}`);

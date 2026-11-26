@@ -1,7 +1,7 @@
 # Editing the content
 
 This guide is for whoever edits the survey's words, questions and points, person or agent.
-**Only edit files in `content/`.** Everything else (`src/`, `index.html`, `test.html`, `tests/`, `.github/`) is the code, and
+**Only edit files in `content/`.** Everything else (`src/`, `index.html`, `form.html`, `test.html`, `tests/`, `.github/`) is the code, and
 another person works on it at the same time.
 
 ## How to work
@@ -25,8 +25,8 @@ Keep each pull request small and about one thing (for example "reword question 3
 | `content/tr.json`, `content/ar.json` | The same text in Turkish and Arabic | Content, translators |
 | `content/questions.json` | Question and answer **ids**, and the **points** each answer adds | Content, with care |
 | `content/config.json` | The matrix, question style, rules, results address | Agreed changes only |
-| `content/landing.en.json`, `landing.tr.json`, `landing.ar.json` | All landing-page text: header, streams, form labels, options, hub names | Content, translators |
-| `content/forms.json` | The three forms: field ids, types, which are required, options, and the hub list | Agreed changes only |
+| `content/landing.en.json`, `landing.tr.json`, `landing.ar.json` | All website text: landing page, numbers, Learn more link, form titles and labels | Content, translators |
+| `content/forms.json` | The three forms: field ids, types, which are required, options | Agreed changes only |
 
 ### Text (`en.json`, `tr.json`, `ar.json`)
 
@@ -67,20 +67,21 @@ Keep each pull request small and about one thing (for example "reword question 3
 - `draftLanguages`: languages that still show the draft note.
 - `pageTurnSound`: the audio file played on each page turn, for example `assets/sounds/page-turn.mp3`. Leave empty for the built-in paper rustle.
 
-### Landing page (`landing.<lang>.json`, `forms.json`)
+### Website (`landing.<lang>.json`, `forms.json`)
 
 - The three landing files have the same structure as each other, like the survey text files.
   `{name}` and `{stream}` are placeholders; keep them.
-- `forms.json` lists the fields shared by every form (`shared`), then each form with its own fields.
-  A field has an `id`, a `type` (`text`, `email`, `tel`, `url`, `select`, `textarea`, `checkboxes`,
-  `radios` or `hub`), `required`, and `options` for choice fields. `showWhen` shows a field only for one
-  answer of another field, for example `{"program": "I"}`.
-- Every field id needs a label in `fields` of each landing file, and every option needs a text in `options`.
-- Hubs: each hub in `forms.json` → `hubs` needs its city name in `hubs.cities` and its country in
-  `hubs.countries` of each landing file.
+- **Numbers** in the header: `hero.stats`, a list of `[number, label]` pairs.
+- **Learn more** button: `links.learnMore`, a full `https://` address (it can differ per language).
+- `forms.json` lists the fields every form asks (`shared`), then each form with its own fields.
+  A field has an `id`, a `type` (`text`, `email`, `tel`, `url`, `select`, `textarea`, `checkboxes` or
+  `radios`), `required`, and `options` for choice fields.
+- Every field needs a label in `fields` of each landing file. A form can give a field its own label under
+  `forms.<form id>.labels`, as the "Why are you interested in …" question does. Every option needs a text
+  in `options.<field id>`.
 - Each form's `sheet` is the tab it saves to. Changing a form id or sheet name also needs a code change in
   `apps-script/Code.gs`, so ask before doing it.
-- A new field or option is fine to add: the Sheet adds a column by itself.
+- Adding a field or option is fine: the Sheet adds a column by itself.
 
 ## What the check catches
 
@@ -89,5 +90,5 @@ Keep each pull request small and about one thing (for example "reword question 3
 - an answer without points, or points for an unknown area
 - a matrix row that does not add up to 10, or bingo lines that overlap
 - a stream that wins less than 5% of the time with the question style in use
-- on the landing page: a field, option, hub or region without text in a language, an unknown field type,
-  a choice field without options, or a form whose tab the Apps Script does not know
+- on the website: a field, option or form without text in a language, an unknown field type, a choice
+  field without options, a Learn more link that is not https://, or a form whose tab the Apps Script does not know

@@ -1,17 +1,19 @@
 {
   "meta": {
-    "title": "Al Sharq Youth · Aramıza katıl",
-    "description": "Sana uygun Al Sharq Youth programını bul, bir hub’a katıl ya da hub aç veya bir programa ilgini bildir."
+    "title": "Al Sharq Youth · Ağa katıl",
+    "description": "Al Sharq Youth, genç liderleri ve değişim yaratanları birbirine bağlayan ve güçlendiren küresel bir ekosistemdir. Bir hub’a katıl, bir hub kur ya da bir programa katıl."
+  },
+  "links": {
+    "learnMore": "https://youth.sharqforum.org/"
   },
   "nav": {
-    "test": "Programını bul",
-    "involve": "Katıl",
-    "site": "youth.sharqforum.org"
+    "home": "Al Sharq Youth",
+    "back": "Al Sharq Youth’a dön"
   },
   "hero": {
-    "eyebrow": "Al Sharq Youth",
-    "title": "Yaşadıkları yerde değişim inşa eden gençler",
-    "lede": "Al Sharq Youth, 40’tan fazla ülkede hub’ları olan genç değişim öncülerinden oluşan bir ağdır. Üyeler kendi şehirlerinde buluşur, birlikte öğrenir ve toplulukları için projeler yürütür; üç destek akışı da gelişimlerine yardım eder.",
+    "eyebrow": "Al Sharq Youth ağına katıl",
+    "title": "Geleceği şekillendiren bir nesil.",
+    "lede": "Al Sharq Youth, genç liderleri ve değişim yaratanları birbirine bağlayan ve güçlendiren küresel bir ekosistemdir. Birlikte siyasi, ekonomik ve sosyal reformu, iş birliğini ve bütünleşmeyi ilerletirler.",
     "stats": [
       [
         "45",
@@ -24,22 +26,50 @@
       [
         "40+",
         "ülke"
-      ],
-      [
-        "3",
-        "destek akışı"
       ]
     ],
-    "ctaTest": "2 dakikalık testi yap",
-    "ctaForms": "Katıl"
+    "ctaInvolve": "Sen de katıl",
+    "ctaLearn": "Daha fazla bilgi",
+    "networkLabel": "Birbirine bağlı insanlardan ve hub’lardan oluşan bir ağ"
   },
-  "test": {
-    "eyebrow": "Nereye uyduğundan emin değil misin?",
-    "title": "Programını iki dakikada bul",
-    "lede": "On kısa ifadeyi değerlendir, tombala kartını doldur ve hangi destek akışının sana uyduğunu, kişiliğin ve güçlü yönlerinle birlikte gör. Sonra tek dokunuşla başvur.",
-    "button": "Teste başla",
-    "close": "Testi kapat",
-    "languages": "English, Türkçe, العربية"
+  "about": {
+    "eyebrow": "Biz kimiz",
+    "title": "İlham ver. Güçlendir. Bağlan.",
+    "body": "Al Sharq Youth, genç liderleri ve değişim yaratanları tek bir küresel ağda bir araya getirir. Sohbete katılmak, kendi insanlarını bulmak, bir lider olarak gelişmek ve fikirleri ve girişimleri ileri taşımak için bir alandır.",
+    "valuesTitle": "Bizi değerler birleştirir",
+    "values": [
+      "Ümmet odaklı",
+      "Geleceğe dönük",
+      "Amaç odaklı",
+      "İyimser",
+      "Bilgiyle yol alan",
+      "Bağlantılı ve becerikli"
+    ],
+    "philosophyTitle": "Değişim felsefesi",
+    "philosophy": "Ağların öngörülemez ve karmaşık bir dünyada daha hızlı, daha akıllı ve daha dayanıklı olduğuna inanan bir ağ modeli."
+  },
+  "path": {
+    "eyebrow": "Nasıl çalışıyoruz",
+    "title": "Etkiye giden yolun burada başlıyor!",
+    "lede": "Al Sharq Youth şu yollarla etki yaratır:",
+    "items": [
+      [
+        "Anlatıları şekillendirmek",
+        "Sohbete katıl. Divanlarda, kamusal diyaloglarda ve düşündüren tartışmalarda yer al."
+      ],
+      [
+        "Gençleri bağlamak ve harekete geçirmek",
+        "Ağını bul. Harekete geç. Dünyanın dört bir yanındaki değişim yaratanlarla bağlantı kur, hub’lara katıl, etkinliklerde ve girişimlerde birlikte çalış."
+      ],
+      [
+        "Liderleri ve kurucuları güçlendirmek",
+        "Bir lider olarak geliş. Etki için inşa et. Al Sharq Youth programlarını keşfet."
+      ],
+      [
+        "Etkiyi ve nüfuzu büyütmek",
+        "Etkini daha ileri taşı. Fikirleri ve girişimleri ilerletmek için başkalarıyla iş birliği yap."
+      ]
+    ]
   },
   "streams": {
     "eyebrow": "Üç destek akışı",
@@ -61,22 +91,37 @@
     },
     "note": "Destek akışlarına başvurular Al Sharq Forum 2026’dan sonra açılacak. Aşağıdan ilgini bildir, seninle iletişime geçelim."
   },
-  "involve": {
-    "eyebrow": "Katıl",
-    "title": "Ne yapmak istersin?",
-    "lede": "Birini seç. Her form yaklaşık üç dakika sürer.",
-    "cards": {
-      "join-hub": {
-        "title": "Bir hub’a katıl",
-        "line": "Şehrindeki bir hub’ın üyesi ol."
-      },
-      "open-hub": {
-        "title": "Hub aç",
-        "line": "Yakınında hub yok mu? Bizimle bir tane başlat."
-      },
-      "join-program": {
-        "title": "Bir programa katıl",
-        "line": "Fellowship, Impact ya da Hub’lar: ilgini bildir."
+  "journey": {
+    "eyebrow": "Sen de katıl",
+    "title": "Yolculuğun burada başlıyor",
+    "start": "Başla"
+  },
+  "next": {
+    "title": "Bir sonraki adımı at",
+    "lede": "Üyelik fırsatlarını keşfet ve sen de katıl.",
+    "test": "Yolunu bulamadın mı? Testi çöz!"
+  },
+  "closing": "Keşfet. Bağlan. Harekete geç.",
+  "forms": {
+    "join-hub": {
+      "title": "Bir hub’a katıl",
+      "line": "Küresel bir ağa açılan yerel kapını keşfet.",
+      "labels": {
+        "why": "Bir hub’a katılmakla neden ilgileniyorsun?"
+      }
+    },
+    "establish-hub": {
+      "title": "Bir hub kur",
+      "line": "Büyüyen bir topluluklar ve etkinlikler ağının parçası ol.",
+      "labels": {
+        "why": "Bir hub kurmakla neden ilgileniyorsun?"
+      }
+    },
+    "join-program": {
+      "title": "Bir programa katıl",
+      "line": "Divan, Fellowship ve Impact Platformu ile fırsatları keşfet.",
+      "labels": {
+        "why": "Bir programa katılmakla neden ilgileniyorsun?"
       }
     }
   },
@@ -85,195 +130,15 @@
       "label": "Ad soyad"
     },
     "email": {
-      "label": "E-posta"
+      "label": "E-posta adresi"
     },
     "phone": {
-      "label": "WhatsApp numarası",
+      "label": "Telefon numarası",
       "hint": "Ülke koduyla, örneğin +90 …"
     },
-    "country": {
-      "label": "Yaşadığın ülke"
-    },
-    "city": {
-      "label": "Yaşadığın şehir"
-    },
-    "age": {
-      "label": "Yaş"
-    },
-    "hub": {
-      "label": "Hangi hub’a katılmak istersin?",
-      "hint": "Yalnızca bir hub seçilebilir."
-    },
-    "team": {
-      "label": "Hangi hub ekipleri ilgini çekiyor?",
-      "hint": "Uyanların hepsini seç."
-    },
-    "hours": {
-      "label": "Haftada ayırabileceğin saat"
-    },
-    "motivation": {
-      "label": "Neden katılmak istiyorsun?",
+    "why": {
+      "label": "Neden ilgileniyorsun?",
       "hint": "Birkaç cümle yeterli."
-    },
-    "hub_city": {
-      "label": "Hub açmak istediğin şehir"
-    },
-    "hub_country": {
-      "label": "Ülke"
-    },
-    "why_city": {
-      "label": "Neden bu şehirde bir hub?"
-    },
-    "experience": {
-      "label": "Yönettiğin gruplar, ekipler veya projeler",
-      "hint": "Gönüllülük, öğrenci kulüpleri ve topluluk çalışmaları da sayılır."
-    },
-    "people": {
-      "label": "Seninle kaç kişi başlar?"
-    },
-    "link": {
-      "label": "LinkedIn ya da çalışmalarına bir bağlantı"
-    },
-    "program": {
-      "label": "Hangi program ilgini çekiyor?"
-    },
-    "idea": {
-      "label": "Bir iki cümleyle fikrin",
-      "hint": "Impact ile ilgileniyorsan"
-    },
-    "member": {
-      "label": "Al Sharq Youth Ağı üyesi misin?"
-    }
-  },
-  "options": {
-    "age": {
-      "under-18": "18 altı",
-      "18-21": "18–21",
-      "22-35": "22–35",
-      "over-35": "35 üstü"
-    },
-    "hours": {
-      "under-5": "5’ten az",
-      "5-10": "5–10",
-      "over-10": "10’dan fazla"
-    },
-    "team": {
-      "projects": "Proje yönetimi",
-      "pr": "Halkla ilişkiler ve iletişim",
-      "creative": "Yaratıcı içerik ve medya",
-      "team-dev": "Ekip gelişimi",
-      "resources": "Kaynak geliştirme",
-      "community": "Topluluk yönetimi"
-    },
-    "people": {
-      "just-me": "Şimdilik sadece ben",
-      "2-4": "2–4",
-      "5-9": "5–9",
-      "10-plus": "10 veya daha fazla"
-    },
-    "program": {
-      "F": "Fellowship",
-      "I": "Impact",
-      "H": "Hub’lar",
-      "unsure": "Henüz emin değilim"
-    },
-    "member": {
-      "yes": "Evet",
-      "no": "Hayır",
-      "applied": "Başvurdum"
-    }
-  },
-  "hubs": {
-    "choose": "Bir hub seç",
-    "notListed": "Şehrim listede yok",
-    "regions": {
-      "me": "Orta Doğu",
-      "na": "Kuzey Afrika",
-      "af": "Afrika",
-      "as": "Asya",
-      "eu": "Avrupa",
-      "nam": "Kuzey Amerika"
-    },
-    "cities": {
-      "gaziantep": "Gaziantep",
-      "ankara": "Ankara",
-      "erbil": "Erbil",
-      "sulaymaniyah": "Süleymaniye",
-      "amman": "Amman",
-      "nablus": "Nablus",
-      "doha": "Doha",
-      "aleppo": "Halep",
-      "damascus": "Şam",
-      "homs": "Humus",
-      "hama": "Hama",
-      "daraa": "Dera",
-      "idlib": "İdlib",
-      "latakia": "Lazkiye",
-      "saida": "Sayda",
-      "beirut": "Beyrut",
-      "tripoli-lb": "Trablus",
-      "tripoli-ly": "Trablus",
-      "rabat": "Rabat",
-      "algiers": "Cezayir",
-      "tunis": "Tunus",
-      "nouakchott": "Nuakşot",
-      "moroni": "Moroni",
-      "addis-ababa": "Addis Ababa",
-      "nairobi": "Nairobi",
-      "abuja": "Abuja",
-      "kano": "Kano",
-      "johannesburg": "Johannesburg",
-      "burao": "Burao",
-      "kuala-lumpur": "Kuala Lumpur",
-      "jakarta": "Cakarta",
-      "lahore": "Lahor",
-      "islamabad": "İslamabad",
-      "dhaka": "Dakka",
-      "new-delhi": "Yeni Delhi",
-      "istanbul": "İstanbul",
-      "london": "Londra",
-      "budapest": "Budapeşte",
-      "milan": "Milano",
-      "frankfurt": "Frankfurt",
-      "paris": "Paris",
-      "barcelona": "Barselona",
-      "sarajevo": "Saraybosna",
-      "chicago": "Şikago",
-      "toronto": "Toronto"
-    },
-    "countries": {
-      "tr": "Türkiye",
-      "iq": "Irak",
-      "jo": "Ürdün",
-      "ps": "Filistin",
-      "qa": "Katar",
-      "sy": "Suriye",
-      "lb": "Lübnan",
-      "ly": "Libya",
-      "ma": "Fas",
-      "dz": "Cezayir",
-      "tn": "Tunus",
-      "mr": "Moritanya",
-      "km": "Komorlar",
-      "et": "Etiyopya",
-      "ke": "Kenya",
-      "ng": "Nijerya",
-      "za": "Güney Afrika",
-      "so": "Somali",
-      "my": "Malezya",
-      "id": "Endonezya",
-      "pk": "Pakistan",
-      "bd": "Bangladeş",
-      "in": "Hindistan",
-      "gb": "Birleşik Krallık",
-      "hu": "Macaristan",
-      "it": "İtalya",
-      "de": "Almanya",
-      "fr": "Fransa",
-      "es": "İspanya",
-      "ba": "Bosna-Hersek",
-      "us": "ABD",
-      "ca": "Kanada"
     }
   },
   "form": {
@@ -292,9 +157,11 @@
     "success": {
       "title": "Teşekkürler, {name}!",
       "body": "Bilgilerin bize ulaştı. Al Sharq Youth ekibi e-posta ile iletişime geçecek.",
-      "again": "Başka bir form doldur"
+      "home": "Al Sharq Youth’a dön"
     },
-    "offline": "Çevrimdışısın. Formun bu cihazda kaydedildi ve tekrar bağlandığında gönderilecek."
+    "offline": "Çevrimdışısın. Formun bu cihazda kaydedildi ve tekrar bağlandığında gönderilecek.",
+    "badPhone": "Lütfen en az 7 haneli bir telefon numarası gir.",
+    "unknown": "Bu form bulunamadı."
   },
   "footer": {
     "line": "Al Sharq Youth, Al Sharq Forum’un bir parçasıdır.",

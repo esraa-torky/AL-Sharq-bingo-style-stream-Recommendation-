@@ -3,7 +3,7 @@
 //
 // - Program Finder test results go to the "Results" tab: time, language, question style, answers, match,
 //   personality and scores. Nothing personal.
-// - The three landing-page forms go to their own tabs: "Join a hub", "Open a hub" and "Join a program".
+// - The three landing-page forms go to their own tabs: "Join a hub", "Establish a hub" and "Join a program".
 //   These hold the names and contact details people type in, so share the spreadsheet only with the team.
 //   Each tab gets its headings from the first form sent to it; a new field later adds a new column at the end.
 //
@@ -14,7 +14,7 @@
 
 var SHEET_NAME = 'Results';
 var COLUMNS = ['time', 'lang', 'style', 'stream', 'personality', 'strengths', 'nextStep', 'scores', 'answers'];
-var FORM_SHEETS = { 'join-hub': 'Join a hub', 'open-hub': 'Open a hub', 'join-program': 'Join a program' };
+var FORM_SHEETS = { 'join-hub': 'Join a hub', 'establish-hub': 'Establish a hub', 'join-program': 'Join a program' };
 var FORM_FIRST = ['time', 'lang'];               // these come first in every form tab
 var FORM_SKIP = ['form', 'sheet', 'website'];   // routing keys and the spam trap are not stored
 
@@ -36,7 +36,7 @@ function formSheet(formId) {
 function setup() {
   resultsSheet();
   Object.keys(FORM_SHEETS).forEach(formSheet);
-  Logger.log('Ready: the Results, Join a hub, Open a hub and Join a program tabs exist and the script may write to them.');
+  Logger.log('Ready: the Results, Join a hub, Establish a hub and Join a program tabs exist and the script may write to them.');
 }
 
 function cell(v) {
