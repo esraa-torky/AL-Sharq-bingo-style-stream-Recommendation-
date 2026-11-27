@@ -83,7 +83,7 @@ Keep each pull request small and about one thing (for example "reword question 3
   so keep the full stops.
 - **Values** (`about.values`): shown as one running line of large type, in the order written.
 - **Your journey starts here** (`journey`, `streams`, `forms`): the section under the hero. `streams.note` is the
-  line under its heading. The hubs panel shows `streams.H` with the titles and lines of the Join a hub and
+  line under its heading. The hubs panel is titled by `streams.hubsTitle` and shows the line of `streams.H` with the titles and lines of the Join a hub and
   Establish a hub forms. The other panel is headed by `streams.title` and shows `streams.F` and `streams.I`,
   with the Join a stream form's title on the button and its line beside it.
   **No time or duration is shown on the landing page**: keep months, weeks and hours out of these texts.
