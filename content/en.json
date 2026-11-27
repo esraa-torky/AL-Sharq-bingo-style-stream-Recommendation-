@@ -151,12 +151,12 @@
       }
     },
     "small-grant": {
-      "q": "If your community got a small grant, you’d…",
+      "q": "If your team got a small grant, you’d…",
       "answers": {
         "a": "Study the real need first",
         "b": "Design a project with clear goals",
         "c": "Test a small idea right away",
-        "d": "Let the community decide together"
+        "d": "Decide together as a team"
       }
     },
     "next-year": {

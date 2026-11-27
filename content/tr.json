@@ -151,12 +151,12 @@
       }
     },
     "small-grant": {
-      "q": "Topluluğun küçük bir hibe alsa…",
+      "q": "Ekibin küçük bir hibe alsa…",
       "answers": {
         "a": "Önce gerçek ihtiyacı araştırırsın",
         "b": "Net hedefli bir proje tasarlarsın",
         "c": "Küçük bir fikri hemen denersin",
-        "d": "Topluluk olarak birlikte karar verirsiniz"
+        "d": "Ekip olarak birlikte karar verirsiniz"
       }
     },
     "next-year": {
