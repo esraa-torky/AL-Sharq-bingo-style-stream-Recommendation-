@@ -6,13 +6,13 @@ The site has three pages:
   - **Hero:** dark wine in both light and dark mode, with a living web of people and hubs moving across its
     whole background (`src/web.js`): points drift, lines join whoever is close, gold signals travel between
     hubs, and the web leans towards a mouse pointer. The headline rises in word by word and the numbers count up.
-  - **Who we are:** the three-word statement, the introduction, and the six values with a drawing each.
+  - **Your journey starts here:** straight under the hero. The hubs panel (Join a hub, Establish a hub) sits
+    beside the streams panel (Fellowship and Impact, then Join a stream). Each action opens its form.
+    No time or duration is shown.
+  - **The test:** "Couldn't find your path? Take the test!", beside a small bingo card that stamps itself.
+  - **Who we are:** the three-word statement, the introduction, and the values as a line of large type.
   - **Philosophy of change:** a dark band with a quieter copy of the web.
-  - **How we work:** four steps on a line that draws itself when it scrolls into view.
-  - **Three support streams:** a card per stream with its colour, weekly time and a link to its form
-    (Fellowship and Impact open Join a stream, Hubs opens Join a hub).
-  - **Your journey starts here:** Join a hub, Establish a hub, Join a stream.
-  - **Take the next step:** the link to the test, beside a small bingo card that stamps itself.
+  - **How we work:** four numbered steps on a line that draws itself when it scrolls into view.
   - **Closing statement and footer:** section links, the three forms, languages and the Al Sharq Forum link.
 
   The top bar stays on screen; on a phone its section links fold into a menu. Sections rise gently into view

@@ -31,7 +31,7 @@
 [lang="ar"]{--font-body:"IBM Plex Sans Arabic","IBM Plex Sans",system-ui,sans-serif;--font-display:"IBM Plex Sans Arabic","Bricolage Grotesque",sans-serif}
 [lang="ar"] *{letter-spacing:0!important}
 [lang="ar"] .eyebrow{font-size:15px}
-[lang="ar"] .time,[lang="ar"] .facts li{font-size:15px}
+[lang="ar"] .facts li{font-size:15px}
 
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--bar-h) + 12px)}
@@ -55,7 +55,6 @@ section h2{font-size:clamp(30px,4.4vw,52px);font-weight:700;margin-top:12px;max-
 .section-lede{margin-top:14px;color:var(--muted);font-size:clamp(17px,1.6vw,20px)}
 .muted{color:var(--muted)}
 .draft{margin-top:20px;font-size:13px;color:var(--muted)}
-.icon{width:24px;height:24px;flex:none}
 /* keyboard users can jump past the top bar */
 .skip{position:absolute;inset-inline-start:12px;top:-80px;z-index:40;padding:12px 16px;border-radius:4px;background:var(--surface);color:var(--ink);font-weight:600;text-decoration:none}
 .skip:focus{top:12px}
@@ -69,7 +68,7 @@ section h2{font-size:clamp(30px,4.4vw,52px);font-weight:700;margin-top:12px;max-
 .btn .arrow{width:18px;height:18px;flex:none;transition:transform .15s}
 .btn:hover .arrow{transform:translateX(3px)}
 .btn:hover .arrow.out{transform:translate(2px,-2px)}
-[dir="rtl"] .btn .arrow,[dir="rtl"] .journey-card .arrow{transform:scaleX(-1)}
+[dir="rtl"] .btn .arrow{transform:scaleX(-1)}
 [dir="rtl"] .btn:hover .arrow{transform:scaleX(-1) translateX(3px)}
 [dir="rtl"] .btn:hover .arrow.out{transform:scaleX(-1) translate(2px,-2px)}
 .btn.primary{background:var(--burg);color:var(--on-burg)}
@@ -180,23 +179,24 @@ main>section.hero+section::before{background:transparent}
 .hero.intro .ctas{animation:rise .8s cubic-bezier(.2,.7,.1,1) .85s both}
 .hero.intro .stats{animation:appear 1s ease 1s both}
 
-/* who we are: the statement beside the introduction, then the six values on a ruled grid */
+/* who we are: the statement beside the introduction, then the values */
 .about-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:end}
 .statement{margin-top:18px;max-width:none;font-size:clamp(44px,7vw,96px);font-weight:800;line-height:1;letter-spacing:-0.015em}
 [lang="ar"] .statement{font-size:clamp(40px,6vw,84px);font-weight:700;line-height:1.35}
 .statement .s{display:block}
 .dot{color:var(--gold)}
 .about-body{font-size:clamp(19px,1.9vw,23px);line-height:1.55;padding-bottom:.35em}
-.values{margin-top:clamp(48px,6vw,84px)}
+.values{margin-top:clamp(48px,6vw,84px);padding-top:28px;border-top:1px solid var(--line-strong)}
 .values h3{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 [lang="ar"] .values h3{font-size:16px}
-/* the 1px gaps show the list's own background, which draws the lines between the cells at any number of columns */
-.values ul{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;margin-top:18px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
-.values li{display:flex;flex-direction:column;gap:16px;padding:22px 18px 24px;background:var(--surface);font-weight:600;font-size:17px;line-height:1.3}
+/* the values run on as one line of large type, with a gold diamond between neighbours */
+.values ul{display:flex;flex-wrap:wrap;gap:.12em 0;margin-top:16px;font-family:var(--font-display);font-weight:700;font-size:clamp(24px,3.3vw,44px);line-height:1.2;letter-spacing:-0.015em}
+[lang="ar"] .values ul{line-height:1.5}
+.values li{display:inline-flex;align-items:center}
+.values li:not(:last-child)::after{content:"";flex:none;width:.24em;height:.24em;margin-inline:.55em;background:var(--gold);transform:rotate(45deg)}
 .values li.reveal{transform:none}
-.values .icon{width:28px;height:28px;color:var(--accent)}
 
-/* dark bands (philosophy, journey): full width, with a quiet echo of the web behind the words */
+/* dark band (philosophy): full width, with a quiet echo of the web behind the words */
 main>section.band{position:relative;isolation:isolate;overflow:hidden;padding-top:var(--section);color:#fff}
 main>section.band::before,main>section.band+section::before{display:none}
 main>section.band+section{padding-top:var(--section)}
@@ -211,60 +211,52 @@ main>section.quote{background:radial-gradient(60% 130% at 90% 0%,rgba(154,23,64,
 [lang="ar"] .quote blockquote{line-height:1.5}
 [lang="ar"] .quote .eyebrow{font-size:16px}
 
-/* path to impact: four numbered steps on a line that draws itself, left to right, when the list arrives */
+/* path to impact: four steps hang from a line that draws itself, start to end, when the list arrives;
+   a dot marks each step and its large numeral takes colour as the line reaches it */
 .path-list{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin-top:56px}
-.path-list::before,.path-list::after{content:"";position:absolute;top:27px;inset-inline-start:28px;width:calc(75% + 21px);height:2px;background:var(--line-strong)}
+.path-list::before,.path-list::after{content:"";position:absolute;top:5px;inset-inline:0;height:2px;background:var(--line-strong)}
 .path-list::after{background:linear-gradient(90deg,var(--burg),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform 1.9s cubic-bezier(.4,0,.2,1) .25s}
 [dir="rtl"] .path-list::after{background:linear-gradient(270deg,var(--burg),var(--gold));transform-origin:right}
 .path-list.in::after{transform:scaleX(1)}
-.path-list li{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px}
-.path-list .num{display:grid;place-items:center;width:56px;height:56px;margin-bottom:14px;border-radius:50%;border:2px solid var(--line-strong);background:var(--bg);color:var(--muted);font-family:var(--font-display);font-weight:800;font-size:18px;transition:background-color .4s,border-color .4s,color .4s;transition-delay:calc(.25s + var(--i) * .55s)}
-.path-list.in .num{background:var(--burg);border-color:var(--burg);color:var(--on-burg)}
+.path-list li{position:relative;display:flex;flex-direction:column;gap:10px;padding-top:36px}
+.path-list li::before{content:"";position:absolute;z-index:1;top:0;inset-inline-start:0;width:12px;height:12px;border-radius:50%;border:2px solid var(--line-strong);background:var(--bg);transition:background-color .4s,border-color .4s;transition-delay:calc(.25s + var(--i) * .5s)}
+.path-list.in li::before{background:var(--burg);border-color:var(--burg)}
+.path-list .num{font-family:var(--font-display);font-weight:800;font-size:clamp(44px,5vw,68px);line-height:1;letter-spacing:-0.03em;color:var(--line-strong);transition:color .5s;transition-delay:calc(.25s + var(--i) * .5s)}
+.path-list.in .num{color:var(--accent)}
 .path-list h3{font-size:21px}
 .path-list p{color:var(--muted);font-size:16px}
 
-/* the three support streams: --c is the stream's own colour */
-.stream-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:48px}
-.stream{--c:var(--burg);position:relative;display:flex;flex-direction:column;gap:12px;padding:28px 26px 22px;background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:4px;transition:transform .2s,box-shadow .2s,border-color .2s}
-.stream.s-I{--c:var(--gold)} .stream.s-H{--c:var(--rose)}
-.stream:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 20px 40px -20px rgba(60,10,25,.4)}
-.stream:has(.stream-go:focus-visible){outline:3px solid var(--gold);outline-offset:3px}
-.stream-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
-.stream .mark{width:52px;height:52px;padding:12px;border-radius:4px;color:var(--c);background:var(--surface-2);background:color-mix(in srgb,var(--c) 15%,transparent)}
-.time{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--line-strong);border-radius:4px;font-size:13px;font-weight:600}
-.time .icon{width:15px;height:15px;color:var(--muted)}
-.stream h3{font-size:clamp(24px,2.4vw,30px)}
-.stream p{margin-bottom:14px;color:var(--muted);font-size:16px}
-.stream-go{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font-family:var(--font-display);font-weight:700;text-decoration:none}
-.stream-go::after{content:"";position:absolute;inset:0} /* the whole card opens the form */
-.stream-go:focus-visible{outline:none}
-.stream-go .arrow{width:18px;height:18px;flex:none;transition:transform .15s}
-.stream:hover .stream-go .arrow{transform:translateX(4px)}
-[dir="rtl"] .stream-go .arrow{transform:scaleX(-1)}
-[dir="rtl"] .stream:hover .stream-go .arrow{transform:scaleX(-1) translateX(4px)}
-.notice{display:flex;align-items:flex-start;gap:12px;max-width:860px;margin-top:28px;padding:16px 20px;border:1px solid var(--line-strong);border-radius:4px;background:var(--surface-2);font-size:16px}
-.notice .icon{width:22px;height:22px;margin-top:2px;color:var(--accent)}
+/* your journey starts here: the hubs panel in burgundy beside the streams panel */
+.involve-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:20px;margin-top:48px}
+.hubs{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;padding:clamp(26px,4vw,48px);border-radius:4px;background:linear-gradient(160deg,#8f1336 0%,#5c0d24 100%);color:#fff}
+.hubs .band-web{opacity:.42}
+.hubs h3{font-size:clamp(48px,6.4vw,88px);font-weight:800;line-height:1;letter-spacing:-0.02em}
+[lang="ar"] .hubs h3{font-size:clamp(44px,5.6vw,76px);font-weight:700;line-height:1.3}
+.hubs>p{max-width:38ch;margin-top:18px;color:var(--hero-soft);font-size:clamp(17px,1.5vw,19px)}
+.ways{margin-top:auto;padding-top:clamp(32px,5vw,64px)}
+/* one way in: its name, a line about it, and a round arrow that fills when the row is pointed at */
+.way{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 16px;padding:20px 0;border-top:1px solid rgba(255,255,255,.24);color:#fff;text-decoration:none}
+.way b{font-family:var(--font-display);font-size:clamp(20px,2vw,24px);line-height:1.2;transition:color .2s}
+.way span{grid-column:1;color:var(--hero-soft);font-size:15px}
+.way .arrow{grid-column:2;grid-row:1 / span 2;width:46px;height:46px;padding:12px;border:1px solid rgba(255,255,255,.42);border-radius:50%;transition:background-color .2s,color .2s,border-color .2s,transform .2s}
+.way:hover b{color:var(--hero-gold)}
+.way:hover .arrow{background:#fff;border-color:#fff;color:#6e0e29;transform:translateX(4px)}
+.way:focus-visible{outline:3px solid var(--hero-gold);outline-offset:4px}
+[dir="rtl"] .way .arrow{transform:scaleX(-1)}
+[dir="rtl"] .way:hover .arrow{transform:scaleX(-1) translateX(4px)}
+.streams{display:flex;flex-direction:column;padding:clamp(26px,4vw,48px);border:1px solid var(--line);border-radius:4px;background:var(--surface)}
+.stream{padding:26px 0;border-bottom:1px solid var(--line)}
+.stream h3{font-size:clamp(30px,3.4vw,44px);font-weight:700;letter-spacing:-0.015em}
+.stream p{max-width:58ch;margin-top:10px;color:var(--muted);font-size:17px}
+.streams-join{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:auto;padding-top:28px}
+.streams-join .btn{min-height:54px}
+.streams-join p{flex:1 1 220px;max-width:46ch;color:var(--muted);font-size:15px}
 
-/* your journey starts here */
-main>section.journey{background:var(--burg-deep)}
-.journey .band-web{opacity:.38}
-.journey-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:48px}
-.journey-card{height:100%;display:flex;flex-direction:column;gap:10px;padding:28px 26px 24px;background:var(--surface);color:var(--ink);text-decoration:none;border-radius:4px;border:2px solid transparent;transition:border-color .2s,transform .2s,box-shadow .2s}
-.journey-card:hover{border-color:var(--hero-gold);transform:translateY(-4px);box-shadow:0 24px 44px -22px rgba(0,0,0,.6)}
-.journey-card:focus-visible{outline:3px solid var(--hero-gold);outline-offset:4px}
-.journey-card .num{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--burg);color:var(--on-burg);font-family:var(--font-display);font-weight:800;font-size:18px;transition:background-color .2s,color .2s}
-.journey-card:hover .num{background:var(--gold);color:var(--on-gold)}
-.journey-card b{font-family:var(--font-display);font-size:clamp(22px,2.2vw,26px);line-height:1.2;margin-top:8px}
-.journey-card .line{color:var(--muted);font-size:16px}
-.journey-card .go{margin-top:auto;padding-top:14px;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:700;color:var(--accent)}
-.journey-card .arrow{width:18px;height:18px;transition:transform .15s}
-.journey-card:hover .arrow{transform:translateX(4px)}
-[dir="rtl"] .journey-card:hover .arrow{transform:scaleX(-1) translateX(4px)}
-
-/* take the next step: the test, with a small paper bingo card (always paper-coloured, like the test itself) */
+/* the test, straight after the ways in, with a small paper bingo card (always paper-coloured, like the test itself) */
+main>section.next::before{display:none}
 .next-card{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:center;gap:clamp(28px,5vw,72px);padding:clamp(26px,5vw,64px);background:var(--surface-2);border:1px solid var(--line);border-radius:4px}
 .next-copy{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
-.next h2,.next .section-lede{margin:0}
+.next h2{margin:0;max-width:16ch}
 .facts{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 12px}
 .facts li{padding:6px 12px;border:1px solid var(--line-strong);border-radius:4px;background:var(--surface);font-weight:600;font-size:14px}
 .btn.test{min-height:56px;padding:12px 24px;text-align:start}
@@ -353,22 +345,21 @@ main>section.journey{background:var(--burg-deep)}
   .topbar.over-hero .site-nav,.topbar.over-hero .site-nav a:not(.btn){border-color:rgba(255,255,255,.12)}
   .topbar.over-hero .site-nav a[aria-current]{color:var(--hero-gold)}
   .topbar.over-hero .nav-join{background:#fff;color:#5a0b21}
-  .values ul{grid-template-columns:repeat(3,minmax(0,1fr))}
-  /* the path runs down the page: each step's line reaches to the next step */
+  /* the path runs down the page, with its line on the starting side */
   .path-list{grid-template-columns:1fr;gap:36px;margin-top:40px}
-  .path-list::before,.path-list::after{display:none}
-  .path-list li{padding-inline-start:80px;min-height:56px}
-  .path-list .num{position:absolute;inset-inline-start:0;top:0;margin:0}
-  .path-list li:not(:last-child)::before,.path-list li:not(:last-child)::after{content:"";position:absolute;z-index:-1;inset-inline-start:27px;top:56px;bottom:-36px;width:2px;background:var(--line-strong)}
-  .path-list li:not(:last-child)::after{background:var(--burg);transform:scaleY(0);transform-origin:top;transition:transform .55s ease;transition-delay:calc(.45s + var(--i) * .55s)}
-  .path-list.in li::after{transform:scaleY(1)}
+  .path-list::before,.path-list::after{top:6px;bottom:0;inset-inline:auto;inset-inline-start:5px;width:2px;height:auto}
+  .path-list::after,[dir="rtl"] .path-list::after{background:linear-gradient(180deg,var(--burg),var(--gold));transform:scaleY(0);transform-origin:top}
+  .path-list.in::after{transform:scaleY(1)}
+  .path-list li{padding-top:0;padding-inline-start:40px}
+  .path-list li::before{top:6px}
+  .path-list .num{font-size:44px}
   .foot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .foot-brand{grid-column:1 / -1}
 }
 @media (max-width:820px){
   .hero h1,[lang="ar"] .hero h1{font-size:clamp(40px,11.4vw,76px)}
   .about-head{grid-template-columns:1fr;gap:24px}
-  .stream-grid,.journey-list{grid-template-columns:1fr}
+  .involve-grid{grid-template-columns:1fr}
   .next-card{grid-template-columns:1fr}
   .bingo{width:min(100%,280px);margin:8px 0 12px}
 }
@@ -390,9 +381,7 @@ main>section.journey{background:var(--burg-deep)}
   [lang="ar"] .hero .eyebrow,[lang="ar"] .quote .eyebrow,[lang="ar"] .stats dd{font-size:14px}
   .stats div{flex-direction:column;gap:6px}
   .stats dd{font-size:11px;letter-spacing:.1em}
-  .values ul{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .values li{padding:18px 14px 20px;font-size:16px}
-  .ctas .btn,.next .btn,.form .btn.primary,.nav-join{width:100%}
+  .ctas .btn,.next .btn,.streams-join .btn,.form .btn.primary,.nav-join{width:100%}
   .foot-base{flex-direction:column;align-items:flex-start}
 }
 @media (prefers-reduced-motion: reduce){

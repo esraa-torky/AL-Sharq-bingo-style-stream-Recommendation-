@@ -74,33 +74,27 @@
     ]
   },
   "streams": {
-    "eyebrow": "Üç destek akışı",
     "title": "Al Sharq Youth ile gelişmenin yolları",
     "F": {
       "name": "Fellowship",
-      "line": "3 aylık bir liderlik yolculuğu: düşünürler ve uygulayıcılarla fikirler, sistemler, medya ve belirsizlikte liderlik üzerine altı modül.",
-      "time": "Haftada 5–10 saat"
+      "line": "Bir liderlik yolculuğu: düşünürler ve uygulayıcılarla fikirler, sistemler, medya ve belirsizlikte liderlik üzerine altı modül."
     },
     "I": {
       "name": "Impact",
-      "line": "Bir fikri, atölyeler ve mentorlarla hub’ında bir topluluk girişimine dönüştürmek için üç ay. Mevcut bir proje gerekmez.",
-      "time": "Haftada 5–10 saat"
+      "line": "Bir fikri, atölyeler ve mentorlarla hub’ında bir topluluk girişimine dönüştür. Mevcut bir proje gerekmez."
     },
     "H": {
       "name": "Hub’lar",
-      "line": "Üyelerin buluştuğu, tartışmalar düzenlediği ve yerel ve bölgesel etki yaratan projeler yürüttüğü şehir temelli alanlar.",
-      "time": "Her zaman katılabilirsin"
+      "line": "Üyelerin buluştuğu, tartışmalar düzenlediği ve yerel ve bölgesel etki yaratan projeler yürüttüğü şehir temelli alanlar."
     },
     "note": "Destek akışlarına başvurular Al Sharq Forum 2026’dan sonra açılacak. Aşağıdan ilgini bildir, seninle iletişime geçelim."
   },
   "journey": {
     "eyebrow": "Sen de katıl",
-    "title": "Yolculuğun burada başlıyor",
-    "start": "Başla"
+    "title": "Yolculuğun burada başlıyor"
   },
   "next": {
     "title": "Bir sonraki adımı at",
-    "lede": "Üyelik fırsatlarını keşfet ve sen de katıl.",
     "test": "Yolunu bulamadın mı? Testi çöz!",
     "facts": ["2 dakika", "12 soru", "Eşleşmen"]
   },
