@@ -141,12 +141,12 @@
       }
     },
     "good-leader": {
-      "q": "For you, a good leader mostly…",
+      "q": "In your view, what is a leader’s most important skill?",
       "answers": {
-        "a": "Listens before deciding",
-        "b": "Sees the bigger picture",
-        "c": "Turns plans into results",
-        "d": "Gets everyone involved in the work"
+        "a": "Listening before deciding",
+        "b": "Seeing the bigger picture",
+        "c": "Turning plans into results",
+        "d": "Getting everyone involved"
       }
     },
     "small-grant": {

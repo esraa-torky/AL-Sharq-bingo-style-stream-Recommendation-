@@ -141,12 +141,12 @@
       }
     },
     "good-leader": {
-      "q": "Sence iyi bir lider…",
+      "q": "Sence bir liderin en önemli becerisi nedir?",
       "answers": {
-        "a": "Karar vermeden önce dinler",
-        "b": "Büyük resmi görür",
-        "c": "Planları sonuca dönüştürür",
-        "d": "Herkesi işin içine katar"
+        "a": "Karar vermeden önce dinlemek",
+        "b": "Büyük resmi görmek",
+        "c": "Planları sonuca dönüştürmek",
+        "d": "Herkesi işin içine katmak"
       }
     },
     "small-grant": {
