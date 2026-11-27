@@ -2,7 +2,7 @@
   "_note": "Question and answer ids with their points. Text lives in the language files. See CONTENT.md.",
   "choices": [
     {
-      "id": "late-night",
+      "id": "free-evening",
       "answers": [
         {
           "id": "a",
@@ -19,20 +19,82 @@
         {
           "id": "c",
           "points": {
-            "launch": 3
+            "launch": 2,
+            "design": 1
           }
         },
         {
           "id": "d",
           "points": {
             "hub": 2,
-            "mobil": 1
+            "civic": 1
           }
         }
       ]
     },
     {
-      "id": "friends",
+      "id": "upsetting-news",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "big": 3
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "design": 3
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "mobil": 2,
+            "civic": 1
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "dial": 2,
+            "big": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "group-role",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "lead": 3
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "design": 3
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "launch": 3
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "mobil": 2,
+            "civic": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "friends-ask",
       "answers": [
         {
           "id": "a",
@@ -56,50 +118,19 @@
         {
           "id": "d",
           "points": {
-            "hub": 2,
-            "civic": 1
+            "civic": 2,
+            "hub": 1
           }
         }
       ]
     },
     {
-      "id": "conference",
+      "id": "ummah-challenges",
       "answers": [
         {
           "id": "a",
           "points": {
             "big": 3
-          }
-        },
-        {
-          "id": "b",
-          "points": {
-            "dial": 3
-          }
-        },
-        {
-          "id": "c",
-          "points": {
-            "design": 2,
-            "launch": 1
-          }
-        },
-        {
-          "id": "d",
-          "points": {
-            "hub": 3
-          }
-        }
-      ]
-    },
-    {
-      "id": "funding",
-      "answers": [
-        {
-          "id": "a",
-          "points": {
-            "big": 2,
-            "design": 1
           }
         },
         {
@@ -111,7 +142,7 @@
         {
           "id": "c",
           "points": {
-            "design": 3
+            "civic": 3
           }
         },
         {
@@ -124,67 +155,7 @@
       ]
     },
     {
-      "id": "group-work",
-      "answers": [
-        {
-          "id": "a",
-          "points": {
-            "big": 2,
-            "dial": 1
-          }
-        },
-        {
-          "id": "b",
-          "points": {
-            "design": 3
-          }
-        },
-        {
-          "id": "c",
-          "points": {
-            "hub": 2,
-            "mobil": 1
-          }
-        },
-        {
-          "id": "d",
-          "points": {
-            "launch": 3
-          }
-        }
-      ]
-    },
-    {
-      "id": "city-problem",
-      "answers": [
-        {
-          "id": "a",
-          "points": {
-            "big": 3
-          }
-        },
-        {
-          "id": "b",
-          "points": {
-            "design": 3
-          }
-        },
-        {
-          "id": "c",
-          "points": {
-            "mobil": 3
-          }
-        },
-        {
-          "id": "d",
-          "points": {
-            "civic": 3
-          }
-        }
-      ]
-    },
-    {
-      "id": "saturday",
+      "id": "weekend",
       "answers": [
         {
           "id": "a",
@@ -210,51 +181,46 @@
         {
           "id": "d",
           "points": {
-            "hub": 3
+            "hub": 2,
+            "civic": 1
           }
         }
       ]
     },
     {
-      "id": "topic",
+      "id": "learn-best",
       "answers": [
         {
           "id": "a",
           "points": {
-            "civic": 3
+            "big": 3
           }
         },
         {
           "id": "b",
+          "points": {
+            "mobil": 2,
+            "hub": 1
+          }
+        },
+        {
+          "id": "c",
           "points": {
             "launch": 2,
             "design": 1
           }
         },
         {
-          "id": "c",
-          "points": {
-            "lead": 3
-          }
-        },
-        {
           "id": "d",
           "points": {
-            "big": 2,
-            "dial": 1
-          }
-        },
-        {
-          "id": "e",
-          "points": {
-            "mobil": 2,
-            "hub": 1
+            "hub": 2,
+            "mobil": 1
           }
         }
       ]
     },
     {
-      "id": "leader",
+      "id": "good-leader",
       "answers": [
         {
           "id": "a",
@@ -266,7 +232,7 @@
           "id": "b",
           "points": {
             "big": 2,
-            "lead": 1
+            "dial": 1
           }
         },
         {
@@ -286,7 +252,38 @@
       ]
     },
     {
-      "id": "this-year",
+      "id": "small-grant",
+      "answers": [
+        {
+          "id": "a",
+          "points": {
+            "big": 2,
+            "design": 1
+          }
+        },
+        {
+          "id": "b",
+          "points": {
+            "design": 3
+          }
+        },
+        {
+          "id": "c",
+          "points": {
+            "launch": 3
+          }
+        },
+        {
+          "id": "d",
+          "points": {
+            "civic": 2,
+            "hub": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "next-year",
       "answers": [
         {
           "id": "a",
@@ -303,7 +300,8 @@
         {
           "id": "c",
           "points": {
-            "hub": 3
+            "hub": 2,
+            "mobil": 1
           }
         },
         {

@@ -78,95 +78,94 @@
     ]
   ],
   "choices": {
-    "late-night": {
-      "q": "Late at night, my mind usually goes to…",
+    "free-evening": {
+      "q": "A free evening. Where would you be?",
       "answers": {
-        "a": "Big questions about why the world is the way it is",
-        "b": "A debate from today and what I’d say next",
-        "c": "An idea I want to start building",
-        "d": "Plans for the next meet-up with people in my city"
+        "a": "Reading the Ummah’s history",
+        "b": "In a long talk with friends",
+        "c": "Working on my own project",
+        "d": "With my local youth group"
       }
     },
-    "friends": {
-      "q": "Friends usually come to me when they need…",
+    "upsetting-news": {
+      "q": "You read news that upsets you. What do you do?",
+      "answers": {
+        "a": "Dig into why it happened",
+        "b": "Think of a practical fix",
+        "c": "Gather friends to help",
+        "d": "Talk it through with others"
+      }
+    },
+    "group-role": {
+      "q": "In group work, you’re usually the one who…",
+      "answers": {
+        "a": "Unites the team on one goal",
+        "b": "Turns the idea into a plan",
+        "c": "Gets it done in the end",
+        "d": "Makes sure everyone is included"
+      }
+    },
+    "friends-ask": {
+      "q": "Friends usually come to you for…",
       "answers": {
         "a": "Advice on a big decision",
-        "b": "Help turning a messy idea into a plan",
-        "c": "Someone to get people together for an event",
-        "d": "Someone who knows the right people around town"
+        "b": "Shaping a rough idea",
+        "c": "Bringing everyone together",
+        "d": "Knowing who can help nearby"
       }
     },
-    "conference": {
-      "q": "At a conference like this one, I am most likely…",
+    "ummah-challenges": {
+      "q": "When you think about the Ummah’s challenges, you…",
       "answers": {
-        "a": "Taking notes in the front row",
-        "b": "Talking with a speaker in the corridor",
-        "c": "Sketching my own project",
-        "d": "Swapping numbers with people from my city"
+        "a": "Want to understand the roots",
+        "b": "Want to start something that helps",
+        "c": "Want youth to have a say",
+        "d": "Want to act with my community"
       }
     },
-    "funding": {
-      "q": "If my community had funding, I would start by…",
+    "weekend": {
+      "q": "A weekend you’d call well spent…",
       "answers": {
-        "a": "Understanding the real problem first",
-        "b": "Testing a small solution next week",
-        "c": "Designing a project with clear goals",
-        "d": "Bringing the neighbours together to decide"
+        "a": "A good book and a discussion",
+        "b": "Building something with a team",
+        "c": "A volunteering day",
+        "d": "Meeting my local group"
       }
     },
-    "group-work": {
-      "q": "In group work, I am usually the one who…",
+    "learn-best": {
+      "q": "You learn best by…",
       "answers": {
-        "a": "Asks why we are doing this",
-        "b": "Turns the idea into a step-by-step plan",
-        "c": "Makes sure everyone feels part of the team",
-        "d": "Builds it in the end"
+        "a": "Reading and connecting ideas",
+        "b": "Sharing what I learn with others",
+        "c": "Trying things out myself",
+        "d": "Learning alongside a group"
       }
     },
-    "city-problem": {
-      "q": "When something in my city isn’t working, I…",
-      "answers": {
-        "a": "Try to understand why",
-        "b": "Start designing a fix",
-        "c": "Bring people together about it",
-        "d": "Find out who is responsible and talk to them"
-      }
-    },
-    "saturday": {
-      "q": "A Saturday I would call well spent…",
-      "answers": {
-        "a": "A book club or a good debate",
-        "b": "A build day on a project with a team",
-        "c": "Volunteering in my neighbourhood",
-        "d": "A meet-up with my local community group"
-      }
-    },
-    "topic": {
-      "q": "The topic I would read about first…",
-      "answers": {
-        "a": "Politics and public decisions",
-        "b": "Social startups and new ideas",
-        "c": "Leadership and learning",
-        "d": "World affairs",
-        "e": "Life and projects in my city"
-      }
-    },
-    "leader": {
-      "q": "For me, a good leader mostly…",
+    "good-leader": {
+      "q": "For you, a good leader mostly…",
       "answers": {
         "a": "Listens before deciding",
         "b": "Sees the bigger picture",
-        "c": "Gets things built",
-        "d": "Brings the whole community along"
+        "c": "Turns plans into results",
+        "d": "Brings everyone along"
       }
     },
-    "this-year": {
-      "q": "What would make you feel this year was worth it?",
+    "small-grant": {
+      "q": "If your community got a small grant, you’d…",
       "answers": {
-        "a": "I learned to lead",
-        "b": "I launched my own initiative",
-        "c": "I found my people in my city",
-        "d": "I understood a big issue deeply"
+        "a": "Study the real need first",
+        "b": "Design a project with clear goals",
+        "c": "Test a small idea right away",
+        "d": "Let the community decide together"
+      }
+    },
+    "next-year": {
+      "q": "What would make next year worth it?",
+      "answers": {
+        "a": "Growing as a leader",
+        "b": "Launching my own initiative",
+        "c": "Finding a community I belong to",
+        "d": "Understanding a big issue deeply"
       }
     }
   },

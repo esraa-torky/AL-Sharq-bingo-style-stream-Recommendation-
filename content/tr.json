@@ -78,95 +78,94 @@
     ]
   ],
   "choices": {
-    "late-night": {
-      "q": "Gece geç saatlerde aklım genellikle…",
+    "free-evening": {
+      "q": "Boş bir akşamın var. Nerede olursun?",
       "answers": {
-        "a": "Dünyanın neden böyle olduğuna dair büyük sorularda",
-        "b": "Bugünkü bir tartışmada ve ne cevap vereceğimde",
-        "c": "İnşa etmeye başlamak istediğim bir fikirde",
-        "d": "Şehrimdeki bir sonraki buluşmanın planında"
+        "a": "Ümmetin tarihini okurken",
+        "b": "Arkadaşlarla uzun bir sohbette",
+        "c": "Kendi projem üzerinde çalışırken",
+        "d": "Yerel gençlik grubumla"
       }
     },
-    "friends": {
-      "q": "Arkadaşlarım bana genellikle şu lazım olduğunda gelir…",
+    "upsetting-news": {
+      "q": "Seni üzen bir haber okudun. Ne yaparsın?",
       "answers": {
-        "a": "Büyük bir karar için tavsiye",
-        "b": "Dağınık bir fikri plana dönüştürmek için yardım",
-        "c": "Bir etkinlik için insanları toplayacak biri",
-        "d": "Şehirde doğru insanları tanıyan biri"
+        "a": "Nedenini araştırırım",
+        "b": "Pratik bir çözüm düşünürüm",
+        "c": "Arkadaşlarımla yardıma koşarız",
+        "d": "Çevremle konuşurum"
       }
     },
-    "conference": {
-      "q": "Böyle bir konferansta büyük ihtimalle…",
+    "group-role": {
+      "q": "Grup çalışmasında genelde sen…",
       "answers": {
-        "a": "Ön sırada not alıyorum",
-        "b": "Koridorda bir konuşmacıyla sohbet ediyorum",
-        "c": "Kendi projemi çiziyorum",
-        "d": "Şehrimden insanlarla numara alışverişi yapıyorum"
+        "a": "Ekibi ortak hedefte buluşturursun",
+        "b": "Fikri plana dönüştürürsün",
+        "c": "İşi sonunda bitirirsin",
+        "d": "Kimseyi dışarıda bırakmazsın"
       }
     },
-    "funding": {
-      "q": "Topluluğumun bir bütçesi olsa ilk olarak…",
+    "friends-ask": {
+      "q": "Arkadaşların sana genelde ne için gelir?",
       "answers": {
-        "a": "Önce asıl sorunu anlardım",
-        "b": "Gelecek hafta küçük bir çözümü denerdim",
-        "c": "Net hedefleri olan bir proje tasarlardım",
-        "d": "Karar vermek için komşuları bir araya getirirdim"
+        "a": "Önemli bir karar için",
+        "b": "Dağınık bir fikri toparlamak için",
+        "c": "Herkesi bir araya getirmek için",
+        "d": "Yakında kimin yardım edeceğini bilmek için"
       }
     },
-    "group-work": {
-      "q": "Grup çalışmasında genellikle…",
+    "ummah-challenges": {
+      "q": "Ümmetin zorluklarını düşündüğünde…",
       "answers": {
-        "a": "Bunu neden yaptığımızı soran benim",
-        "b": "Fikri adım adım bir plana dönüştüren benim",
-        "c": "Herkesi ekibin parçası hissettiren benim",
-        "d": "Sonunda onu inşa eden benim"
+        "a": "Köklerini anlamak istersin",
+        "b": "Fark yaratacak bir şey başlatmak istersin",
+        "c": "Gençlerin söz sahibi olmasını istersin",
+        "d": "Topluluğumla birlikte harekete geçmek istersin"
       }
     },
-    "city-problem": {
-      "q": "Şehrimde bir şey yolunda gitmediğinde…",
+    "weekend": {
+      "q": "İyi geçmiş bir hafta sonu…",
       "answers": {
-        "a": "Nedenini anlamaya çalışırım",
-        "b": "Bir çözüm tasarlamaya başlarım",
-        "c": "İnsanları bu konuda bir araya getiririm",
-        "d": "Sorumluyu bulup onunla konuşurum"
+        "a": "İyi bir kitap ve sohbet",
+        "b": "Ekiple bir şey inşa etmek",
+        "c": "Bir gönüllülük günü",
+        "d": "Yerel grubumla buluşmak"
       }
     },
-    "saturday": {
-      "q": "İyi geçmiş dediğim bir cumartesi…",
+    "learn-best": {
+      "q": "En iyi nasıl öğrenirsin?",
       "answers": {
-        "a": "Bir kitap kulübü ya da güzel bir tartışma",
-        "b": "Bir ekiple proje üzerinde üretim günü",
-        "c": "Mahallemde gönüllülük",
-        "d": "Yerel topluluk grubumla buluşma"
+        "a": "Okuyup fikirleri birleştirerek",
+        "b": "Öğrendiklerimi başkalarıyla paylaşarak",
+        "c": "Kendim deneyerek",
+        "d": "Bir grupla birlikte"
       }
     },
-    "topic": {
-      "q": "İlk okuyacağım konu…",
-      "answers": {
-        "a": "Siyaset ve kamu kararları",
-        "b": "Sosyal girişimler ve yeni fikirler",
-        "c": "Liderlik ve öğrenme",
-        "d": "Dünya gündemi",
-        "e": "Şehrimdeki hayat ve projeler"
-      }
-    },
-    "leader": {
-      "q": "Bence iyi bir lider çoğunlukla…",
+    "good-leader": {
+      "q": "Sence iyi bir lider…",
       "answers": {
         "a": "Karar vermeden önce dinler",
         "b": "Büyük resmi görür",
-        "c": "İşleri hayata geçirir",
-        "d": "Tüm topluluğu yanında götürür"
+        "c": "Planları sonuca dönüştürür",
+        "d": "Herkesi yanında götürür"
       }
     },
-    "this-year": {
-      "q": "Bu yılın değdiğini hissettiren ne olurdu?",
+    "small-grant": {
+      "q": "Topluluğun küçük bir hibe alsa…",
       "answers": {
-        "a": "Liderlik etmeyi öğrendim",
-        "b": "Kendi girişimimi başlattım",
-        "c": "Şehrimde kendi insanlarımı buldum",
-        "d": "Büyük bir konuyu derinlemesine anladım"
+        "a": "Önce gerçek ihtiyacı araştırırsın",
+        "b": "Net hedefli bir proje tasarlarsın",
+        "c": "Küçük bir fikri hemen denersin",
+        "d": "Topluluk olarak birlikte karar verirsiniz"
+      }
+    },
+    "next-year": {
+      "q": "Gelecek yılı ne değerli kılar?",
+      "answers": {
+        "a": "Lider olarak gelişmek",
+        "b": "Kendi girişimimi başlatmak",
+        "c": "Ait olduğum topluluğu bulmak",
+        "d": "Büyük bir meseleyi derinden anlamak"
       }
     }
   },
