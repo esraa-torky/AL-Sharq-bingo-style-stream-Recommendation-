@@ -103,20 +103,18 @@ The settings are in the repository: `wrangler.jsonc` (the project name and how f
 (makes the bare address open `index.html`). Pages keep their own addresses (`test.html`, `form.html?f=…`),
 exactly as on GitHub Pages, so links, QR codes and the offline copy work the same on both.
 
-**Set it up once** (button names in Cloudflare may differ slightly):
+The Cloudflare project is **`al-sharq-bingo-style-stream-recommendation`**, connected to this repository, at
+https://al-sharq-bingo-style-stream-recommendation.salaheddin-jarjour.workers.dev
 
-1. Sign in at https://dash.cloudflare.com and open **Workers & Pages**.
-2. Choose **Create**, then **Import a repository**. Connect GitHub when asked and pick this repository.
-3. Name the project **`alsharq-youth`**: it must match `name` in `wrangler.jsonc`.
-4. Leave the build command empty and the deploy command as `npx wrangler deploy`. Deploy.
-5. Cloudflare shows the address, `https://alsharq-youth.<your-account>.workers.dev`.
-   A domain of your own is added under the project's **Settings → Domains & Routes**.
+Every merge into `main` is published by Cloudflare within a minute or two. To publish another branch instead,
+change the production branch in the project's **Settings → Builds**. A domain of your own is added under
+**Settings → Domains & Routes**.
 
-After that, every merge into `main` is published by Cloudflare within a minute or two.
-To publish another branch instead, change the production branch in the project's **Settings → Builds**.
+If the project is ever made again (Workers & Pages → Create → Import a repository), give it the same name as
+`name` in `wrangler.jsonc`, leave the build command empty and keep the deploy command `npx wrangler deploy`.
 
-**After the first publish**, put the new address into the `og:` tags at the top of `index.html`
-(see "The link preview") and remake the QR codes (see "The QR codes") if Cloudflare becomes the main address.
+If Cloudflare becomes the main address, put it into the `og:` tags at the top of `index.html`
+(see "The link preview") and remake the QR codes (see "The QR codes"); both still point at GitHub Pages.
 
 To try the Cloudflare setup on your own computer: `npm run cloudflare`, then open http://localhost:8787.
 `npm run deploy` publishes from your computer after signing in with `npx wrangler login`.

@@ -186,8 +186,16 @@ export function createWeb({ density = 1, interactive = true, className = 'hero-w
   }
   function pause() { if (raf) cancelAnimationFrame(raf); raf = 0; }
 
-  new ResizeObserver(() => { fit(); run(); }).observe(el);
-  new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; if (onScreen) run(); else pause(); }).observe(el);
+  // Is any of the web inside the screen? Measured directly whenever the page scrolls or the web changes size,
+  // which is exact in every browser and both text directions.
+  function look() {
+    const box = el.getBoundingClientRect();
+    onScreen = box.width > 0 && box.bottom > 0 && box.top < window.innerHeight;
+    if (onScreen) run(); else pause();
+  }
+  new ResizeObserver(() => { fit(); look(); }).observe(el);
+  window.addEventListener('scroll', look, { passive: true });
+  window.addEventListener('resize', look, { passive: true });
   document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); else run(); });
   still.addEventListener?.('change', () => { if (still.matches) { pause(); draw(); } else run(); });
   if (interactive) window.addEventListener('pointermove', (e) => {

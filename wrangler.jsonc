@@ -2,7 +2,8 @@
 // Cloudflare reads this file when it builds from GitHub (Workers & Pages → Import a repository), and so does
 // `npm run deploy`. See "Publishing on Cloudflare" in README.md.
 {
-  "name": "alsharq-youth",
+  // must be the same as the name of the project in Cloudflare
+  "name": "al-sharq-bingo-style-stream-recommendation",
   "main": "cloudflare/worker.js",
   "compatibility_date": "2025-09-01",
   "assets": {

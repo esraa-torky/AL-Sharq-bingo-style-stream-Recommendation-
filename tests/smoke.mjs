@@ -116,8 +116,9 @@ try {
       if (lang === 'ar' && (await page.evaluate(() => document.documentElement.dir)) !== 'rtl') failures.push(`${label}: not right to left`);
       if (await sideways(page)) failures.push(`${label}: landing page scrolls sideways`);
       if (!(await page.isVisible('.hero-web canvas'))) failures.push(`${label}: the web behind the headline is missing`);
-      const drawn = await page.evaluate(() => new Promise((done) => { const web = window.__landing.web, from = web.frames; setTimeout(() => done(web.frames - from), 500); }));
-      if (drawn < 2) failures.push(`${label}: the web behind the headline is not moving`);
+      // the web must keep drawing new frames; a slow test machine gets a few seconds to show it
+      const from = await page.evaluate(() => window.__landing.web.frames);
+      await page.waitForFunction((n) => window.__landing.web.frames >= n + 5, from, { timeout: 5000 }).catch(() => failures.push(`${label}: the web behind the headline is not moving`));
       if (!(await page.isVisible('.stats dt'))) failures.push(`${label}: the numbers in the hero are missing`);
       // the section links: in the bar on a laptop, behind the menu button on a phone
       if (dev.name === 'phone') {
