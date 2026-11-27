@@ -71,7 +71,12 @@ Keep each pull request small and about one thing (for example "reword question 3
 
 - The three landing files have the same structure as each other, like the survey text files.
   `{name}` and `{stream}` are placeholders; keep them.
-- **Numbers** in the header: `hero.stats`, a list of `[number, label]` pairs.
+- **Headline**: in `hero.title`, the words between `<em>` and `</em>` are shown in gold on their own line.
+  Keep the two tags when rewording, around the words to highlight.
+- **Numbers** in the header: `hero.stats`, a list of `[number, label]` pairs. A number may carry a plus sign
+  before or after it (`800+`, `+800`); the digits count up when the page opens.
+- The links in the top bar reuse the small section headings (`about.eyebrow`, `path.eyebrow`, `streams.eyebrow`),
+  so keep those short.
 - **Learn more** button: `links.learnMore`, a full `https://` address (it can differ per language).
 - `forms.json` lists the fields every form asks (`shared`), then each form with its own fields.
   A field has an `id`, a `type` (`text`, `email`, `tel`, `url`, `select`, `textarea`, `checkboxes` or

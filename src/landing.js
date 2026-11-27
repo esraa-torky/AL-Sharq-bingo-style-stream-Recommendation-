@@ -1,36 +1,50 @@
-// Landing page (index.html): Al Sharq Youth hero with the moving network, who we are, the path to impact,
+// Landing page (index.html): Al Sharq Youth hero over the living web (web.js), who we are, the path to impact,
 // the three support streams, "Your journey starts here" (each card opens its form on form.html),
 // and "Take the next step" with the Program Finder test. All text comes from content/landing.<lang>.json.
 import { h, ARROW, loadSite, applyLang, href, topbar, footer, registerWorker } from './site.js';
+import { createWeb } from './web.js';
 
 const page = document.getElementById('page');
-let site, lang;
+const OUT = '<svg class="arrow out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+const calm = matchMedia('(prefers-reduced-motion: reduce)');
+let site, lang, web, bar, heroEl, first = true;
 
 function render() {
   const { config, forms, texts } = site, t = texts[lang];
   applyLang(config, t, lang);
   document.title = t.meta.title;
   page.innerHTML = '';
-  page.appendChild(topbar(config, t, lang, (l) => { lang = l; render(); }));
+  // top bar: stays at the top of the screen; clear over the hero, solid once the hero has scrolled away
+  bar = topbar(config, t, lang, (l) => { lang = l; render(); });
+  bar.classList.add('sticky', 'over-hero');
+  const nav = h('nav', 'site-nav'); nav.setAttribute('aria-label', t.nav.home);
+  [['about', t.about.eyebrow], ['path', t.path.eyebrow], ['streams', t.streams.eyebrow]].forEach(([id, text]) => { const a = h('a', null, text); a.href = '#' + id; nav.appendChild(a); });
+  bar.insertBefore(nav, bar.lastChild);
+  const join = h('a', 'btn nav-cta', t.hero.ctaInvolve); join.href = '#journey';
+  bar.lastChild.appendChild(join);
+  page.appendChild(bar);
   const main = h('main'); main.id = 'main';
 
-  // hero
-  const hero = h('section', 'hero'); hero.setAttribute('aria-labelledby', 'hero-title');
+  // hero: the web fills the whole background; headline, actions and numbers sit on top
+  const hero = h('section', 'hero' + (first ? ' intro' : '')); hero.setAttribute('aria-labelledby', 'hero-title');
+  heroEl = hero;
+  web = web || createWeb();
+  web.label(t.hero.networkLabel);
+  hero.appendChild(web.el);
   const copy = h('div', 'hero-copy');
   copy.appendChild(h('p', 'eyebrow', t.hero.eyebrow));
-  const h1 = h('h1', null, t.hero.title); h1.id = 'hero-title'; copy.appendChild(h1);
+  const h1 = h('h1', null, t.hero.title); h1.id = 'hero-title'; words(h1); copy.appendChild(h1);
   copy.appendChild(h('p', 'lede', t.hero.lede));
   const ctas = h('div', 'ctas');
   const involve = h('a', 'btn primary', t.hero.ctaInvolve + ARROW); involve.href = '#journey'; involve.id = 'cta-involve';
-  const learn = h('a', 'btn secondary', t.hero.ctaLearn); learn.href = t.links.learnMore; learn.rel = 'noopener'; learn.target = '_blank'; learn.id = 'cta-learn';
+  const learn = h('a', 'btn secondary', t.hero.ctaLearn + OUT); learn.href = t.links.learnMore; learn.rel = 'noopener'; learn.target = '_blank'; learn.id = 'cta-learn';
   ctas.appendChild(involve); ctas.appendChild(learn);
+  if (config.draftLanguages.includes(lang) && t.draftNote) ctas.appendChild(h('p', 'draft', t.draftNote));
   copy.appendChild(ctas);
   hero.appendChild(copy);
-  hero.appendChild(networkArt(t.hero.networkLabel));
   const stats = h('dl', 'stats');
-  t.hero.stats.forEach(([n, label]) => { const d = h('div'); d.appendChild(h('dt', null, n)); d.appendChild(h('dd', null, label)); stats.appendChild(d); });
+  t.hero.stats.forEach(([n, label]) => { const d = h('div'); d.appendChild(figure(n)); d.appendChild(h('dd', null, label)); stats.appendChild(d); });
   hero.appendChild(stats);
-  if (config.draftLanguages.includes(lang) && t.draftNote) hero.appendChild(h('p', 'draft', t.draftNote));
   main.appendChild(hero);
 
   // who we are
@@ -98,47 +112,63 @@ function render() {
   main.appendChild(h('p', 'closing', t.closing));
   page.appendChild(main);
   page.appendChild(footer(t));
+  first = false;
+  onScroll();
 }
+
+// Wraps each word of the headline so the words can rise in one after another. <em> in the text marks the highlighted words.
+function words(el) {
+  let i = 0;
+  const walk = (node) => {
+    [...node.childNodes].forEach((c) => {
+      if (c.nodeType !== 3) { walk(c); return; }
+      const frag = document.createDocumentFragment();
+      c.textContent.split(/(\s+)/).forEach((part) => {
+        if (!part.trim()) { frag.appendChild(document.createTextNode(part)); return; }
+        const w = h('span', 'w'); w.textContent = part; w.style.setProperty('--i', i++); frag.appendChild(w);
+      });
+      node.replaceChild(frag, c);
+    });
+  };
+  walk(el);
+}
+
+// A number in the hero ("800+", "+40"): the digits count up once when the page opens, the plus sign stays gold.
+function figure(text) {
+  const dt = h('dt'), m = /^(\D*)(\d+)(\D*)$/.exec(text);
+  if (!m) { dt.textContent = text; return dt; }
+  const [, pre, digits, post] = m, to = Number(digits);
+  if (pre) { const s = h('span', 'sign'); s.textContent = pre; dt.appendChild(s); }
+  const num = h('span', 'n'); num.textContent = digits; dt.appendChild(num);
+  if (post) { const s = h('span', 'sign'); s.textContent = post; dt.appendChild(s); }
+  if (!first || calm.matches) return dt;
+  num.textContent = '0';
+  const t0 = performance.now() + 700, dur = 1500;
+  const tick = (now) => {
+    const k = Math.min(1, Math.max(0, (now - t0) / dur));
+    num.textContent = String(Math.round(to * (1 - Math.pow(1 - k, 4))));
+    if (k < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  return dt;
+}
+
+// The top bar is clear at the very top, dark glass while the hero scrolls under it, and solid after the hero.
+function onScroll() {
+  if (!bar || !heroEl) return;
+  const over = window.scrollY < heroEl.offsetHeight - bar.offsetHeight;
+  bar.classList.toggle('over-hero', over);
+  bar.classList.toggle('stuck', window.scrollY > 8);
+}
+window.__landing = { get web() { return web; } }; // lets the smoke test see that the web is drawing
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll, { passive: true });
 
 function section(id, eyebrow, title) {
   const s = h('section', id); s.id = id; s.setAttribute('aria-labelledby', id + '-title');
   s.appendChild(h('p', 'eyebrow', eyebrow));
   const t = h('h2', null, title); t.id = id + '-title'; s.appendChild(t);
   return s;
-}
-
-/* The moving network next to the headline: hubs joined by lines, with signals travelling between them.
-   Drawn once in SVG; it stands still for visitors who ask their device for less motion. */
-const NODES = [[160, 160, 14, 'core'], [70, 92, 8], [252, 82, 9], [282, 196, 7], [214, 270, 9], [96, 256, 7], [36, 180, 6], [168, 40, 7], [128, 212, 5], [214, 140, 5], [112, 132, 5], [300, 128, 4], [40, 40, 3], [290, 290, 3]];
-const EDGES = [[0, 1], [0, 2], [0, 4], [0, 5], [0, 9], [0, 10], [0, 8], [1, 6], [1, 7], [1, 10], [2, 7], [2, 3], [2, 9], [2, 11], [3, 4], [3, 9], [3, 11], [4, 8], [4, 13], [5, 6], [5, 8], [6, 10], [7, 10], [1, 12]];
-const SIGNALS = [[0, 2, 3.2], [1, 0, 4.1], [4, 0, 3.6], [0, 5, 4.6], [2, 3, 2.8], [6, 1, 3.4], [7, 2, 3.9], [3, 4, 3.1]];
-function networkArt(label) {
-  const wrap = h('div', 'network');
-  const ns = 'http://www.w3.org/2000/svg';
-  const svg = document.createElementNS(ns, 'svg');
-  svg.setAttribute('viewBox', '0 0 320 320'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', label);
-  const el = (tag, attrs, parent = svg) => { const n = document.createElementNS(ns, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); parent.appendChild(n); return n; };
-  el('circle', { cx: 160, cy: 160, r: 150, class: 'orbit' });
-  el('circle', { cx: 160, cy: 160, r: 96, class: 'orbit inner' });
-  const lines = el('g', { class: 'edges' });
-  EDGES.forEach(([a, b], i) => el('line', { x1: NODES[a][0], y1: NODES[a][1], x2: NODES[b][0], y2: NODES[b][1], style: '--d:' + (i % 6) * 0.5 + 's' }, lines));
-  const sig = el('g', { class: 'signals' });
-  SIGNALS.forEach(([a, b, dur], i) => {
-    const dot = el('circle', { r: 3.2 }, sig);
-    el('animateMotion', { dur: dur + 's', repeatCount: 'indefinite', begin: (i * 0.45) + 's', path: `M${NODES[a][0]},${NODES[a][1]} L${NODES[b][0]},${NODES[b][1]}` }, dot);
-  });
-  const nodes = el('g', { class: 'nodes' });
-  NODES.forEach(([x, y, r, kind], i) => {
-    const g = el('g', { class: 'node' + (kind ? ' ' + kind : ''), style: `--d:${(i % 5) * 0.7}s;transform-origin:${x}px ${y}px` }, nodes);
-    if (r >= 7) el('circle', { cx: x, cy: y, r: r + 7, class: 'halo' }, g);
-    el('circle', { cx: x, cy: y, r }, g);
-  });
-  wrap.appendChild(svg);
-  const still = matchMedia('(prefers-reduced-motion: reduce)');
-  const apply = () => { if (still.matches) svg.pauseAnimations?.(); else svg.unpauseAnimations?.(); };
-  requestAnimationFrame(apply);
-  still.addEventListener?.('change', apply);
-  return wrap;
 }
 
 loadSite().then((s) => {

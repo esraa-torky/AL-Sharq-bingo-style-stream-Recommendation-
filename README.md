@@ -4,8 +4,11 @@ The site has three pages:
 
 - **`index.html`, the landing page:** who Al Sharq Youth are, values, the path to impact, the three
   support streams, "Your journey starts here" (Join a hub, Establish a hub, Join a program) and
-  "Take the next step" with a link to the test. A moving network drawing sits next to the headline.
-  It uses its own calm style (`src/site.css`), separate from the test's paper look.
+  "Take the next step" with a link to the test. The hero is dark wine in both light and dark mode, and a
+  living web of people and hubs moves across its whole background (`src/web.js`): points drift, lines join
+  whoever is close, gold signals travel between hubs, and the web leans towards a mouse pointer. It rests
+  while off screen and stands still for devices set to reduce motion. The top bar stays on screen while scrolling.
+  The page uses its own style (`src/site.css`), separate from the test's paper look.
 - **`form.html?f=<form>`, one page per form:** `join-hub`, `establish-hub` or `join-program`.
 - **`test.html`, the Program Finder:** on its own for the iPad at the stand. Opened from the website
   (`test.html?site=1`), its result offers "Apply to …", which opens the Join a program form showing the match.

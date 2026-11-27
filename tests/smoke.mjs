@@ -115,7 +115,10 @@ try {
       await page.waitForSelector('#take-test');
       if (lang === 'ar' && (await page.evaluate(() => document.documentElement.dir)) !== 'rtl') failures.push(`${label}: not right to left`);
       if (await sideways(page)) failures.push(`${label}: landing page scrolls sideways`);
-      if (!(await page.isVisible('.network svg'))) failures.push(`${label}: the network art is missing`);
+      if (!(await page.isVisible('.hero-web canvas'))) failures.push(`${label}: the web behind the headline is missing`);
+      const drawn = await page.evaluate(() => new Promise((done) => { const web = window.__landing.web, from = web.frames; setTimeout(() => done(web.frames - from), 500); }));
+      if (drawn < 2) failures.push(`${label}: the web behind the headline is not moving`);
+      if (!(await page.isVisible('.stats dt'))) failures.push(`${label}: the numbers in the hero are missing`);
       for (const f of forms.forms) {
         await page.goto(`${BASE}?lang=${lang}`);
         await page.click(`#go-${f.id}`);
