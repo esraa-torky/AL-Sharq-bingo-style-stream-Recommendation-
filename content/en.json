@@ -87,13 +87,13 @@
         "d": "At our weekly youth gathering"
       }
     },
-    "public-space": {
-      "q": "A public place your community loves is being neglected. What do you do first?",
+    "ummah-crisis": {
+      "q": "When a crisis hits the Ummah, like Gaza, what do you do first?",
       "answers": {
-        "a": "Find out why it’s neglected",
-        "b": "Plan a practical fix",
-        "c": "Get people together to save it",
-        "d": "Discuss it with people around me"
+        "a": "Learn the history behind it",
+        "b": "Design a practical way to help",
+        "c": "Organise a solidarity event locally",
+        "d": "Help people around me understand it"
       }
     },
     "group-role": {

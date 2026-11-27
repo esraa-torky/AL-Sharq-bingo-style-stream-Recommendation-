@@ -87,13 +87,13 @@
         "d": "Haftalık gençlik buluşmamızda"
       }
     },
-    "public-space": {
-      "q": "Topluluğunun sevdiği ortak bir mekân bakımsız kalıyor. İlk ne yaparsın?",
+    "ummah-crisis": {
+      "q": "Ümmeti Gazze gibi bir kriz sarstığında ilk ne yaparsın?",
       "answers": {
-        "a": "Nedenini araştırırım",
-        "b": "Pratik bir çözüm planlarım",
-        "c": "Onu korumak için insanları toplarım",
-        "d": "Çevremdekilerle konuşurum"
+        "a": "Arka planını ve tarihini öğrenirim",
+        "b": "Pratik bir yardım yolu tasarlarım",
+        "c": "Başkalarıyla bir dayanışma etkinliği düzenlerim",
+        "d": "Çevreme olanları anlatırım"
       }
     },
     "group-role": {
