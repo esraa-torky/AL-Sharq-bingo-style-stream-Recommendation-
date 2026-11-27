@@ -1,0 +1,15 @@
+# Files Cloudflare must not publish as part of the website (same format as .gitignore).
+# Everything else in the repository is the site.
+.git
+.github
+.gitignore
+.assetsignore
+.wrangler
+node_modules
+tests
+apps-script
+cloudflare
+wrangler.jsonc
+package.json
+package-lock.json
+*.md

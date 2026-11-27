@@ -1,0 +1,17 @@
+// Cloudflare settings: the site is published as a Cloudflare Worker that serves this folder as static files.
+// Cloudflare reads this file when it builds from GitHub (Workers & Pages → Import a repository), and so does
+// `npm run deploy`. See "Publishing on Cloudflare" in README.md.
+{
+  "name": "alsharq-youth",
+  "main": "cloudflare/worker.js",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    // The whole repository folder is the site; .assetsignore lists what is left out (tests, docs, settings).
+    "directory": "./",
+    "binding": "ASSETS",
+    // Serve every file at its own address, exactly like GitHub Pages. Cloudflare's default would redirect
+    // test.html to /test, and the offline copy kept by sw.js cannot be opened through a redirect.
+    "html_handling": "none",
+    "not_found_handling": "none"
+  }
+}

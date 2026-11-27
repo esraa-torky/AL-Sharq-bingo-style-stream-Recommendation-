@@ -95,6 +95,32 @@ Because merging publishes, only merge a pull request once its **Checks** (conten
 To make GitHub enforce this, add a branch rule for `main` in **Settings → Branches** that requires the
 "Content check" and "Smoke test" status checks to pass.
 
+## Publishing on Cloudflare
+
+The site can also be published on Cloudflare, straight from GitHub, with no keys to manage.
+The settings are in the repository: `wrangler.jsonc` (the project name and how files are served),
+`.assetsignore` (what is left out of the website: tests, docs, settings) and `cloudflare/worker.js`
+(makes the bare address open `index.html`). Pages keep their own addresses (`test.html`, `form.html?f=…`),
+exactly as on GitHub Pages, so links, QR codes and the offline copy work the same on both.
+
+**Set it up once** (button names in Cloudflare may differ slightly):
+
+1. Sign in at https://dash.cloudflare.com and open **Workers & Pages**.
+2. Choose **Create**, then **Import a repository**. Connect GitHub when asked and pick this repository.
+3. Name the project **`alsharq-youth`**: it must match `name` in `wrangler.jsonc`.
+4. Leave the build command empty and the deploy command as `npx wrangler deploy`. Deploy.
+5. Cloudflare shows the address, `https://alsharq-youth.<your-account>.workers.dev`.
+   A domain of your own is added under the project's **Settings → Domains & Routes**.
+
+After that, every merge into `main` is published by Cloudflare within a minute or two.
+To publish another branch instead, change the production branch in the project's **Settings → Builds**.
+
+**After the first publish**, put the new address into the `og:` tags at the top of `index.html`
+(see "The link preview") and remake the QR codes (see "The QR codes") if Cloudflare becomes the main address.
+
+To try the Cloudflare setup on your own computer: `npm run cloudflare`, then open http://localhost:8787.
+`npm run deploy` publishes from your computer after signing in with `npx wrangler login`.
+
 ## Saving results to a Google Sheet
 
 1. Create a Google Sheet owned by the Al Sharq Youth account, for example "Program Finder results".
