@@ -172,7 +172,7 @@ function involve(t, config) {
 
   const hubs = reveal(h('div', 'hubs'));
   hubs.appendChild(echo('journey'));
-  hubs.appendChild(h('h3', null, t.streams[HUBS].name));
+  hubs.appendChild(h('h3', null, t.streams.hubsTitle)); // the panel's own title; the stream keeps its name for the test match
   hubs.appendChild(h('p', null, t.streams[HUBS].line));
   const ways = h('ul', 'ways');
   ['join-hub', 'establish-hub'].forEach((f) => {
