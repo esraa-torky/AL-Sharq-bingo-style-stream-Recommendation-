@@ -11,6 +11,12 @@ const icon = (paths, cls = 'icon') => '<svg class="' + cls + '" viewBox="0 0 24 
 const DOWN = icon('<path d="M12 5v14M6 13l6 6 6-6"/>', 'arrow down');
 const OUT = icon('<path d="M7 17 17 7M9 7h8v8"/>', 'arrow out');
 let site, lang, bar, heroEl, first = true, appear, spy;
+
+// The opening screen (index.html, #intro): the logo on wine, then the screen lifts away. While it is up, the hero
+// holds its own entrance, so the headline and numbers start as the page is revealed.
+const intro = document.documentElement.classList.contains('no-intro') ? null : document.getElementById('intro');
+const INTRO_MS = 2100; // how long the logo stays, counted from when the page began to load
+let heroStart = 0;      // when the hero's entrance may begin
 const webs = {}; // the canvases live on through language changes, so the web never restarts
 
 function render() {
@@ -305,7 +311,7 @@ function figure(text) {
   if (post) { const s = h('span', 'sign'); s.textContent = post; dt.appendChild(s); }
   if (!first || calm.matches) return dt;
   num.textContent = '0';
-  const t0 = performance.now() + 700, dur = 1500;
+  const t0 = Math.max(performance.now(), heroStart) + 700, dur = 1500;
   const tick = (now) => {
     const k = Math.min(1, Math.max(0, (now - t0) / dur));
     num.textContent = String(Math.round(to * (1 - Math.pow(1 - k, 4))));
@@ -365,11 +371,22 @@ function watch() {
 window.addEventListener('beforeprint', () => page.querySelectorAll('.reveal').forEach((el) => { el.classList.add('in'); el.classList.remove('reveal'); }));
 window.__landing = { get web() { return webs.hero; } }; // lets the smoke test see that the web is drawing
 
+// Lifts the opening screen away and lets the hero begin. A tap on the screen does the same at once.
+function endIntro() {
+  if (!intro || intro.classList.contains('leave')) return;
+  intro.classList.add('leave');
+  page.classList.remove('held');
+  setTimeout(() => intro.remove(), 1000);
+}
+
 loadSite().then((s) => {
   site = s; lang = s.lang;
+  if (intro) { heroStart = Math.max(performance.now(), INTRO_MS); page.classList.add('held'); }
   render();
+  if (intro) { setTimeout(endIntro, heroStart - performance.now()); intro.addEventListener('click', endIntro); }
   if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
 }).catch((e) => {
+  if (intro) intro.remove();
   page.innerHTML = '<p class="loading">Could not load the page. Please reload.</p>';
   console.error(e);
 });
