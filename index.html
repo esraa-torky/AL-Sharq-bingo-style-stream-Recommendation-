@@ -24,8 +24,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="src/site.css">
+  <!-- The opening screen (#intro) shows once per visit. It is skipped for devices set to reduce motion, for automated
+       tests, and after the first page of a visit. Adding ?intro=1 to the address always shows it. -->
+  <script>
+    (function () {
+      var asked = /[?&]intro=1(&|$)/.test(location.search), skip = false;
+      try {
+        skip = !asked && (!!sessionStorage.getItem('intro') || matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.webdriver);
+        if (!skip) sessionStorage.setItem('intro', '1');
+      } catch (e) {}
+      if (skip) document.documentElement.classList.add('no-intro');
+    })();
+  </script>
 </head>
 <body>
+  <div id="intro" aria-hidden="true"><img src="assets/logo-dark.png" alt="" width="472" height="189"><span></span></div>
   <div id="page"><p class="loading">Al Sharq Youth</p></div>
   <script type="module" src="src/landing.js"></script>
 </body>

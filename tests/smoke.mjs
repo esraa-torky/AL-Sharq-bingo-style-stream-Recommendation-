@@ -103,6 +103,22 @@ try {
     }
   }
   // ---------- the website: landing page, the three form pages, and the test → program form ----------
+  // the opening screen: shown when asked for, then it lifts away and leaves the page usable
+  {
+    const page = await browser.newPage({ viewport: devices[0].viewport });
+    const errs = watchErrors(page);
+    await page.goto(`${BASE}?intro=1`);
+    if (!(await page.isVisible('#intro img'))) failures.push('intro: the opening screen with the logo did not show');
+    await page.waitForSelector('#intro', { state: 'detached', timeout: 8000 }).catch(() => failures.push('intro: the opening screen did not go away'));
+    await page.waitForSelector('#take-test');
+    const shown = await page.evaluate(() => new Promise((done) => setTimeout(() => done(getComputedStyle(document.querySelector('.hero h1 .w')).opacity), 2500)));
+    if (shown !== '1') failures.push(`intro: the headline did not appear after the opening screen (opacity ${shown})`);
+    await page.goto(BASE);
+    if (await page.isVisible('#intro')) failures.push('intro: the opening screen shows in automated runs without being asked for');
+    if (errs.length) failures.push(`intro: ${errs.join(' | ')}`);
+    console.log('intro                    shown on request, then cleared');
+    await page.close();
+  }
   const forms = JSON.parse(readFileSync(new URL('../content/forms.json', import.meta.url), 'utf8'));
   const sideways = (page) => page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
   for (const lang of config.languages) {

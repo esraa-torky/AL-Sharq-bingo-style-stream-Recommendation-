@@ -64,6 +64,19 @@ section h2{font-size:clamp(30px,4.4vw,52px);font-weight:700;margin-top:12px;max-
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.7,.1,1);transition-delay:calc(var(--i,0) * 90ms)}
 .reveal.in{opacity:1;transform:none}
 
+/* The opening screen: the logo wipes in on the hero's wine, a gold line draws under it, then the whole screen
+   lifts away (landing.js adds .leave). If the page's code never runs, it clears itself after a few seconds. */
+#intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;align-content:center;gap:clamp(20px,3vh,32px);background:radial-gradient(60% 55% at 50% 44%,rgba(154,23,64,.8) 0%,transparent 72%),linear-gradient(165deg,#2c0713 0%,#16040a 100%);cursor:pointer;transition:transform .85s cubic-bezier(.76,0,.24,1);animation:intro-clear .5s 8s forwards}
+.no-intro #intro{display:none}
+#intro img{width:min(70vw,460px);height:auto;animation:intro-logo 1.1s cubic-bezier(.2,.7,.1,1) .2s both}
+#intro span{width:min(30vw,180px);height:2px;background:#f1c27a;animation:intro-line .8s cubic-bezier(.2,.7,.1,1) .85s both}
+#intro.leave{transform:translateY(-100%)}
+@keyframes intro-logo{from{opacity:0;clip-path:inset(0 100% 0 0);transform:translateY(12px)}to{opacity:1;clip-path:inset(0 0 0 0);transform:none}}
+@keyframes intro-line{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes intro-clear{to{opacity:0;visibility:hidden}}
+/* the hero's own entrance waits until the opening screen lifts */
+#page.held .hero.intro,#page.held .hero.intro *{animation-play-state:paused!important}
+
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 24px;border-radius:4px;border:2px solid transparent;font-family:var(--font-display);font-weight:700;font-size:16px;text-decoration:none;cursor:pointer;transition:background-color .15s,border-color .15s,color .15s}
 .btn .arrow{width:18px;height:18px;flex:none;transition:transform .15s}
