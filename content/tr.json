@@ -87,12 +87,12 @@
         "d": "Haftalık gençlik buluşmamızda"
       }
     },
-    "families-struggling": {
-      "q": "Topluluğunda bazı ailelerin zor durumda olduğunu duydun. İlk ne yaparsın?",
+    "public-space": {
+      "q": "Topluluğunun sevdiği ortak bir mekân bakımsız kalıyor. İlk ne yaparsın?",
       "answers": {
-        "a": "Arkasındaki nedeni araştırırım",
-        "b": "Pratik bir yardım planı yaparım",
-        "c": "Arkadaşlarımla onlara destek oluruz",
+        "a": "Nedenini araştırırım",
+        "b": "Pratik bir çözüm planlarım",
+        "c": "Onu korumak için insanları toplarım",
         "d": "Çevremdekilerle konuşurum"
       }
     },

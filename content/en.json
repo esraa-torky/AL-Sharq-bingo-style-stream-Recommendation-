@@ -87,12 +87,12 @@
         "d": "At our weekly youth gathering"
       }
     },
-    "families-struggling": {
-      "q": "You hear some families in your community are struggling. What do you do first?",
+    "public-space": {
+      "q": "A public place your community loves is being neglected. What do you do first?",
       "answers": {
-        "a": "Find out what’s behind it",
-        "b": "Plan a practical way to help",
-        "c": "Get friends together to support them",
+        "a": "Find out why it’s neglected",
+        "b": "Plan a practical fix",
+        "c": "Get people together to save it",
         "d": "Discuss it with people around me"
       }
     },
