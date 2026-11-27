@@ -18,18 +18,12 @@
     "title": "<em>Geleceği</em> şekillendiren bir nesil.",
     "lede": "Al Sharq Youth, genç liderleri ve değişim yaratanları birbirine bağlayan ve güçlendiren küresel bir ekosistemdir. Birlikte siyasi, ekonomik ve sosyal reformu, iş birliğini ve bütünleşmeyi ilerletirler.",
     "stats": [
-      [
-        "45",
-        "hub"
-      ],
-      [
-        "800+",
-        "üye"
-      ],
-      [
-        "40+",
-        "ülke"
-      ]
+      ["47", "hub"],
+      ["800+", "ağ üyesi"],
+      ["40+", "ağdaki ülke"],
+      ["21", "aktif hub’ı olan ülke"],
+      ["100+", "etkinlik ve girişim"],
+      ["5", "uluslararası kamp"]
     ],
     "ctaInvolve": "Sen de katıl",
     "ctaLearn": "Daha fazla bilgi",
