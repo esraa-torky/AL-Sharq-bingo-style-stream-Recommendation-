@@ -151,8 +151,8 @@
         "d": "Herkesi işin içine katmak"
       }
     },
-    "small-grant": {
-      "q": "Ekibin küçük bir hibe alsa…",
+    "new-project": {
+      "q": "Ekibin yeni bir projeye başlıyor. İlk adımın ne olur?",
       "answers": {
         "a": "Önce gerçek ihtiyacı araştırırsın",
         "b": "Net hedefli bir proje tasarlarsın",

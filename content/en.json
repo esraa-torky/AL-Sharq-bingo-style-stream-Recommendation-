@@ -151,8 +151,8 @@
         "d": "Getting everyone involved"
       }
     },
-    "small-grant": {
-      "q": "If your team got a small grant, you’d…",
+    "new-project": {
+      "q": "Your team is starting a new project. What’s your first step?",
       "answers": {
         "a": "Study the real need first",
         "b": "Design a project with clear goals",
