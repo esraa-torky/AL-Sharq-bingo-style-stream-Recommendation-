@@ -81,9 +81,9 @@
     "free-evening": {
       "q": "On a free evening, where are you most likely to be?",
       "answers": {
-        "a": "Reading the Ummah’s history",
-        "b": "In a long talk with friends",
-        "c": "Working on my own project",
+        "a": "In a library, reading our history",
+        "b": "At a café, deep in conversation",
+        "c": "At my desk, building a project",
         "d": "At our weekly youth gathering"
       }
     },

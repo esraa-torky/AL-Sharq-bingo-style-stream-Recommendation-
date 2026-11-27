@@ -81,9 +81,9 @@
     "free-evening": {
       "q": "Boş bir akşamda en çok nerede olursun?",
       "answers": {
-        "a": "Ümmetin tarihini okurken",
-        "b": "Arkadaşlarla uzun bir sohbette",
-        "c": "Kendi projem üzerinde çalışırken",
+        "a": "Kütüphanede, tarihimizi okurken",
+        "b": "Bir kafede, derin bir sohbette",
+        "c": "Masamda, bir proje üzerinde çalışırken",
         "d": "Haftalık gençlik buluşmamızda"
       }
     },
