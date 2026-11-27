@@ -16,6 +16,8 @@
     "cardHint": "Her bir cevap yıldıza giden bir yola çıkıyor. Soruları doldur ve tombala de.",
     "yourMatch": "Eşleşmen",
     "nextStep": "Sonraki adımın",
+    "matchBreakdown": "Her akışa ne kadar yakınsın",
+    "percent": "%{p}",
     "idle": "Sonraki ziyaretçi için {s} saniye içinde başa döner.",
     "thatsMe": "Bu benim!",
     "ticketNo": "No.",

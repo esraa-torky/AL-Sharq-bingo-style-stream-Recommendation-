@@ -16,6 +16,8 @@
     "cardHint": "Each stream owns one line through the star. Fill it and shout bingo.",
     "yourMatch": "Your match",
     "nextStep": "Your next step",
+    "matchBreakdown": "How close you are to each stream",
+    "percent": "{p}%",
     "idle": "Back to the welcome screen in {s} seconds for the next visitor.",
     "thatsMe": "That’s me!",
     "ticketNo": "No.",
