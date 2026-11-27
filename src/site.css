@@ -11,8 +11,8 @@
   --logo-light:block; --logo-dark:none;
   --font-body:"IBM Plex Sans","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
   --font-display:"Bricolage Grotesque","Montserrat","Avenir Next","Segoe UI",var(--font-body);
-  /* layout: the height of the top bar, and the side space that keeps content 1160px wide on large screens */
-  --bar-h:76px;
+  /* layout: the heights of the top bar, and the side space that keeps content 1160px wide on large screens */
+  --bar-h:88px; --bar-s:62px; /* the landing page's bar: at the very top, and once the page has scrolled */
   --gutter:max(20px,env(safe-area-inset-left),env(safe-area-inset-right),calc(50% - 580px));
   color-scheme:light;
 }
@@ -34,7 +34,8 @@
 [lang="ar"] .facts li{font-size:15px}
 
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:calc(var(--bar-h) + 12px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--bar-s) + 12px)}
+html.menu-open{overflow:hidden}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-text-size-adjust:100%}
 h1,h2,h3,p,ul,ol,figure,blockquote,dl,dd{margin:0}
 ul,ol{padding:0;list-style:none}
@@ -80,54 +81,62 @@ section h2{font-size:clamp(30px,4.4vw,52px);font-weight:700;margin-top:12px;max-
 .btn:disabled{opacity:.7;cursor:progress}
 
 /* top bar */
-.topbar{display:flex;align-items:center;gap:clamp(14px,2.4vw,32px);height:var(--bar-h);padding:0 var(--gutter)}
+.topbar{position:relative;display:flex;align-items:center;gap:clamp(14px,2.4vw,32px);height:76px;padding:0 var(--gutter)}
 .brand{display:block;line-height:0;margin-inline-end:auto}
-.brand .logo{width:auto}
+.brand .logo{width:auto;transition:height .25s}
 /* the two logo files carry different empty margins: these sizes draw both marks at the same height and edge */
 .brand .logo.for-light{height:58px;margin:-9px -7px}
 .brand .logo.for-dark{height:41px}
-.topbar-end{display:flex;align-items:center;gap:14px}
+.topbar-end{display:flex;align-items:center;gap:clamp(10px,1.6vw,20px)}
 .back{font-weight:600;font-size:15px;text-decoration:none;color:var(--muted)}
 .back:hover{color:var(--ink)}
-.langs{display:flex;border:1px solid var(--line-strong);border-radius:4px;overflow:hidden}
-.langs button{font:inherit;font-size:14px;font-weight:600;min-width:44px;min-height:40px;padding:0 10px;border:0;background:transparent;color:var(--muted);cursor:pointer;transition:background-color .15s,color .15s}
-.langs button+button{border-inline-start:1px solid var(--line-strong)}
-.langs button:hover{color:var(--ink)}
-.langs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
-.site-nav{display:flex;gap:clamp(18px,2.2vw,30px)}
-.site-nav a{position:relative;padding:8px 0;font-size:15px;font-weight:500;text-decoration:none;white-space:nowrap;opacity:.84;transition:opacity .15s}
+/* languages: plain text, the one in use underlined in gold */
+.langs{display:flex;gap:2px}
+.langs button{font:inherit;font-size:14px;font-weight:600;min-width:40px;min-height:40px;padding:0 8px;border:0;background:transparent;color:inherit;opacity:.6;cursor:pointer;transition:opacity .15s}
+.langs button:hover{opacity:1}
+.langs button[aria-pressed="true"]{opacity:1;text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:7px}
+.site-nav{display:flex;gap:clamp(18px,2.4vw,34px)}
+.site-nav a{position:relative;padding:8px 0;font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap;opacity:.82;transition:opacity .15s}
 .site-nav a::after{content:"";position:absolute;inset-inline:0;bottom:3px;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .2s}
 .site-nav a:hover,.site-nav a[aria-current]{opacity:1}
 .site-nav a:hover::after,.site-nav a[aria-current]::after{transform:scaleX(1)}
 .nav-join{display:none}
 .site-nav .btn{opacity:1}
 /* the menu button, shown on narrow screens: two lines that cross when the menu is open */
-.menu-btn{display:none;position:relative;width:44px;height:40px;padding:0;border:1px solid var(--line-strong);border-radius:4px;background:transparent;color:inherit;cursor:pointer}
-.menu-btn span{position:absolute;left:11px;right:11px;height:2px;border-radius:1px;background:currentColor;transition:transform .2s,top .2s}
-.menu-btn span:first-child{top:14px}
-.menu-btn span:last-child{top:22px}
-.topbar.open .menu-btn span:first-child{top:18px;transform:rotate(45deg)}
-.topbar.open .menu-btn span:last-child{top:18px;transform:rotate(-45deg)}
-.topbar.over-hero .menu-btn{border-color:rgba(255,255,255,.3)}
-.btn.nav-cta{min-height:40px;padding:0 16px;font-size:14px;background:var(--burg);color:var(--on-burg)}
+.menu-btn{display:none;position:relative;width:44px;height:44px;padding:0;border:0;background:transparent;color:inherit;cursor:pointer}
+.menu-btn span{position:absolute;left:9px;right:9px;height:2px;border-radius:1px;background:currentColor;transition:transform .2s,top .2s}
+.menu-btn span:first-child{top:17px}
+.menu-btn span:last-child{top:26px}
+.topbar.open .menu-btn span:first-child{top:21px;transform:rotate(45deg)}
+.topbar.open .menu-btn span:last-child{top:21px;transform:rotate(-45deg)}
+/* "Get involved" is the strongest thing in the bar: filled white over the hero, filled burgundy after it */
+.btn.nav-cta{min-height:44px;padding:0 20px;font-size:15px;background:var(--burg);color:var(--on-burg);transition:background-color .15s,border-color .15s,color .15s,min-height .25s}
 .btn.nav-cta:hover{background:var(--burg-deep)}
-/* landing page: the bar stays on screen. Clear at the top of the hero, dark glass while the hero scrolls under it, solid after it. */
-.topbar.sticky{position:sticky;top:0;z-index:30;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:saturate(1.3) blur(14px);backdrop-filter:saturate(1.3) blur(14px);border-bottom:1px solid var(--line);transition:background-color .25s,border-color .25s,color .25s}
+.btn.nav-cta .arrow{width:16px;height:16px}
+/* landing page: the bar is fixed to the top of the screen. Tall and clear at the very top of the hero; slim once
+   the page scrolls, as dark glass while the hero passes under it and solid after it. */
+.topbar.sticky{position:fixed;top:0;inset-inline:0;z-index:30;height:var(--bar-h);background:var(--bg);background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:saturate(1.3) blur(14px);backdrop-filter:saturate(1.3) blur(14px);border-bottom:1px solid var(--line);transition:height .25s,background-color .25s,border-color .25s,color .25s}
+.topbar.sticky.stuck{height:var(--bar-s)}
+.topbar.sticky .logo.for-dark{height:48px}
+.topbar.sticky.stuck .logo.for-dark{height:37px}
+.topbar.sticky .logo.for-light{height:52px;margin:-8px -6px}
+.topbar.sticky.stuck .btn.nav-cta{min-height:40px}
 .topbar.over-hero{--logo-light:none;--logo-dark:block;color:#fff;background:transparent;border-bottom-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
-.topbar.over-hero.stuck{background:rgba(22,4,10,.68);border-bottom-color:rgba(255,255,255,.1);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-.topbar.over-hero .langs,.topbar.over-hero .langs button+button{border-color:rgba(255,255,255,.3)}
-.topbar.over-hero .langs button{color:rgba(255,255,255,.8)}
-.topbar.over-hero .langs button:hover{color:#fff}
-.topbar.over-hero .langs button[aria-pressed="true"]{background:#fff;color:#3a0915}
-.topbar.over-hero .btn.nav-cta{background:transparent;border-color:rgba(255,255,255,.34);color:#fff}
-.topbar.over-hero .btn.nav-cta:hover{background:#fff;border-color:#fff;color:#5a0b21}
+.topbar.over-hero.stuck{background:rgba(22,4,10,.72);border-bottom-color:rgba(255,255,255,.1);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.topbar.over-hero .langs button[aria-pressed="true"]{text-decoration-color:var(--hero-gold)}
+.topbar.over-hero .btn.nav-cta{background:#fff;border-color:#fff;color:#5a0b21}
+.topbar.over-hero .btn.nav-cta:hover{background:var(--hero-gold);border-color:var(--hero-gold);color:#2a0d14}
+/* the gold line along the lower edge grows with the distance scrolled (landing.js sets --p from 0 to 1) */
+.progress{position:absolute;inset-inline:0;bottom:-1px;height:2px;background:var(--gold);transform:scaleX(var(--p,0));transform-origin:left;pointer-events:none}
+[dir="rtl"] .progress{transform-origin:right}
+.topbar.over-hero .progress{background:var(--hero-gold)}
+.topbar.open .progress{display:none}
 
 /* hero: deep wine in both themes, with the living web (web.js) across the whole background */
 main>section.hero{
   position:relative;isolation:isolate;overflow:hidden;
-  margin-top:calc(-1 * var(--bar-h));
   /* space above and below the words grows with the height of the screen, so the numbers stay in view on a laptop */
-  padding:calc(var(--bar-h) + clamp(22px,calc((100vh - 700px) * .36),96px)) var(--gutter) 0;
+  padding:calc(var(--bar-h) + clamp(12px,calc((100vh - 700px) * .36),96px)) var(--gutter) 0;
   min-height:min(100vh,960px);min-height:min(100svh,960px);
   display:flex;flex-direction:column;
   color:#fff;
@@ -333,18 +342,19 @@ main>section.next::before{display:none}
 .form-page>.draft{text-align:center}
 
 @media (max-width:980px){
-  /* the section links fold into a menu that opens under the bar */
+  /* the links open as a full-screen menu in the hero's wine, behind the bar's logo, languages and close button */
   .menu-btn{display:block}
-  .site-nav{display:none;position:absolute;top:100%;inset-inline:0;flex-direction:column;gap:0;padding:4px var(--gutter) 24px;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 24px 40px -24px rgba(0,0,0,.4)}
-  .topbar.open .site-nav{display:flex}
-  .site-nav a:not(.btn){padding:16px 0;border-bottom:1px solid var(--line);font-size:19px;font-weight:600;opacity:1}
+  .site-nav{position:fixed;inset:0;z-index:-1;visibility:hidden;opacity:0;flex-direction:column;gap:0;overflow:auto;padding:calc(var(--bar-h) + 6vh) var(--gutter) max(28px,env(safe-area-inset-bottom));background:radial-gradient(80% 60% at 92% 8%,rgba(154,23,64,.78) 0%,transparent 70%),linear-gradient(165deg,var(--hero-1) 0%,var(--hero-0) 100%);color:#fff}
+  [dir="rtl"] .site-nav{background:radial-gradient(80% 60% at 8% 8%,rgba(154,23,64,.78) 0%,transparent 70%),linear-gradient(195deg,var(--hero-1) 0%,var(--hero-0) 100%)}
+  .topbar.open .site-nav{visibility:visible;opacity:1;transition:opacity .25s}
+  .site-nav a:not(.btn){padding:16px 0;border-bottom:1px solid rgba(255,255,255,.14);font-family:var(--font-display);font-weight:700;font-size:clamp(30px,8.6vw,48px);line-height:1.1;letter-spacing:-0.02em;white-space:normal;opacity:1}
+  [lang="ar"] .site-nav a:not(.btn){line-height:1.4}
   .site-nav a::after{display:none}
-  .site-nav a[aria-current]{color:var(--accent)}
-  .nav-join{display:inline-flex;margin-top:20px}
-  .topbar.over-hero.open,.topbar.over-hero .site-nav{background:var(--hero-0)}
-  .topbar.over-hero .site-nav,.topbar.over-hero .site-nav a:not(.btn){border-color:rgba(255,255,255,.12)}
-  .topbar.over-hero .site-nav a[aria-current]{color:var(--hero-gold)}
-  .topbar.over-hero .nav-join{background:#fff;color:#5a0b21}
+  .site-nav a[aria-current]{color:var(--hero-gold)}
+  .nav-join{display:inline-flex;align-self:stretch;min-height:56px;margin-top:28px;background:#fff;color:#5a0b21;font-size:17px}
+  .topbar.open .site-nav>*{animation:rise .5s cubic-bezier(.2,.7,.1,1) calc(.05s + var(--i,0) * .06s) both}
+  /* a blurred backdrop would trap the full-screen menu inside the bar, so the open bar is plain and clear */
+  .topbar.sticky.over-hero.open{background:transparent;border-bottom-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
   /* the path runs down the page, with its line on the starting side */
   .path-list{grid-template-columns:1fr;gap:36px;margin-top:40px}
   .path-list::before,.path-list::after{top:6px;bottom:0;inset-inline:auto;inset-inline-start:5px;width:2px;height:auto}
@@ -367,10 +377,13 @@ main>section.next::before{display:none}
   .btn.nav-cta{display:none}
 }
 @media (max-width:560px){
-  :root{--bar-h:64px}
+  :root{--bar-h:68px;--bar-s:56px}
   body{font-size:16px}
-  .brand .logo.for-light{height:50px;margin:-8px -6px}
+  .topbar{height:64px}
+  .brand .logo.for-light,.topbar.sticky .logo.for-light{height:50px;margin:-8px -6px}
   .brand .logo.for-dark{height:35px}
+  .topbar.sticky .logo.for-dark{height:38px}
+  .topbar.sticky.stuck .logo.for-dark{height:33px}
   .back{display:none}
   /* the words run the full width on a phone, so the shade is even instead of one-sided */
   .hero-web::after,[dir="rtl"] .hero-web::after{background:linear-gradient(0deg,rgba(22,4,10,.72) 0%,rgba(22,4,10,.4) 34%,rgba(22,4,10,.4) 100%)}
@@ -381,7 +394,7 @@ main>section.next::before{display:none}
   [lang="ar"] .hero .eyebrow,[lang="ar"] .quote .eyebrow,[lang="ar"] .stats dd{font-size:14px}
   .stats div{flex-direction:column;gap:6px}
   .stats dd{font-size:11px;letter-spacing:.1em}
-  .ctas .btn,.next .btn,.streams-join .btn,.form .btn.primary,.nav-join{width:100%}
+  .ctas .btn,.next .btn,.streams-join .btn,.form .btn.primary{width:100%}
   .foot-base{flex-direction:column;align-items:flex-start}
 }
 @media (prefers-reduced-motion: reduce){

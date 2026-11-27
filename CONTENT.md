@@ -76,8 +76,8 @@ Keep each pull request small and about one thing (for example "reword question 3
 - **Numbers** in the header: `hero.stats`, a list of `[number, label]` pairs. A number may carry a plus sign
   before or after it (`800+`, `+800`); the digits count up when the page opens.
 - The links in the top bar and the footer reuse the small section headings (`about.eyebrow`, `path.eyebrow`),
-  so keep those short. `nav.menu` names the menu button on phones and `nav.skip` is the
-  "Skip to content" link for keyboard users.
+  so keep those short. `nav.test` is the link that opens the test, `nav.menu` names the menu button on
+  phones and `nav.skip` is the "Skip to content" link for keyboard users.
 - **Statements** (`about.title`, `closing`): each sentence is shown as its own piece with a gold full stop,
   so keep the full stops.
 - **Values** (`about.values`): shown as one running line of large type, in the order written.

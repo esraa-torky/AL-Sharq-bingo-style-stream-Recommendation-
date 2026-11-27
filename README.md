@@ -15,7 +15,10 @@ The site has three pages:
   - **How we work:** four numbered steps on a line that draws itself when it scrolls into view.
   - **Closing statement and footer:** section links, the three forms, languages and the Al Sharq Forum link.
 
-  The top bar stays on screen; on a phone its section links fold into a menu. Sections rise gently into view
+  The top bar stays on screen: tall and clear at the very top, slim once the page scrolls, with a gold line
+  along its lower edge that shows how far down the page the visitor is. It holds the section links, a link to
+  the test, the languages and the "Get involved" button; on phones and tablets the links open as a full-screen
+  menu. Sections rise gently into view
   on the first visit. The web rests while off screen, and all movement is off for devices set to reduce motion.
   The page has its own style (`src/site.css`), separate from the test's paper look.
 - **`form.html?f=<form>`, one page per form:** `join-hub`, `establish-hub` or `join-program`.

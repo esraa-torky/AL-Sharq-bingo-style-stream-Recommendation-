@@ -17,6 +17,7 @@ function render() {
   applyLang(config, t, lang);
   document.title = t.meta.title;
   document.querySelector('meta[name="description"]')?.setAttribute('content', t.meta.description);
+  const menuWasOpen = !!bar && bar.classList.contains('open'); // a language change keeps the menu open
   page.innerHTML = '';
   // sections rise into view as they are reached, on the first visit only; after a language change everything is simply there
   page.classList.toggle('static', !first || calm.matches || !('IntersectionObserver' in window));
@@ -29,47 +30,60 @@ function render() {
   page.appendChild(foot(t, config, forms));
   watch();
   first = false;
-  onScroll();
+  setMenu(menuWasOpen);
 }
 
 /* ---------- top bar ---------- */
 
-// Stays at the top of the screen: clear over the hero, solid once the hero has scrolled away.
-// On narrow screens the section links fold into a menu that opens under the bar.
+// Stays at the top of the screen. At the very top it is tall and clear over the hero; once the page scrolls it
+// tightens into a slim bar (dark glass over the hero, solid after it) and a gold line along its lower edge shows
+// how far down the page the visitor is. On narrow screens the links open as a full-screen menu.
 function topBar(config, t) {
   bar = topbar(config, t, lang, (l) => { lang = l; render(); });
   bar.classList.add('sticky', 'over-hero');
   const nav = h('nav', 'site-nav'); nav.id = 'site-nav'; nav.setAttribute('aria-label', t.nav.menu);
-  sectionLinks(t).forEach((a) => nav.appendChild(a));
-  const joinInMenu = h('a', 'btn primary nav-join', t.hero.ctaInvolve + ARROW); joinInMenu.href = '#journey';
-  nav.appendChild(joinInMenu);
+  const test = testLink(t); test.id = 'nav-test';
+  const joinInMenu = h('a', 'btn nav-join', t.hero.ctaInvolve + ARROW); joinInMenu.href = '#journey';
+  [...sectionLinks(t), test, joinInMenu].forEach((a, i) => { a.style.setProperty('--i', i); nav.appendChild(a); });
   nav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
   bar.insertBefore(nav, bar.lastChild);
-  const join = h('a', 'btn nav-cta', t.hero.ctaInvolve); join.href = '#journey';
+  const join = h('a', 'btn nav-cta', t.hero.ctaInvolve + ARROW); join.href = '#journey';
   bar.lastChild.appendChild(join);
   const menu = h('button', 'menu-btn', '<span></span><span></span>'); menu.type = 'button'; menu.id = 'menu';
   menu.setAttribute('aria-label', t.nav.menu); menu.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-controls', 'site-nav');
   menu.addEventListener('click', () => setMenu(!bar.classList.contains('open')));
   bar.lastChild.appendChild(menu);
+  const progress = h('span', 'progress'); progress.setAttribute('aria-hidden', 'true');
+  bar.appendChild(progress);
   return bar;
 }
 const sectionLinks = (t) => [['about', t.about.eyebrow], ['path', t.path.eyebrow]].map(([id, text]) => { const a = h('a', null, text); a.href = '#' + id; return a; });
+const testLink = (t) => { const a = h('a', null, t.nav.test); a.href = href('test.html', lang, { site: 1 }); return a; };
+
+// Opens or closes the full-screen menu. While it is open the page behind cannot be scrolled or tabbed into.
 function setMenu(open) {
   if (!bar) return;
   bar.classList.toggle('open', open);
   bar.querySelector('.menu-btn').setAttribute('aria-expanded', String(open));
+  document.documentElement.classList.toggle('menu-open', open);
+  page.querySelectorAll('main, .site-foot').forEach((el) => { el.inert = open; });
+  if (open) bar.querySelector('.site-nav a').focus({ preventScroll: true });
+  onScroll();
 }
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && bar && bar.classList.contains('open')) { setMenu(false); bar.querySelector('.menu-btn').focus(); } });
-document.addEventListener('click', (e) => { if (bar && bar.classList.contains('open') && !bar.contains(e.target)) setMenu(false); });
 
-// The bar is clear at the very top, dark glass while the hero scrolls under it, and solid after the hero.
+// Sets the look of the bar for where the page is: tall and clear at the very top, slim once scrolled, light on
+// wine while over the hero (or while the menu is open), and the gold line's length.
 function onScroll() {
   if (!bar || !heroEl) return;
-  bar.classList.toggle('over-hero', window.scrollY < heroEl.offsetHeight - bar.offsetHeight);
-  bar.classList.toggle('stuck', window.scrollY > 8);
+  const y = window.scrollY, open = bar.classList.contains('open');
+  bar.classList.toggle('over-hero', open || y < heroEl.offsetHeight - bar.offsetHeight);
+  bar.classList.toggle('stuck', y > 8);
+  const room = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.setProperty('--p', room > 0 ? Math.min(1, y / room).toFixed(4) : 0);
 }
 window.addEventListener('scroll', onScroll, { passive: true });
-window.addEventListener('resize', onScroll, { passive: true });
+window.addEventListener('resize', () => { if (bar && bar.classList.contains('open') && !matchMedia('(max-width:980px)').matches) setMenu(false); onScroll(); }, { passive: true });
 
 /* ---------- sections ---------- */
 
@@ -215,7 +229,7 @@ function foot(t, config, forms) {
     nav.appendChild(ul);
     return nav;
   };
-  grid.appendChild(column(t.nav.home, sectionLinks(t)));
+  grid.appendChild(column(t.nav.home, [...sectionLinks(t), testLink(t)]));
   grid.appendChild(column(t.journey.eyebrow, forms.forms.map((x) => { const a = h('a', null, t.forms[x.id].title); a.href = href('form.html', lang, { f: x.id }); return a; })));
   f.appendChild(grid);
   const base = h('div', 'foot-base');
