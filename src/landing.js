@@ -4,6 +4,7 @@
 // All text comes from content/landing.<lang>.json.
 import { h, ARROW, LANG_NAMES, loadSite, applyLang, href, topbar, registerWorker } from './site.js';
 import { createWeb } from './web.js';
+import { startIntro } from './intro.js';
 
 const page = document.getElementById('page');
 const calm = matchMedia('(prefers-reduced-motion: reduce)');
@@ -12,10 +13,11 @@ const DOWN = icon('<path d="M12 5v14M6 13l6 6 6-6"/>', 'arrow down');
 const OUT = icon('<path d="M7 17 17 7M9 7h8v8"/>', 'arrow out');
 let site, lang, bar, heroEl, first = true, appear, spy;
 
-// The opening screen (index.html, #intro): the logo on wine, then the screen lifts away. While it is up, the hero
-// holds its own entrance, so the headline and numbers start as the page is revealed.
+// The opening screen (index.html, #intro; drawn by intro.js): the network gathers and the logo appears. While it
+// is up, the hero holds its own entrance, so the headline and numbers start as the page is revealed.
 const intro = document.documentElement.classList.contains('no-intro') ? null : document.getElementById('intro');
-const INTRO_MS = 2100; // how long the logo stays, counted from when the page began to load
+const opening = intro ? startIntro(intro) : null;
+const INTRO_MS = 2600; // how long the opening screen stays, counted from when the page began to load
 let heroStart = 0;      // when the hero's entrance may begin
 const webs = {}; // the canvases live on through language changes, so the web never restarts
 
@@ -371,19 +373,24 @@ function watch() {
 window.addEventListener('beforeprint', () => page.querySelectorAll('.reveal').forEach((el) => { el.classList.add('in'); el.classList.remove('reveal'); }));
 window.__landing = { get web() { return webs.hero; } }; // lets the smoke test see that the web is drawing
 
-// Lifts the opening screen away and lets the hero begin. A tap on the screen does the same at once.
+// Ends the opening screen and lets the hero begin: the big logo travels to the logo in the top bar, which stays
+// hidden until it lands. A tap on the screen does the same at once.
+let introOver = false;
 function endIntro() {
-  if (!intro || intro.classList.contains('leave')) return;
-  intro.classList.add('leave');
-  page.classList.remove('held');
-  setTimeout(() => intro.remove(), 1000);
+  if (!intro || introOver) return;
+  introOver = true;
+  setTimeout(() => page.classList.remove('held'), 520); // the headline starts once the logo has cleared its path
+  const atTop = bar && bar.classList.contains('over-hero') && !bar.classList.contains('stuck');
+  const target = atTop ? [...bar.querySelectorAll('.brand .logo')].find((img) => img.offsetWidth) : null;
+  if (target) page.classList.add('logo-landing');
+  opening.leave(target).then(() => { page.classList.remove('logo-landing'); intro.remove(); });
 }
 
 loadSite().then((s) => {
   site = s; lang = s.lang;
-  if (intro) { heroStart = Math.max(performance.now(), INTRO_MS); page.classList.add('held'); }
+  if (intro) { heroStart = Math.max(performance.now(), INTRO_MS) + 520; page.classList.add('held'); }
   render();
-  if (intro) { setTimeout(endIntro, heroStart - performance.now()); intro.addEventListener('click', endIntro); }
+  if (intro) { setTimeout(endIntro, heroStart - 520 - performance.now()); intro.addEventListener('click', endIntro); }
   if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
 }).catch((e) => {
   if (intro) intro.remove();
