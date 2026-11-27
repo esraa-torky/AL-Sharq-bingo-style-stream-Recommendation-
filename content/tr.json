@@ -109,7 +109,7 @@
     "friends-ask": {
       "q": "Arkadaşların sana genelde ne için gelir?",
       "answers": {
-        "a": "Önemli bir karar için",
+        "a": "Önemli bir karar verirken fikir almak için",
         "b": "Dağınık bir fikri toparlamak için",
         "c": "Bir gezi ya da buluşma ayarlamak için",
         "d": "Gönüllü olabilecekleri bir yer bulmak için"
