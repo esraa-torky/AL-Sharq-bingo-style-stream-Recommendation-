@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Al Sharq Youth · Join the network",
-    "description": "Al Sharq Youth is a global ecosystem that connects and empowers young leaders and changemakers. Join a hub, establish a hub or join a program."
+    "description": "Al Sharq Youth is a global ecosystem that connects and empowers young leaders and changemakers. Join a hub, establish a hub or join a stream."
   },
   "links": {
     "learnMore": "https://youth.sharqforum.org/"
@@ -39,7 +39,7 @@
     "items": [
       ["Shaping narratives", "Join the conversation. Take part in Diwans, public dialogues, and thought-provoking discussions."],
       ["Connecting and activating youth", "Find your network. Take action. Connect with changemakers worldwide, join hubs, and collaborate on activities and initiatives."],
-      ["Empowering leaders and builders", "Grow as a leader. Build for impact. Explore the Al Sharq Youth programs."],
+      ["Empowering leaders and builders", "Grow as a leader. Build for impact. Explore the Al Sharq Youth streams."],
       ["Amplifying impact and influence", "Take impact further. Collaborate with others to advance ideas and initiatives."]
     ]
   },
@@ -86,9 +86,9 @@
       "labels": { "why": "Why are you interested in establishing a hub?" }
     },
     "join-program": {
-      "title": "Join a program",
+      "title": "Join a stream",
       "line": "Discover opportunities through Diwan, The Fellowship, and the Impact Platform.",
-      "labels": { "why": "Why are you interested in joining a program?" }
+      "labels": { "why": "Why are you interested in joining a stream?" }
     }
   },
   "fields": {
