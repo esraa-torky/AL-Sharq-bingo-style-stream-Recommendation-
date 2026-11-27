@@ -78,13 +78,13 @@
     ]
   ],
   "choices": {
-    "free-evening": {
-      "q": "On a free evening, where would we find you?",
+    "at-the-forum": {
+      "q": "At a forum like this one, where would we find you?",
       "answers": {
-        "a": "At the library, reading Ummah history",
-        "b": "At a café, discussing big questions",
-        "c": "At my desk, building a project",
-        "d": "With local youth, planning an activity"
+        "a": "In the front row, taking notes",
+        "b": "Talking with a speaker afterwards",
+        "c": "Sharing my project idea with people",
+        "d": "Meeting young people from my city"
       }
     },
     "ummah-crisis": {
