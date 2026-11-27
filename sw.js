@@ -1,6 +1,6 @@
 // Offline cache so the iPad at the stand (test.html) and the landing page keep working if the venue Wi-Fi drops.
 // Content files are fetched fresh when online (network first), and the cached copy is used offline.
-const VERSION = 'finder-v14';
+const VERSION = 'finder-v15';
 const SHELL = [
   './',
   'index.html',
@@ -30,7 +30,8 @@ const SHELL = [
   'content/landing.ar.json',
   'assets/logo-light.png',
   'assets/logo-dark.png',
-  'assets/icon.svg',
+  'assets/favicon-32.png',
+  'assets/favicon-192.png',
   'assets/sounds/page-turn.mp3',
 ];
 

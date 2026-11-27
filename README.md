@@ -166,6 +166,13 @@ came to the program form from the test. A hidden spam-trap field drops most bot 
 
 If the device is offline, finished surveys and forms wait on the device and are sent when the connection returns.
 
+## The tab icon
+
+The icon in the browser tab and on a phone's home screen is the Arabic mark of the Al Sharq Youth logo, in white
+on the brand burgundy: `assets/favicon-32.png` and `assets/favicon-192.png` for tabs, `assets/icon-180.png` and
+`assets/icon-512.png` for home screens. They are drawn from `assets/logo-dark.png`. Browsers keep a tab icon
+for a long time, so a changed icon needs new file names to show up.
+
 ## The link preview
 
 When a link to the site is shared (WhatsApp, X, LinkedIn …), the preview shows the Al Sharq Youth logo:
