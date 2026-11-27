@@ -3,7 +3,7 @@
 export const h = (tag, cls, html) => { const n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; };
 export const fill = (s, vars) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
 export const ARROW = '<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-const LANG_NAMES = { en: ['EN', 'English'], tr: ['TR', 'Türkçe'], ar: ['ع', 'العربية'] };
+export const LANG_NAMES = { en: ['EN', 'English'], tr: ['TR', 'Türkçe'], ar: ['ع', 'العربية'] };
 
 async function loadJSON(path) {
   const r = await fetch(path, { cache: 'no-cache' });

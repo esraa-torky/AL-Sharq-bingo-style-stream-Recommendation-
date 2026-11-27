@@ -2,10 +2,22 @@
 
 The site has three pages:
 
-- **`index.html`, the landing page:** who Al Sharq Youth are, values, the path to impact, the three
-  support streams, "Your journey starts here" (Join a hub, Establish a hub, Join a program) and
-  "Take the next step" with a link to the test. A moving network drawing sits next to the headline.
-  It uses its own calm style (`src/site.css`), separate from the test's paper look.
+- **`index.html`, the landing page**, top to bottom:
+  - **Hero:** dark wine in both light and dark mode, with a living web of people and hubs moving across its
+    whole background (`src/web.js`): points drift, lines join whoever is close, gold signals travel between
+    hubs, and the web leans towards a mouse pointer. The headline rises in word by word and the numbers count up.
+  - **Who we are:** the three-word statement, the introduction, and the six values with a drawing each.
+  - **Philosophy of change:** a dark band with a quieter copy of the web.
+  - **How we work:** four steps on a line that draws itself when it scrolls into view.
+  - **Three support streams:** a card per stream with its colour, weekly time and a link to its form
+    (Fellowship and Impact open Join a stream, Hubs opens Join a hub).
+  - **Your journey starts here:** Join a hub, Establish a hub, Join a stream.
+  - **Take the next step:** the link to the test, beside a small bingo card that stamps itself.
+  - **Closing statement and footer:** section links, the three forms, languages and the Al Sharq Forum link.
+
+  The top bar stays on screen; on a phone its section links fold into a menu. Sections rise gently into view
+  on the first visit. The web rests while off screen, and all movement is off for devices set to reduce motion.
+  The page has its own style (`src/site.css`), separate from the test's paper look.
 - **`form.html?f=<form>`, one page per form:** `join-hub`, `establish-hub` or `join-program`.
 - **`test.html`, the Program Finder:** on its own for the iPad at the stand. Opened from the website
   (`test.html?site=1`), its result offers "Apply to …", which opens the Join a program form showing the match.
@@ -83,6 +95,30 @@ Because merging publishes, only merge a pull request once its **Checks** (conten
 To make GitHub enforce this, add a branch rule for `main` in **Settings → Branches** that requires the
 "Content check" and "Smoke test" status checks to pass.
 
+## Publishing on Cloudflare
+
+The site can also be published on Cloudflare, straight from GitHub, with no keys to manage.
+The settings are in the repository: `wrangler.jsonc` (the project name and how files are served),
+`.assetsignore` (what is left out of the website: tests, docs, settings) and `cloudflare/worker.js`
+(makes the bare address open `index.html`). Pages keep their own addresses (`test.html`, `form.html?f=…`),
+exactly as on GitHub Pages, so links, QR codes and the offline copy work the same on both.
+
+The Cloudflare project is **`al-sharq-bingo-style-stream-recommendation`**, connected to this repository, at
+https://al-sharq-bingo-style-stream-recommendation.salaheddin-jarjour.workers.dev
+
+Every merge into `main` is published by Cloudflare within a minute or two. To publish another branch instead,
+change the production branch in the project's **Settings → Builds**. A domain of your own is added under
+**Settings → Domains & Routes**.
+
+If the project is ever made again (Workers & Pages → Create → Import a repository), give it the same name as
+`name` in `wrangler.jsonc`, leave the build command empty and keep the deploy command `npx wrangler deploy`.
+
+If Cloudflare becomes the main address, put it into the `og:` tags at the top of `index.html`
+(see "The link preview") and remake the QR codes (see "The QR codes"); both still point at GitHub Pages.
+
+To try the Cloudflare setup on your own computer: `npm run cloudflare`, then open http://localhost:8787.
+`npm run deploy` publishes from your computer after signing in with `npx wrangler login`.
+
 ## Saving results to a Google Sheet
 
 1. Create a Google Sheet owned by the Al Sharq Youth account, for example "Program Finder results".
@@ -115,6 +151,12 @@ later, a new column appears at the end. `testMatch` and `testPersonality` are fi
 came to the program form from the test. A hidden spam-trap field drops most bot submissions.
 
 If the device is offline, finished surveys and forms wait on the device and are sent when the connection returns.
+
+## The link preview
+
+When the site's address is shared (WhatsApp, X, LinkedIn …), the preview shows `assets/share.jpg` with the
+title and description from the `og:` tags at the top of `index.html`. Those tags carry the full live address,
+so update them if the site moves. To remake the picture after the hero changes, take a 1200 × 630 screenshot of it.
 
 ## The QR codes
 

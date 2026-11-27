@@ -8,11 +8,13 @@
   },
   "nav": {
     "home": "Al Sharq Youth",
-    "back": "Al Sharq Youth’a dön"
+    "back": "Al Sharq Youth’a dön",
+    "menu": "Menü",
+    "skip": "İçeriğe geç"
   },
   "hero": {
     "eyebrow": "Al Sharq Youth ağına katıl",
-    "title": "Geleceği şekillendiren bir nesil.",
+    "title": "<em>Geleceği</em> şekillendiren bir nesil.",
     "lede": "Al Sharq Youth, genç liderleri ve değişim yaratanları birbirine bağlayan ve güçlendiren küresel bir ekosistemdir. Birlikte siyasi, ekonomik ve sosyal reformu, iş birliğini ve bütünleşmeyi ilerletirler.",
     "stats": [
       [
@@ -99,7 +101,8 @@
   "next": {
     "title": "Bir sonraki adımı at",
     "lede": "Üyelik fırsatlarını keşfet ve sen de katıl.",
-    "test": "Yolunu bulamadın mı? Testi çöz!"
+    "test": "Yolunu bulamadın mı? Testi çöz!",
+    "facts": ["2 dakika", "12 soru", "Eşleşmen"]
   },
   "closing": "Keşfet. Bağlan. Harekete geç.",
   "forms": {

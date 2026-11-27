@@ -8,11 +8,13 @@
   },
   "nav": {
     "home": "Al Sharq Youth",
-    "back": "Back to Al Sharq Youth"
+    "back": "Back to Al Sharq Youth",
+    "menu": "Menu",
+    "skip": "Skip to content"
   },
   "hero": {
     "eyebrow": "Join the Al Sharq Youth network",
-    "title": "A generation shaping the future.",
+    "title": "A generation shaping <em>the future.</em>",
     "lede": "Al Sharq Youth is a global ecosystem that connects and empowers young leaders and changemakers. Together, they advance political, economic, and social reform, cooperation, and integration.",
     "stats": [
       ["45", "hubs"],
@@ -71,7 +73,8 @@
   "next": {
     "title": "Take the next step",
     "lede": "Explore membership opportunities and get involved.",
-    "test": "Couldn’t find your path? Take the test!"
+    "test": "Couldn’t find your path? Take the test!",
+    "facts": ["2 minutes", "12 questions", "Your match"]
   },
   "closing": "Discover. Connect. Act.",
   "forms": {

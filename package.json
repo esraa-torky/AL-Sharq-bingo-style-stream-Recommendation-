@@ -7,7 +7,9 @@
     "start": "python3 -m http.server 8000",
     "check": "node tests/check-content.mjs",
     "smoke": "node tests/smoke.mjs",
-    "qr": "node tests/make-qr.mjs"
+    "qr": "node tests/make-qr.mjs",
+    "cloudflare": "npx wrangler@4 dev",
+    "deploy": "npx wrangler@4 deploy"
   },
   "devDependencies": {
     "playwright": "1.49.1",
