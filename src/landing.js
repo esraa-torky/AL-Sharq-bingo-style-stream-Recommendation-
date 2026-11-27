@@ -73,15 +73,12 @@ function setMenu(open) {
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && bar && bar.classList.contains('open')) { setMenu(false); bar.querySelector('.menu-btn').focus(); } });
 
 // Sets the look of the bar for where the page is: tall and clear at the very top, slim once scrolled, light on
-// wine while over the hero (or while the menu is open), and the gold line's length. Its "Get involved" button
-// stays folded away while the hero's own button is on screen, so the same button is never shown twice.
+// wine while over the hero (or while the menu is open), and the gold line's length.
 function onScroll() {
   if (!bar || !heroEl) return;
   const y = window.scrollY, open = bar.classList.contains('open');
   bar.classList.toggle('over-hero', open || y < heroEl.offsetHeight - bar.offsetHeight);
   bar.classList.toggle('stuck', y > 8);
-  const own = document.getElementById('cta-involve'), box = own && own.getBoundingClientRect();
-  bar.classList.toggle('hero-cta-seen', !!box && box.bottom > bar.offsetHeight && box.top < window.innerHeight);
   const room = document.documentElement.scrollHeight - window.innerHeight;
   bar.style.setProperty('--p', room > 0 ? Math.min(1, y / room).toFixed(4) : 0);
 }
@@ -102,11 +99,9 @@ function hero(t, config) {
   const h1 = h('h1', null, t.hero.title); h1.id = 'hero-title'; words(h1); copy.appendChild(h1);
   copy.appendChild(h('p', 'lede', t.hero.lede));
   const ctas = h('div', 'ctas');
-  // the main action, with its arrow on a round disc; the test as the second choice; "Learn more" as a quiet link
-  const involve = h('a', 'btn primary', '<span>' + t.hero.ctaInvolve + '</span><span class="disc">' + ARROW + '</span>'); involve.href = '#journey'; involve.id = 'cta-involve';
-  const test = h('a', 'btn try', t.nav.test + ARROW); test.href = href('test.html', lang, { site: 1 }); test.id = 'cta-test';
-  const learn = h('a', 'more', t.hero.ctaLearn + OUT); learn.href = t.links.learnMore; learn.rel = 'noopener'; learn.target = '_blank'; learn.id = 'cta-learn';
-  ctas.appendChild(involve); ctas.appendChild(test); ctas.appendChild(learn);
+  const involve = h('a', 'btn primary', t.hero.ctaInvolve + ARROW); involve.href = '#journey'; involve.id = 'cta-involve';
+  const learn = h('a', 'btn secondary', t.hero.ctaLearn + OUT); learn.href = t.links.learnMore; learn.rel = 'noopener'; learn.target = '_blank'; learn.id = 'cta-learn';
+  ctas.appendChild(involve); ctas.appendChild(learn);
   if (config.draftLanguages.includes(lang) && t.draftNote) ctas.appendChild(h('p', 'draft', t.draftNote));
   copy.appendChild(ctas);
   s.appendChild(copy);

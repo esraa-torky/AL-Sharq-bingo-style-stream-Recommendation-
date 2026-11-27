@@ -78,7 +78,6 @@ section h2{font-size:clamp(30px,4.4vw,52px);font-weight:700;margin-top:12px;max-
 .btn.secondary:hover{border-color:var(--ink)}
 .btn.test{background:var(--gold);color:var(--on-gold)}
 .btn.test:hover{background:color-mix(in srgb,var(--gold) 85%,#000)}
-.btn:active{transform:scale(.98)}
 .btn:disabled{opacity:.7;cursor:progress}
 
 /* top bar */
@@ -88,7 +87,7 @@ section h2{font-size:clamp(30px,4.4vw,52px);font-weight:700;margin-top:12px;max-
 /* the two logo files carry different empty margins: these sizes draw both marks at the same height and edge */
 .brand .logo.for-light{height:58px;margin:-9px -7px}
 .brand .logo.for-dark{height:41px}
-.topbar-end{--end-gap:clamp(10px,1.6vw,20px);display:flex;align-items:center;gap:var(--end-gap)}
+.topbar-end{display:flex;align-items:center;gap:clamp(10px,1.6vw,20px)}
 .back{font-weight:600;font-size:15px;text-decoration:none;color:var(--muted)}
 .back:hover{color:var(--ink)}
 /* languages: plain text, the one in use underlined in gold */
@@ -111,9 +110,7 @@ section h2{font-size:clamp(30px,4.4vw,52px);font-weight:700;margin-top:12px;max-
 .topbar.open .menu-btn span:first-child{top:21px;transform:rotate(45deg)}
 .topbar.open .menu-btn span:last-child{top:21px;transform:rotate(-45deg)}
 /* "Get involved" is the strongest thing in the bar: filled white over the hero, filled burgundy after it */
-.btn.nav-cta{max-width:280px;overflow:hidden;white-space:nowrap;min-height:44px;padding:0 20px;font-size:15px;background:var(--burg);color:var(--on-burg);transition:background-color .15s,border-color .15s,color .15s,min-height .25s,max-width .3s,padding .3s,margin .3s,border-width .3s,opacity .2s}
-/* folded away while the hero's own "Get involved" is on screen (landing.js sets .hero-cta-seen) */
-.topbar.hero-cta-seen .btn.nav-cta{max-width:0;padding-inline:0;border-width:0;margin-inline-start:calc(-1 * var(--end-gap));opacity:0;pointer-events:none;visibility:hidden;transition:background-color .15s,border-color .15s,color .15s,min-height .25s,max-width .3s,padding .3s,margin .3s,border-width .3s,opacity .2s,visibility 0s .3s}
+.btn.nav-cta{min-height:44px;padding:0 20px;font-size:15px;background:var(--burg);color:var(--on-burg);transition:background-color .15s,border-color .15s,color .15s,min-height .25s}
 .btn.nav-cta:hover{background:var(--burg-deep)}
 .btn.nav-cta .arrow{width:16px;height:16px}
 /* landing page: the bar is fixed to the top of the screen. Tall and clear at the very top of the hero; slim once
@@ -170,28 +167,11 @@ main>section.hero+section::before{background:transparent}
 [lang="ar"] .stats dd{font-size:14px}
 .hero .lede{font-size:clamp(17px,1.55vw,21px);line-height:1.55;color:var(--hero-soft);max-width:54ch}
 .ctas{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:6px}
-.hero .btn{min-height:60px;padding:0 28px;font-size:18px}
-/* main action: white, with its arrow on a wine disc; pointing at it sweeps gold across from the starting side */
-.hero .btn.primary{position:relative;isolation:isolate;overflow:hidden;gap:16px;padding-inline:28px 10px;background:#fff;color:#5a0b21}
-.hero .btn.primary::before{content:"";position:absolute;z-index:-1;inset:-2px;background:var(--hero-gold);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.7,.1,1)}
-[dir="rtl"] .hero .btn.primary::before{transform-origin:right}
-.hero .btn.primary:hover,.hero .btn.primary:focus-visible{color:#2a0d14}
-.hero .btn.primary:hover::before,.hero .btn.primary:focus-visible::before{transform:scaleX(1)}
-.hero .btn.primary .disc{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:#5a0b21;color:#fff;transition:transform .25s,background-color .25s}
-.hero .btn.primary:hover .disc{transform:translateX(4px);background:#2a0d14}
-[dir="rtl"] .hero .btn.primary:hover .disc{transform:translateX(-4px)}
-.hero .btn.primary:hover .arrow{transform:none}
-[dir="rtl"] .hero .btn.primary:hover .arrow{transform:scaleX(-1)}
-/* second choice: the test, outlined in gold */
-.hero .btn.try{border-color:var(--hero-gold);color:var(--hero-gold)}
-.hero .btn.try:hover{background:var(--hero-gold);color:#2a0d14}
-/* "Learn more" leaves the site, so it is a quiet link beside the buttons */
-.hero .more{display:inline-flex;align-items:center;gap:8px;margin-inline-start:10px;padding:10px 0;color:#fff;font-family:var(--font-display);font-weight:600;font-size:16px;text-decoration:underline;text-decoration-color:rgba(255,255,255,.4);text-decoration-thickness:1px;text-underline-offset:6px;opacity:.9;transition:opacity .15s,text-decoration-color .15s}
-.hero .more:hover{opacity:1;text-decoration-color:var(--hero-gold)}
-.hero .more .arrow{width:16px;height:16px;transition:transform .15s}
-.hero .more:hover .arrow{transform:translate(2px,-2px)}
-[dir="rtl"] .hero .more .arrow{transform:scaleX(-1)}
-[dir="rtl"] .hero .more:hover .arrow{transform:scaleX(-1) translate(2px,-2px)}
+.hero .btn{min-height:56px;padding:0 28px;font-size:17px}
+.hero .btn.primary{background:#fff;color:#5a0b21}
+.hero .btn.primary:hover{background:var(--hero-gold);color:#2a0d14}
+.hero .btn.secondary{border-color:rgba(255,255,255,.34);color:#fff}
+.hero .btn.secondary:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 .hero .draft{margin:0;margin-inline-start:10px;color:var(--hero-soft);opacity:.75}
 /* the numbers: six across on a wide screen, each with its label underneath, ruled off from its neighbour */
 .stats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid var(--hero-rule)}
@@ -416,8 +396,6 @@ main>section.next::before{display:none}
   .hero .eyebrow,.quote .eyebrow{gap:10px;font-size:12px;letter-spacing:.12em}
   .hero .eyebrow::before,.quote .eyebrow::before{width:24px}
   .hero .ctas{width:100%}
-  .hero .btn.primary{justify-content:space-between}
-  .hero .more{margin-inline-start:0}
   .hero .draft{margin-inline-start:0}
   [lang="ar"] .hero .eyebrow,[lang="ar"] .quote .eyebrow{font-size:14px}
   [lang="ar"] .stats dd{font-size:13px}
