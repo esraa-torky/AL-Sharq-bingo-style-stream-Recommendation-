@@ -157,9 +157,11 @@ If the device is offline, finished surveys and forms wait on the device and are 
 
 ## The link preview
 
-When the site's address is shared (WhatsApp, X, LinkedIn …), the preview shows `assets/share.jpg` with the
-title and description from the `og:` tags at the top of `index.html`. Those tags carry the full live address,
-so update them if the site moves. To remake the picture after the hero changes, take a 1200 × 630 screenshot of it.
+When a link to the site is shared (WhatsApp, X, LinkedIn …), the preview shows the Al Sharq Youth logo:
+`assets/share-logo.jpg`, the white logo (`assets/logo-dark.png`) on the hero's wine background, 1200 × 630.
+The title, description and picture come from the `og:` tags at the top of `index.html`, `test.html` and
+`form.html`. Those tags carry the full live address, so update them in all three files if the site moves.
+Apps keep a preview for a while after they first fetch it; a changed picture needs a new file name to show up.
 
 ## The QR codes
 
