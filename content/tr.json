@@ -79,7 +79,7 @@
   ],
   "choices": {
     "free-evening": {
-      "q": "Boş bir akşamda en çok nerede olursun?",
+      "q": "Boş bir akşamda seni nerede buluruz?",
       "answers": {
         "a": "Kütüphanede, ümmetin tarihini okurken",
         "b": "Bir kafede, büyük meseleleri konuşurken",

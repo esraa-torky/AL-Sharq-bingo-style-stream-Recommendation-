@@ -79,7 +79,7 @@
   ],
   "choices": {
     "free-evening": {
-      "q": "On a free evening, where are you most likely to be?",
+      "q": "On a free evening, where would we find you?",
       "answers": {
         "a": "At the library, reading Ummah history",
         "b": "At a café, discussing big questions",
