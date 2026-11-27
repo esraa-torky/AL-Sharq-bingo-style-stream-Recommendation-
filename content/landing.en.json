@@ -10,7 +10,8 @@
     "home": "Al Sharq Youth",
     "back": "Back to Al Sharq Youth",
     "menu": "Menu",
-    "skip": "Skip to content"
+    "skip": "Skip to content",
+    "test": "Take the test"
   },
   "hero": {
     "eyebrow": "Join the Al Sharq Youth network",
@@ -46,33 +47,27 @@
     ]
   },
   "streams": {
-    "eyebrow": "Three support streams",
     "title": "Ways to grow with Al Sharq Youth",
     "F": {
       "name": "Fellowship",
-      "line": "A 3-month leadership journey: six modules on ideas, systems, media and leading in uncertain times, with thinkers and practitioners.",
-      "time": "5 to 10 hours a week"
+      "line": "A leadership journey: six modules on ideas, systems, media and leading in uncertain times, with thinkers and practitioners."
     },
     "I": {
       "name": "Impact",
-      "line": "Three months to turn an idea into a community initiative in your hub, with workshops and mentors. No existing project needed.",
-      "time": "5 to 10 hours a week"
+      "line": "Turn an idea into a community initiative in your hub, with workshops and mentors. No existing project needed."
     },
     "H": {
       "name": "Hubs",
-      "line": "Local, city-based spaces where members meet, host discussions and run projects that create local and regional impact.",
-      "time": "Join any time"
+      "line": "Local, city-based spaces where members meet, host discussions and run projects that create local and regional impact."
     },
     "note": "Applications for the support streams open after Al Sharq Forum 2026. Register your interest below and we will contact you."
   },
   "journey": {
     "eyebrow": "Get involved",
-    "title": "Your journey starts here",
-    "start": "Start"
+    "title": "Your journey starts here"
   },
   "next": {
     "title": "Take the next step",
-    "lede": "Explore membership opportunities and get involved.",
     "test": "Couldn’t find your path? Take the test!",
     "facts": ["2 minutes", "12 questions", "Your match"]
   },

@@ -167,7 +167,7 @@ if (forms && landing.en) {
       for (const o of fd.options || []) need.push(`options.${fd.id}.${o}`);
     }
   }
-  for (const s of streams) need.push(`streams.${s}.name`, `streams.${s}.line`, `streams.${s}.time`);
+  for (const s of streams) need.push(`streams.${s}.name`, `streams.${s}.line`);
   const get = (o, path) => path.split('.').reduce((a, k) => (a == null ? a : a[k]), o);
   const leaves = (o, p = '') => Object.entries(o).flatMap(([k, v]) => (v && typeof v === 'object' && !Array.isArray(v) ? leaves(v, p + k + '.') : [[p + k, v]]));
   const holes = (s) => (String(s).match(/\{\w+\}/g) || []).sort().join();

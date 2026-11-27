@@ -1,6 +1,6 @@
-// Landing page (index.html), top to bottom: the hero over the living web (web.js), who we are with the six values,
-// the philosophy band, the path to impact, the three support streams, "Your journey starts here" (each card opens
-// its form on form.html), the Program Finder test, and the closing statement with the footer.
+// Landing page (index.html), top to bottom: the hero over the living web (web.js); "Your journey starts here" with
+// hubs on one side and the streams on the other (each action opens its form on form.html); the Program Finder test;
+// who we are with the values; the philosophy band; the path to impact; and the closing statement with the footer.
 // All text comes from content/landing.<lang>.json.
 import { h, ARROW, LANG_NAMES, loadSite, applyLang, href, topbar, registerWorker } from './site.js';
 import { createWeb } from './web.js';
@@ -9,26 +9,6 @@ const page = document.getElementById('page');
 const calm = matchMedia('(prefers-reduced-motion: reduce)');
 const icon = (paths, cls = 'icon') => '<svg class="' + cls + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + paths + '</svg>';
 const OUT = icon('<path d="M7 17 17 7M9 7h8v8"/>', 'arrow out');
-const CLOCK = icon('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>');
-const INFO = icon('<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 7.8v.2"/>');
-// One drawing per value, in the order of about.values: community around a centre, a rising line, a target,
-// a sunrise, an open book, joined points.
-const VALUE_ICONS = [
-  '<circle cx="12" cy="12" r="2.6"/><circle cx="12" cy="3.8" r="1.3"/><circle cx="19.1" cy="7.9" r="1.3"/><circle cx="19.1" cy="16.1" r="1.3"/><circle cx="12" cy="20.2" r="1.3"/><circle cx="4.9" cy="16.1" r="1.3"/><circle cx="4.9" cy="7.9" r="1.3"/>',
-  '<path d="M3.5 17.5 9.5 11l4 4 7-8.5"/><path d="M15 6.5h5.5V12"/>',
-  '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r=".9"/>',
-  '<path d="M2.5 18.5h19M6.5 18.5a5.5 5.5 0 0 1 11 0M12 6.5V9M4.9 10.6l1.8 1.8M19.1 10.6l-1.8 1.8"/>',
-  '<path d="M12 6.8C10 5.4 7.4 5 4 5.3v12.4c3.4-.3 6 .1 8 1.5 2-1.4 4.6-1.8 8-1.5V5.3c-3.4-.3-6 .1-8 1.5zM12 6.8v12.4"/>',
-  '<circle cx="5.5" cy="6.5" r="2.2"/><circle cx="18.5" cy="8.5" r="2.2"/><circle cx="11" cy="18" r="2.2"/><path d="M7.6 7 16.4 8.2M6.4 8.5l3.7 7.6M17.2 10.3l-4.8 6.2"/>',
-];
-// A compass for Fellowship, a spark for Impact, a place for Hubs; and the form each stream's card opens.
-const STREAM_ICONS = {
-  F: '<circle cx="12" cy="12" r="8.5"/><path d="m15.6 8.4-2.1 5.1-5.1 2.1 2.1-5.1z"/>',
-  I: '<path d="M13 3 5 13.5h6L10 21l9-11.5h-6z"/>',
-  H: '<path d="M12 21s-6.5-5.6-6.5-10.5a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.3"/>',
-};
-const STREAM_FORM = { F: 'join-program', I: 'join-program', H: 'join-hub' };
-
 let site, lang, bar, heroEl, first = true, appear, spy;
 const webs = {}; // the canvases live on through language changes, so the web never restarts
 
@@ -37,6 +17,7 @@ function render() {
   applyLang(config, t, lang);
   document.title = t.meta.title;
   document.querySelector('meta[name="description"]')?.setAttribute('content', t.meta.description);
+  const menuWasOpen = !!bar && bar.classList.contains('open'); // a language change keeps the menu open
   page.innerHTML = '';
   // sections rise into view as they are reached, on the first visit only; after a language change everything is simply there
   page.classList.toggle('static', !first || calm.matches || !('IntersectionObserver' in window));
@@ -44,52 +25,65 @@ function render() {
   page.appendChild(skip);
   page.appendChild(topBar(config, t));
   const main = h('main'); main.id = 'main'; main.tabIndex = -1;
-  [hero, about, philosophy, path, streams, journey, next].forEach((part) => main.appendChild(part(t, config, forms)));
+  [hero, involve, next, about, philosophy, path].forEach((part) => main.appendChild(part(t, config, forms)));
   page.appendChild(main);
   page.appendChild(foot(t, config, forms));
   watch();
   first = false;
-  onScroll();
+  setMenu(menuWasOpen);
 }
 
 /* ---------- top bar ---------- */
 
-// Stays at the top of the screen: clear over the hero, solid once the hero has scrolled away.
-// On narrow screens the section links fold into a menu that opens under the bar.
+// Stays at the top of the screen. At the very top it is tall and clear over the hero; once the page scrolls it
+// tightens into a slim bar (dark glass over the hero, solid after it) and a gold line along its lower edge shows
+// how far down the page the visitor is. On narrow screens the links open as a full-screen menu.
 function topBar(config, t) {
   bar = topbar(config, t, lang, (l) => { lang = l; render(); });
   bar.classList.add('sticky', 'over-hero');
   const nav = h('nav', 'site-nav'); nav.id = 'site-nav'; nav.setAttribute('aria-label', t.nav.menu);
-  sectionLinks(t).forEach((a) => nav.appendChild(a));
-  const joinInMenu = h('a', 'btn primary nav-join', t.hero.ctaInvolve + ARROW); joinInMenu.href = '#journey';
-  nav.appendChild(joinInMenu);
+  const test = testLink(t); test.id = 'nav-test';
+  const joinInMenu = h('a', 'btn nav-join', t.hero.ctaInvolve + ARROW); joinInMenu.href = '#journey';
+  [...sectionLinks(t), test, joinInMenu].forEach((a, i) => { a.style.setProperty('--i', i); nav.appendChild(a); });
   nav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
   bar.insertBefore(nav, bar.lastChild);
-  const join = h('a', 'btn nav-cta', t.hero.ctaInvolve); join.href = '#journey';
+  const join = h('a', 'btn nav-cta', t.hero.ctaInvolve + ARROW); join.href = '#journey';
   bar.lastChild.appendChild(join);
   const menu = h('button', 'menu-btn', '<span></span><span></span>'); menu.type = 'button'; menu.id = 'menu';
   menu.setAttribute('aria-label', t.nav.menu); menu.setAttribute('aria-expanded', 'false'); menu.setAttribute('aria-controls', 'site-nav');
   menu.addEventListener('click', () => setMenu(!bar.classList.contains('open')));
   bar.lastChild.appendChild(menu);
+  const progress = h('span', 'progress'); progress.setAttribute('aria-hidden', 'true');
+  bar.appendChild(progress);
   return bar;
 }
-const sectionLinks = (t) => [['about', t.about.eyebrow], ['path', t.path.eyebrow], ['streams', t.streams.eyebrow]].map(([id, text]) => { const a = h('a', null, text); a.href = '#' + id; return a; });
+const sectionLinks = (t) => [['about', t.about.eyebrow], ['path', t.path.eyebrow]].map(([id, text]) => { const a = h('a', null, text); a.href = '#' + id; return a; });
+const testLink = (t) => { const a = h('a', null, t.nav.test); a.href = href('test.html', lang, { site: 1 }); return a; };
+
+// Opens or closes the full-screen menu. While it is open the page behind cannot be scrolled or tabbed into.
 function setMenu(open) {
   if (!bar) return;
   bar.classList.toggle('open', open);
   bar.querySelector('.menu-btn').setAttribute('aria-expanded', String(open));
+  document.documentElement.classList.toggle('menu-open', open);
+  page.querySelectorAll('main, .site-foot').forEach((el) => { el.inert = open; });
+  if (open) bar.querySelector('.site-nav a').focus({ preventScroll: true });
+  onScroll();
 }
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && bar && bar.classList.contains('open')) { setMenu(false); bar.querySelector('.menu-btn').focus(); } });
-document.addEventListener('click', (e) => { if (bar && bar.classList.contains('open') && !bar.contains(e.target)) setMenu(false); });
 
-// The bar is clear at the very top, dark glass while the hero scrolls under it, and solid after the hero.
+// Sets the look of the bar for where the page is: tall and clear at the very top, slim once scrolled, light on
+// wine while over the hero (or while the menu is open), and the gold line's length.
 function onScroll() {
   if (!bar || !heroEl) return;
-  bar.classList.toggle('over-hero', window.scrollY < heroEl.offsetHeight - bar.offsetHeight);
-  bar.classList.toggle('stuck', window.scrollY > 8);
+  const y = window.scrollY, open = bar.classList.contains('open');
+  bar.classList.toggle('over-hero', open || y < heroEl.offsetHeight - bar.offsetHeight);
+  bar.classList.toggle('stuck', y > 8);
+  const room = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.setProperty('--p', room > 0 ? Math.min(1, y / room).toFixed(4) : 0);
 }
 window.addEventListener('scroll', onScroll, { passive: true });
-window.addEventListener('resize', onScroll, { passive: true });
+window.addEventListener('resize', () => { if (bar && bar.classList.contains('open') && !matchMedia('(max-width:980px)').matches) setMenu(false); onScroll(); }, { passive: true });
 
 /* ---------- sections ---------- */
 
@@ -117,7 +111,7 @@ function hero(t, config) {
   return s;
 }
 
-// who we are: the three-word statement beside the introduction, then the six values on a ruled strip
+// who we are: the three-word statement beside the introduction, then the values set large in one running line
 function about(t) {
   const s = section('about');
   const head = h('div', 'about-head');
@@ -130,7 +124,7 @@ function about(t) {
   const vals = h('div', 'values');
   vals.appendChild(h('h3', null, t.about.valuesTitle));
   const ul = h('ul');
-  t.about.values.forEach((v, i) => ul.appendChild(reveal(h('li', null, icon(VALUE_ICONS[i % VALUE_ICONS.length]) + '<span>' + v + '</span>'), i)));
+  t.about.values.forEach((v, i) => ul.appendChild(reveal(h('li', null, v), i)));
   vals.appendChild(ul);
   s.appendChild(vals);
   return s;
@@ -164,51 +158,55 @@ function path(t) {
   return s;
 }
 
-// the three support streams: each card carries its colour, drawing, weekly time and a link to its form
-function streams(t, config) {
-  const s = section('streams');
-  s.appendChild(reveal(header('streams', t.streams.eyebrow, t.streams.title)));
-  const grid = h('div', 'stream-grid');
-  config.streams.forEach((k, i) => {
-    const d = t.streams[k], form = STREAM_FORM[k] || 'join-program', c = reveal(h('article', 'stream s-' + k), i);
-    c.appendChild(h('div', 'stream-top', icon(STREAM_ICONS[k] || STREAM_ICONS.F, 'icon mark') + '<span class="time">' + CLOCK + d.time + '</span>'));
-    c.appendChild(h('h3', null, d.name));
-    c.appendChild(h('p', null, d.line));
-    const go = h('a', 'stream-go', '<span>' + t.forms[form].title + '</span>' + ARROW); go.href = href('form.html', lang, { f: form }); go.id = 'stream-' + k;
-    c.appendChild(go);
-    grid.appendChild(c);
+// Get involved, right under the hero. Hubs on one side: join one or establish one. The streams on the other, each
+// with its description, and one way in. Every action opens its form on form.html.
+const HUBS = 'H'; // the stream shown as the hubs panel
+function involve(t, config) {
+  const s = section('journey', 'involve');
+  s.appendChild(reveal(header('journey', t.journey.eyebrow, t.journey.title, t.streams.note)));
+  const grid = h('div', 'involve-grid');
+  const go = (form, cls, html) => { const a = h('a', cls, html); a.href = href('form.html', lang, { f: form }); a.id = 'go-' + form; return a; };
+
+  const hubs = reveal(h('div', 'hubs'));
+  hubs.appendChild(echo('journey'));
+  hubs.appendChild(h('h3', null, t.streams[HUBS].name));
+  hubs.appendChild(h('p', null, t.streams[HUBS].line));
+  const ways = h('ul', 'ways');
+  ['join-hub', 'establish-hub'].forEach((f) => {
+    const li = h('li');
+    li.appendChild(go(f, 'way', '<b>' + t.forms[f].title + '</b><span>' + t.forms[f].line + '</span>' + ARROW));
+    ways.appendChild(li);
   });
+  hubs.appendChild(ways);
+  grid.appendChild(hubs);
+
+  const streams = reveal(h('div', 'streams'), 1); streams.id = 'streams';
+  streams.appendChild(h('p', 'eyebrow', t.streams.title));
+  config.streams.filter((k) => k !== HUBS).forEach((k) => {
+    const a = h('article', 'stream');
+    a.appendChild(h('h3', null, t.streams[k].name));
+    a.appendChild(h('p', null, t.streams[k].line));
+    streams.appendChild(a);
+  });
+  const join = h('div', 'streams-join');
+  join.appendChild(go('join-program', 'btn primary', t.forms['join-program'].title + ARROW));
+  join.appendChild(h('p', null, t.forms['join-program'].line));
+  streams.appendChild(join);
+  grid.appendChild(streams);
   s.appendChild(grid);
-  s.appendChild(reveal(h('p', 'notice', INFO + '<span>' + t.streams.note + '</span>')));
   return s;
 }
 
-// your journey starts here: one card per form, each opens its own page
-function journey(t, config, forms) {
-  const s = section('journey', 'journey band');
-  s.appendChild(echo('journey'));
-  s.appendChild(reveal(header('journey', t.journey.eyebrow, t.journey.title)));
-  const list = h('ol', 'journey-list');
-  forms.forms.forEach((f, i) => {
-    const li = reveal(h('li'), i), a = h('a', 'journey-card'); a.href = href('form.html', lang, { f: f.id }); a.id = 'go-' + f.id;
-    a.innerHTML = '<span class="num">' + (i + 1) + '</span><b>' + t.forms[f.id].title + '</b><span class="line">' + t.forms[f.id].line + '</span><span class="go">' + t.journey.start + ARROW + '</span>';
-    li.appendChild(a); list.appendChild(li);
-  });
-  s.appendChild(list);
-  return s;
-}
-
-// take the next step: the Program Finder test, with a small bingo card that stamps itself
+// the Program Finder test, for visitors who are not sure which way in is theirs; a small bingo card stamps itself
 function next(t) {
   const s = section('next');
   const card = h('div', 'next-card');
   const copy = reveal(h('div', 'next-copy'));
-  const title = h('h2', null, t.next.title); title.id = 'next-title'; copy.appendChild(title);
-  copy.appendChild(h('p', 'section-lede', t.next.lede));
+  const title = h('h2', null, t.next.test); title.id = 'next-title'; copy.appendChild(title);
   const facts = h('ul', 'facts');
   t.next.facts.forEach((f) => facts.appendChild(h('li', null, f)));
   copy.appendChild(facts);
-  const test = h('a', 'btn test', '<span>' + t.next.test + '</span>' + ARROW); test.href = href('test.html', lang, { site: 1 }); test.id = 'take-test';
+  const test = h('a', 'btn test', '<span>' + t.next.title + '</span>' + ARROW); test.href = href('test.html', lang, { site: 1 }); test.id = 'take-test';
   copy.appendChild(test);
   card.appendChild(copy);
   card.appendChild(bingo());
@@ -216,7 +214,7 @@ function next(t) {
   return s;
 }
 
-// closing statement, then the footer: logo, section links, the three ways in, languages and the Al Sharq Forum link
+// closing statement, then the footer: logo, section links, the three forms, languages and the Al Sharq Forum link
 function foot(t, config, forms) {
   const f = h('footer', 'site-foot');
   f.appendChild(reveal(h('p', 'closing', sentences(t.closing))));
@@ -231,7 +229,7 @@ function foot(t, config, forms) {
     nav.appendChild(ul);
     return nav;
   };
-  grid.appendChild(column(t.nav.home, sectionLinks(t)));
+  grid.appendChild(column(t.nav.home, [...sectionLinks(t), testLink(t)]));
   grid.appendChild(column(t.journey.eyebrow, forms.forms.map((x) => { const a = h('a', null, t.forms[x.id].title); a.href = href('form.html', lang, { f: x.id }); return a; })));
   f.appendChild(grid);
   const base = h('div', 'foot-base');
@@ -310,7 +308,7 @@ function figure(text) {
   return dt;
 }
 
-// The quiet web behind a dark band: fainter than the hero's (see .band-web), and it does not follow the pointer.
+// The quiet web behind a dark band or panel: fainter than the hero's (see .band-web), and it does not follow the pointer.
 function echo(name) {
   webs[name] = webs[name] || createWeb({ density: 0.9, interactive: false, className: 'band-web' });
   return webs[name].el;
@@ -353,7 +351,7 @@ function watch() {
   spy = new IntersectionObserver((seen) => seen.forEach((e) => {
     bar.querySelectorAll('.site-nav a[href="#' + e.target.id + '"]').forEach((a) => { if (e.isIntersecting) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
   }), { rootMargin: '-45% 0px -50% 0px' });
-  ['about', 'path', 'streams'].forEach((id) => spy.observe(document.getElementById(id)));
+  ['about', 'path'].forEach((id) => spy.observe(document.getElementById(id)));
 }
 
 // printing shows the whole page, including parts that have not been scrolled to yet

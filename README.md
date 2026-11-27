@@ -6,16 +6,19 @@ The site has three pages:
   - **Hero:** dark wine in both light and dark mode, with a living web of people and hubs moving across its
     whole background (`src/web.js`): points drift, lines join whoever is close, gold signals travel between
     hubs, and the web leans towards a mouse pointer. The headline rises in word by word and the numbers count up.
-  - **Who we are:** the three-word statement, the introduction, and the six values with a drawing each.
+  - **Your journey starts here:** straight under the hero. The hubs panel (Join a hub, Establish a hub) sits
+    beside the streams panel (Fellowship and Impact, then Join a stream). Each action opens its form.
+    No time or duration is shown.
+  - **The test:** "Couldn't find your path? Take the test!", beside a small bingo card that stamps itself.
+  - **Who we are:** the three-word statement, the introduction, and the values as a line of large type.
   - **Philosophy of change:** a dark band with a quieter copy of the web.
-  - **How we work:** four steps on a line that draws itself when it scrolls into view.
-  - **Three support streams:** a card per stream with its colour, weekly time and a link to its form
-    (Fellowship and Impact open Join a stream, Hubs opens Join a hub).
-  - **Your journey starts here:** Join a hub, Establish a hub, Join a stream.
-  - **Take the next step:** the link to the test, beside a small bingo card that stamps itself.
+  - **How we work:** four numbered steps on a line that draws itself when it scrolls into view.
   - **Closing statement and footer:** section links, the three forms, languages and the Al Sharq Forum link.
 
-  The top bar stays on screen; on a phone its section links fold into a menu. Sections rise gently into view
+  The top bar stays on screen: tall and clear at the very top, slim once the page scrolls, with a gold line
+  along its lower edge that shows how far down the page the visitor is. It holds the section links, a link to
+  the test, the languages and the "Get involved" button; on phones and tablets the links open as a full-screen
+  menu. Sections rise gently into view
   on the first visit. The web rests while off screen, and all movement is off for devices set to reduce motion.
   The page has its own style (`src/site.css`), separate from the test's paper look.
 - **`form.html?f=<form>`, one page per form:** `join-hub`, `establish-hub` or `join-program`.
@@ -103,18 +106,29 @@ The settings are in the repository: `wrangler.jsonc` (the project name and how f
 (makes the bare address open `index.html`). Pages keep their own addresses (`test.html`, `form.html?f=…`),
 exactly as on GitHub Pages, so links, QR codes and the offline copy work the same on both.
 
-The Cloudflare project is **`al-sharq-bingo-style-stream-recommendation`**, connected to this repository, at
-https://al-sharq-bingo-style-stream-recommendation.salaheddin-jarjour.workers.dev
+Cloudflare publishes from a **copy** of this repository,
+[salaheddinjarjour-ai/al-sharq-bingo-style-stream-recommendation](https://github.com/salaheddinjarjour-ai/al-sharq-bingo-style-stream-recommendation),
+at https://al-sharq-bingo-style-stream-recommendation.salaheddin-jarjour.workers.dev
 
-Every merge into `main` is published by Cloudflare within a minute or two. To publish another branch instead,
-change the production branch in the project's **Settings → Builds**. A domain of your own is added under
-**Settings → Domains & Routes**.
+**This repository is where changes are made.** The copy follows it by itself: every 15 minutes a workflow in the
+copy (`.github/workflows/sync-from-original.yml`) brings in this repository's `main` branch, and Cloudflare
+publishes it a minute or two later. So a change merged into `main` here reaches the Cloudflare address
+within about half an hour, with nothing to do by hand. To bring it across at once, open the copy's
+**Actions** tab, choose **Sync from the original repository** and press **Run workflow**.
 
-If the project is ever made again (Workers & Pages → Create → Import a repository), give it the same name as
-`name` in `wrangler.jsonc`, leave the build command empty and keep the deploy command `npx wrangler deploy`.
+- Anything edited directly in the copy is replaced at the next sync. Edit here.
+- The copy keeps two things of its own: its `.github` folder, and its own address in the link-preview tags.
+- If this repository's content check fails, the copy is left as it was until the content is fixed.
+- GitHub pauses timed workflows in a repository that has had no activity for 60 days; pressing
+  **Run workflow** once starts it again.
 
-If Cloudflare becomes the main address, put it into the `og:` tags at the top of `index.html`
-(see "The link preview") and remake the QR codes (see "The QR codes"); both still point at GitHub Pages.
+The Cloudflare project is named **`al-sharq-bingo-style-stream-recommendation`**, the same as `name` in
+`wrangler.jsonc`. If it is ever made again (Workers & Pages → Create → Import a repository), keep that name,
+leave the build command empty and keep the deploy command `npx wrangler deploy`. A domain of your own is added
+under the project's **Settings → Domains & Routes**.
+
+The QR codes (see "The QR codes") point at the GitHub Pages address; remake them if the Cloudflare address
+is to be the one on printed material.
 
 To try the Cloudflare setup on your own computer: `npm run cloudflare`, then open http://localhost:8787.
 `npm run deploy` publishes from your computer after signing in with `npx wrangler login`.
@@ -154,9 +168,11 @@ If the device is offline, finished surveys and forms wait on the device and are 
 
 ## The link preview
 
-When the site's address is shared (WhatsApp, X, LinkedIn …), the preview shows `assets/share.jpg` with the
-title and description from the `og:` tags at the top of `index.html`. Those tags carry the full live address,
-so update them if the site moves. To remake the picture after the hero changes, take a 1200 × 630 screenshot of it.
+When a link to the site is shared (WhatsApp, X, LinkedIn …), the preview shows the Al Sharq Youth logo:
+`assets/share-logo.jpg`, the white logo (`assets/logo-dark.png`) on the hero's wine background, 1200 × 630.
+The title, description and picture come from the `og:` tags at the top of `index.html`, `test.html` and
+`form.html`. Those tags carry the full live address, so update them in all three files if the site moves.
+Apps keep a preview for a while after they first fetch it; a changed picture needs a new file name to show up.
 
 ## The QR codes
 

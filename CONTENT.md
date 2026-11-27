@@ -75,15 +75,20 @@ Keep each pull request small and about one thing (for example "reword question 3
   Keep the two tags when rewording, around the words to highlight.
 - **Numbers** in the header: `hero.stats`, a list of `[number, label]` pairs. A number may carry a plus sign
   before or after it (`800+`, `+800`); the digits count up when the page opens.
-- The links in the top bar and the footer reuse the small section headings (`about.eyebrow`, `path.eyebrow`,
-  `streams.eyebrow`), so keep those short. `nav.menu` names the menu button on phones and `nav.skip` is the
-  "Skip to content" link for keyboard users.
+- The links in the top bar and the footer reuse the small section headings (`about.eyebrow`, `path.eyebrow`),
+  so keep those short. `nav.test` is the link that opens the test, `nav.menu` names the menu button on
+  phones and `nav.skip` is the "Skip to content" link for keyboard users.
 - **Statements** (`about.title`, `closing`): each sentence is shown as its own piece with a gold full stop,
   so keep the full stops.
-- **Values** (`about.values`): six values, each with its own drawing in this order: community, future, purpose,
-  optimism, knowledge, connection. Keep the order the same in every language; reordering needs a code change.
-- **Test facts** (`next.facts`): the three short labels beside the test button (time, number of questions, result).
-  Update the number if questions are added or removed.
+- **Values** (`about.values`): shown as one running line of large type, in the order written.
+- **Your journey starts here** (`journey`, `streams`, `forms`): the section under the hero. `streams.note` is the
+  line under its heading. The hubs panel shows `streams.H` with the titles and lines of the Join a hub and
+  Establish a hub forms. The other panel is headed by `streams.title` and shows `streams.F` and `streams.I`,
+  with the Join a stream form's title on the button and its line beside it.
+  **No time or duration is shown on the landing page**: keep months, weeks and hours out of these texts.
+- **Test block** (`next`): `next.test` is the heading, `next.title` is the text on the button, and `next.facts`
+  are the three short labels (time the test takes, number of questions, result). Update the number if questions
+  are added or removed.
 - **Learn more** button: `links.learnMore`, a full `https://` address (it can differ per language).
 - `forms.json` lists the fields every form asks (`shared`), then each form with its own fields.
   A field has an `id`, a `type` (`text`, `email`, `tel`, `url`, `select`, `textarea`, `checkboxes` or
