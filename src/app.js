@@ -1,5 +1,5 @@
 // Program Finder app: welcome, questions, result. All text and points come from content/*.json.
-import { buildQuestions, areaMax, lean, score, profile, nextStepKey, fill } from './scoring.js';
+import { buildQuestions, areaMax, lean, score, shares, profile, nextStepKey, fill } from './scoring.js';
 import { deckle, addRims, h, logos, labelBtn, phone, papered, dot } from './paper.js';
 import { saveResult, flushQueue } from './save.js';
 import { turn, stamp, soundOn, setSound, useRecording } from './sound.js';
@@ -110,6 +110,26 @@ function langChips() {
 }
 
 /* personality: a torn bingo ticket stub with the type number, name, one line and the top 3 strengths */
+// How close the visitor is to each stream: one bar per stream, winner first in burgundy.
+function breakdown(rows, win) {
+  if (!rows.length) return null;
+  const t = T(), box = h('section', 'mix'); box.id = 'mix';
+  const head = h('h2', 'mix-k', t.ui.matchBreakdown); head.id = 'mix-title';
+  box.setAttribute('aria-labelledby', 'mix-title'); box.appendChild(head);
+  const list = h('ul', 'mix-rows');
+  rows.forEach(({ stream, p }) => {
+    const pct = fill(t.ui.percent, { p });
+    const li = h('li', 'mix-row' + (stream === win ? ' win' : '')); li.dataset.stream = stream; li.dataset.p = p;
+    li.innerHTML = '<span class="sr-only">' + t.streams[stream] + ' ' + pct + '</span>'
+      + '<span class="mix-name" aria-hidden="true">' + t.streams[stream] + '</span>'
+      + '<span class="mix-bar" aria-hidden="true"><i style="--w:' + p + '%"></i></span>'
+      + '<span class="mix-p" aria-hidden="true">' + pct + '</span>';
+    list.appendChild(li);
+  });
+  box.appendChild(list);
+  return box;
+}
+
 function ticket(pr) {
   const t = T(), i0 = config.areas.indexOf(pr.type), type = t.personality.types[pr.type];
   const tw = h('div', 'pt-wrap'), tk = h('div', 'pt');
@@ -196,6 +216,8 @@ function render(enter) {
     c.appendChild(h('p', 'res-k', t.ui.yourMatch));
     c.appendChild(h('h1', 'res-name' + (name.length > 12 ? ' long' : ''), name));
     c.appendChild(ticket(pr));
+    const mix = breakdown(shares(config, res), win);
+    if (mix) c.appendChild(mix);
     const card = bingoCard(true, win); card.appendChild(papered('banner', 'banner-wrap', 'BINGO!', 1.2));
     (tab ? R : c).appendChild(card);
     c.appendChild(h('div', 'spacer'));
