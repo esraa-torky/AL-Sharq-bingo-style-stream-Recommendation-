@@ -92,6 +92,25 @@ export function score(config, qs, picks, max = areaMax(config, qs)) {
 }
 
 /**
+ * How close the visitor is to each stream, for the bars on the result screen.
+ * Returns [{ stream, p }] with whole percentages that add up to exactly 100 (largest remainder),
+ * ordered highest first with the winner (result.win, after the tie-break) always first.
+ * Returns [] when every score is 0.
+ */
+export function shares(config, result) {
+  const { scores, win } = result;
+  const total = config.streams.reduce((a, s) => a + scores[s], 0);
+  if (!(total > 0)) return [];
+  const order = [...config.streams].sort((a, b) => (a === win ? -1 : b === win ? 1 : scores[b] - scores[a] || config.tieOrder.indexOf(a) - config.tieOrder.indexOf(b)));
+  const raw = order.map((s) => (scores[s] / total) * 100);
+  const out = order.map((s, i) => ({ stream: s, p: Math.floor(raw[i]) }));
+  let left = 100 - out.reduce((a, x) => a + x.p, 0);
+  // hand out the missing points by largest remainder; equal remainders go to the earlier row (the winner first)
+  order.map((s, i) => i).sort((i, j) => (raw[j] - out[j].p) - (raw[i] - out[i].p) || i - j).forEach((i) => { if (left > 0) { out[i].p++; left--; } });
+  return out;
+}
+
+/**
  * Personality: areas ranked by the visitor's percentage (ties keep the order in config.areas).
  * If nothing scored at all, the type comes from the matched stream's main area.
  */

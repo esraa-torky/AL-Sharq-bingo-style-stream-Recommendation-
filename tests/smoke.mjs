@@ -80,12 +80,25 @@ try {
         name: document.querySelector('.res-name').textContent,
         ticket: !!document.querySelector('.pt'),
         sideways: document.documentElement.scrollWidth > innerWidth,
+        win: document.querySelector('.phone.result').dataset.win,
+        mix: [...document.querySelectorAll('.phone.result #mix .mix-row')].map((r) => ({ s: r.dataset.stream, p: +r.dataset.p, label: r.querySelector('.sr-only').textContent, w: r.querySelector('.mix-bar i').style.getPropertyValue('--w') })),
+        mixBox: (() => { const b = document.querySelector('.phone.result #mix'); if (!b) return null; const r = b.getBoundingClientRect(), c = b.closest('.phone').getBoundingClientRect(); return { inside: r.left >= c.left - 1 && r.right <= c.right + 1, h: r.height }; })(),
       }));
+      // the breakdown: three rows, adding up to 100, winner first, highest to lowest
+      const sum = info.mix.reduce((a, x) => a + x.p, 0);
+      if (info.mix.length !== 3) failures.push(`${lang} ${dev.name}: the breakdown has ${info.mix.length} rows, not 3`);
+      else {
+        if (sum !== 100) failures.push(`${lang} ${dev.name}: the breakdown adds up to ${sum}, not 100`);
+        if (info.mix[0].s !== info.win) failures.push(`${lang} ${dev.name}: the first bar (${info.mix[0].s}) is not the match (${info.win})`);
+        if (info.mix.some((x, i) => i > 0 && x.p > info.mix[i - 1].p)) failures.push(`${lang} ${dev.name}: the bars are not highest to lowest`);
+        if (info.mix.some((x) => x.w !== x.p + '%' || !x.label.includes(String(x.p)))) failures.push(`${lang} ${dev.name}: a bar width or label does not match its percentage`);
+        if (!info.mixBox.inside) failures.push(`${lang} ${dev.name}: the breakdown sticks out of the sheet`);
+      }
       if (!info.ticket) failures.push(`${lang} ${dev.name}: no personality ticket on the result`);
       if (info.sideways) failures.push(`${lang} ${dev.name}: page scrolls sideways`);
       if (lang === 'ar' && dir !== 'rtl') failures.push('ar: layout is not right to left');
       if (errs.length) failures.push(`${lang} ${dev.name}: ${errs.join(' | ')}`);
-      console.log(`${lang.padEnd(2)} ${dev.name.padEnd(15)} ${n} questions → ${info.name}`);
+      console.log(`${lang.padEnd(2)} ${dev.name.padEnd(15)} ${n} questions → ${info.name} (${info.mix.map((x) => x.s + ' ' + x.p + '%').join(', ')})`);
       await page.close();
     }
   }
