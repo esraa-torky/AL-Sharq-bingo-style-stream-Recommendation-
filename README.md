@@ -6,6 +6,7 @@ The site has three pages:
   - **Hero:** dark wine in both light and dark mode, with a living web of people and hubs moving across its
     whole background (`src/web.js`): points drift, lines join whoever is close, gold signals travel between
     hubs, and the web leans towards a mouse pointer. The headline rises in word by word and the numbers count up.
+    Its buttons are "Get involved" (the main one), "Take the test", and a quiet "Learn more" link.
   - **Your journey starts here:** straight under the hero. The hubs panel (Join a hub, Establish a hub) sits
     beside the streams panel (Fellowship and Impact, then Join a stream). Each action opens its form.
     No time or duration is shown.
@@ -17,7 +18,7 @@ The site has three pages:
 
   The top bar stays on screen: tall and clear at the very top, slim once the page scrolls, with a gold line
   along its lower edge that shows how far down the page the visitor is. It holds the section links, a link to
-  the test, the languages and the "Get involved" button; on phones and tablets the links open as a full-screen
+  the test, the languages and the "Get involved" button (folded away while the hero's own is on screen); on phones and tablets the links open as a full-screen
   menu. Sections rise gently into view
   on the first visit. The web rests while off screen, and all movement is off for devices set to reduce motion.
   The page has its own style (`src/site.css`), separate from the test's paper look.
