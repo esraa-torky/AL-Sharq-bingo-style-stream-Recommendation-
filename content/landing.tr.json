@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Al Sharq Youth · Ağa katıl",
-    "description": "Al Sharq Youth, genç liderleri ve değişim yaratanları birbirine bağlayan ve güçlendiren küresel bir ekosistemdir. Bir hub’a katıl, bir hub kur ya da bir programa katıl."
+    "description": "Al Sharq Youth, genç liderleri ve değişim yaratanları birbirine bağlayan ve güçlendiren küresel bir ekosistemdir. Bir hub’a katıl, bir hub kur ya da bir akışa katıl."
   },
   "links": {
     "learnMore": "https://youth.sharqforum.org/"
@@ -63,7 +63,7 @@
       ],
       [
         "Liderleri ve kurucuları güçlendirmek",
-        "Bir lider olarak geliş. Etki için inşa et. Al Sharq Youth programlarını keşfet."
+        "Bir lider olarak geliş. Etki için inşa et. Al Sharq Youth akışlarını keşfet."
       ],
       [
         "Etkiyi ve nüfuzu büyütmek",
@@ -118,10 +118,10 @@
       }
     },
     "join-program": {
-      "title": "Bir programa katıl",
+      "title": "Bir akışa katıl",
       "line": "Divan, Fellowship ve Impact Platformu ile fırsatları keşfet.",
       "labels": {
-        "why": "Bir programa katılmakla neden ilgileniyorsun?"
+        "why": "Bir akışa katılmakla neden ilgileniyorsun?"
       }
     }
   },
