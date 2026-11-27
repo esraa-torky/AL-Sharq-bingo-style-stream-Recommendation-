@@ -30,7 +30,6 @@
   },
   "steps": {
     "apply": "Applications open after Al Sharq Forum 2026. Leave your details on the 2027 interest form. Network members get special places.",
-    "under18": "Join your local hub now. {stream} is one to apply to when you turn 18.",
     "over35": "Contribute to a hub as a professional: mentor, speak or train. Pass {stream} on to a friend.",
     "lowTime": "Start at your local hub. {stream} asks 5 to 10 hours a week, so keep it for when you have more time."
   },
@@ -78,95 +77,94 @@
     ]
   ],
   "choices": {
-    "late-night": {
-      "q": "Late at night, my mind usually goes to…",
+    "free-evening": {
+      "q": "On a free evening, where would we find you?",
       "answers": {
-        "a": "Big questions about why the world is the way it is",
-        "b": "A debate from today and what I’d say next",
-        "c": "An idea I want to start building",
-        "d": "Plans for the next meet-up with people in my city"
+        "a": "At the library, reading Ummah history",
+        "b": "At a talk or discussion circle",
+        "c": "On my laptop, building my project",
+        "d": "Volunteering with youth in my city"
       }
     },
-    "friends": {
-      "q": "Friends usually come to me when they need…",
+    "ummah-crisis": {
+      "q": "When a crisis hits part of the Ummah, what do you do first?",
+      "answers": {
+        "a": "Study the crisis roots and regional history",
+        "b": "Design a practical way to help",
+        "c": "Organise a solidarity event locally",
+        "d": "Spread awareness about what’s happening"
+      }
+    },
+    "group-role": {
+      "q": "In group work, you’re usually the one who…",
+      "answers": {
+        "a": "Unites the team on one goal",
+        "b": "Turns the idea into a plan",
+        "c": "Gets it done in the end",
+        "d": "Makes sure everyone is included"
+      }
+    },
+    "friends-ask": {
+      "q": "Friends usually come to you for…",
       "answers": {
         "a": "Advice on a big decision",
-        "b": "Help turning a messy idea into a plan",
-        "c": "Someone to get people together for an event",
-        "d": "Someone who knows the right people around town"
+        "b": "Shaping a rough idea",
+        "c": "Organising an outing or get-together",
+        "d": "Finding a place to volunteer"
       }
     },
-    "conference": {
-      "q": "At a conference like this one, I am most likely…",
+    "ummah-challenges": {
+      "q": "When you think about the Ummah’s challenges, you…",
       "answers": {
-        "a": "Taking notes in the front row",
-        "b": "Talking with a speaker in the corridor",
-        "c": "Sketching my own project",
-        "d": "Swapping numbers with people from my city"
+        "a": "Want to understand the roots",
+        "b": "Want to start something that helps",
+        "c": "Want youth to have a say",
+        "d": "Want to be active in your community"
       }
     },
-    "funding": {
-      "q": "If my community had funding, I would start by…",
+    "weekend": {
+      "q": "A weekend you’d call well spent…",
       "answers": {
-        "a": "Understanding the real problem first",
-        "b": "Testing a small solution next week",
-        "c": "Designing a project with clear goals",
-        "d": "Bringing the neighbours together to decide"
+        "a": "A good book and a discussion",
+        "b": "Building something with a team",
+        "c": "A volunteering day",
+        "d": "Hosting a meet-up for local youth"
       }
     },
-    "group-work": {
-      "q": "In group work, I am usually the one who…",
+    "learn-best": {
+      "q": "You learn best by…",
       "answers": {
-        "a": "Asks why we are doing this",
-        "b": "Turns the idea into a step-by-step plan",
-        "c": "Makes sure everyone feels part of the team",
-        "d": "Builds it in the end"
+        "a": "Reading and connecting ideas",
+        "b": "Sharing what I learn with others",
+        "c": "Hands-on practice",
+        "d": "Learning alongside a group"
       }
     },
-    "city-problem": {
-      "q": "When something in my city isn’t working, I…",
+    "good-leader": {
+      "q": "In your view, what is a leader’s most important skill?",
       "answers": {
-        "a": "Try to understand why",
-        "b": "Start designing a fix",
-        "c": "Bring people together about it",
-        "d": "Find out who is responsible and talk to them"
+        "a": "Listening before deciding",
+        "b": "Seeing the bigger picture",
+        "c": "Turning plans into results",
+        "d": "Getting everyone involved"
       }
     },
-    "saturday": {
-      "q": "A Saturday I would call well spent…",
+    "small-grant": {
+      "q": "If your team got a small grant, you’d…",
       "answers": {
-        "a": "A book club or a good debate",
-        "b": "A build day on a project with a team",
-        "c": "Volunteering in my neighbourhood",
-        "d": "A meet-up with my local community group"
+        "a": "Study the real need first",
+        "b": "Design a project with clear goals",
+        "c": "Pilot one idea from the project",
+        "d": "Consult the team on next steps"
       }
     },
-    "topic": {
-      "q": "The topic I would read about first…",
+    "next-year": {
+      "q": "What would make next year a fruitful one?",
       "answers": {
-        "a": "Politics and public decisions",
-        "b": "Social startups and new ideas",
-        "c": "Leadership and learning",
-        "d": "World affairs",
-        "e": "Life and projects in my city"
-      }
-    },
-    "leader": {
-      "q": "For me, a good leader mostly…",
-      "answers": {
-        "a": "Listens before deciding",
-        "b": "Sees the bigger picture",
-        "c": "Gets things built",
-        "d": "Brings the whole community along"
-      }
-    },
-    "this-year": {
-      "q": "What would make you feel this year was worth it?",
-      "answers": {
-        "a": "I learned to lead",
-        "b": "I launched my own initiative",
-        "c": "I found my people in my city",
-        "d": "I understood a big issue deeply"
+        "a": "Growing as a leader",
+        "b": "Launching my own initiative",
+        "c": "Finding a community I belong to",
+        "d": "Understanding the Ummah’s issues deeply"
       }
     }
   },

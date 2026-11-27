@@ -1,6 +1,6 @@
 {
   "_note": "Settings for the whole survey. See CONTENT.md before editing.",
-  "questionStyle": "scale",
+  "questionStyle": "choices",
   "languages": [
     "en",
     "tr",
