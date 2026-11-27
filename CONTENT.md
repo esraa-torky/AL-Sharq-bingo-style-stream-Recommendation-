@@ -75,8 +75,15 @@ Keep each pull request small and about one thing (for example "reword question 3
   Keep the two tags when rewording, around the words to highlight.
 - **Numbers** in the header: `hero.stats`, a list of `[number, label]` pairs. A number may carry a plus sign
   before or after it (`800+`, `+800`); the digits count up when the page opens.
-- The links in the top bar reuse the small section headings (`about.eyebrow`, `path.eyebrow`, `streams.eyebrow`),
-  so keep those short.
+- The links in the top bar and the footer reuse the small section headings (`about.eyebrow`, `path.eyebrow`,
+  `streams.eyebrow`), so keep those short. `nav.menu` names the menu button on phones and `nav.skip` is the
+  "Skip to content" link for keyboard users.
+- **Statements** (`about.title`, `closing`): each sentence is shown as its own piece with a gold full stop,
+  so keep the full stops.
+- **Values** (`about.values`): six values, each with its own drawing in this order: community, future, purpose,
+  optimism, knowledge, connection. Keep the order the same in every language; reordering needs a code change.
+- **Test facts** (`next.facts`): the three short labels beside the test button (time, number of questions, result).
+  Update the number if questions are added or removed.
 - **Learn more** button: `links.learnMore`, a full `https://` address (it can differ per language).
 - `forms.json` lists the fields every form asks (`shared`), then each form with its own fields.
   A field has an `id`, a `type` (`text`, `email`, `tel`, `url`, `select`, `textarea`, `checkboxes` or

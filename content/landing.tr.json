@@ -8,7 +8,9 @@
   },
   "nav": {
     "home": "Al Sharq Youth",
-    "back": "Al Sharq Youth’a dön"
+    "back": "Al Sharq Youth’a dön",
+    "menu": "Menü",
+    "skip": "İçeriğe geç"
   },
   "hero": {
     "eyebrow": "Al Sharq Youth ağına katıl",
@@ -99,7 +101,8 @@
   "next": {
     "title": "Bir sonraki adımı at",
     "lede": "Üyelik fırsatlarını keşfet ve sen de katıl.",
-    "test": "Yolunu bulamadın mı? Testi çöz!"
+    "test": "Yolunu bulamadın mı? Testi çöz!",
+    "facts": ["2 dakika", "12 soru", "Eşleşmen"]
   },
   "closing": "Keşfet. Bağlan. Harekete geç.",
   "forms": {

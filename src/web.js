@@ -1,7 +1,9 @@
 // The living web behind the landing page headline: people (small points) and hubs (larger points) drift slowly,
 // lines join whoever is close, and gold signals travel from hub to hub. Near a mouse pointer the web leans in and
-// links to it. Drawn on one canvas that fills the whole hero. It rests while off screen or in a background tab,
+// links to it. Drawn on one canvas that fills its section. It rests while off screen or in a background tab,
 // and shows a single still frame for visitors who ask their device for less motion.
+// createWeb() is the full web for the hero; createWeb({ density: 0.9, interactive: false }) is the echo behind
+// the dark bands further down the page, which the stylesheet shows fainter.
 const TAU = Math.PI * 2;
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const rand = (lo, hi) => lo + Math.random() * (hi - lo);
@@ -9,10 +11,10 @@ const rand = (lo, hi) => lo + Math.random() * (hi - lo);
 // Colours as "r,g,b" so each stroke can set its own opacity. The hero is dark in both themes.
 const INK = { line: '236,168,188', point: '255,226,233', hub: '246,176,196', glow: '214,64,104', gold: '241,194,122' };
 
-export function createWeb() {
+export function createWeb({ density = 1, interactive = true, className = 'hero-web' } = {}) {
   const el = document.createElement('div');
-  el.className = 'hero-web';
-  el.setAttribute('role', 'img');
+  el.className = className;
+  el.setAttribute('aria-hidden', 'true'); // decoration, unless label() gives it a description
   const canvas = document.createElement('canvas');
   el.appendChild(canvas);
   const ctx = canvas.getContext('2d');
@@ -66,7 +68,7 @@ export function createWeb() {
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     reach = clamp(Math.sqrt(W * H) / 6, 124, 210);
-    const want = Math.round(clamp((W * H) / 13500, 26, 110) * (light ? 0.6 : 1));
+    const want = Math.round(clamp((W * H) / 13500, 26, 110) * density * (light ? 0.6 : 1));
     nodes.forEach((n) => { n.x *= sx; n.y *= sy; });
     while (nodes.length > want) nodes.pop();
     while (nodes.length < want) nodes.push(makeNode(nodes.length % 8 === 0));
@@ -188,7 +190,7 @@ export function createWeb() {
   new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; if (onScreen) run(); else pause(); }).observe(el);
   document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); else run(); });
   still.addEventListener?.('change', () => { if (still.matches) { pause(); draw(); } else run(); });
-  window.addEventListener('pointermove', (e) => {
+  if (interactive) window.addEventListener('pointermove', (e) => {
     if (e.pointerType !== 'mouse') return;
     const box = canvas.getBoundingClientRect();
     pointer.x = e.clientX - box.left; pointer.y = e.clientY - box.top;
@@ -196,5 +198,5 @@ export function createWeb() {
   }, { passive: true });
   document.documentElement.addEventListener('pointerleave', () => { pointer.inside = false; });
 
-  return { el, label(text) { el.setAttribute('aria-label', text); }, get frames() { return frames; } };
+  return { el, label(text) { el.removeAttribute('aria-hidden'); el.setAttribute('role', 'img'); el.setAttribute('aria-label', text); }, get frames() { return frames; } };
 }

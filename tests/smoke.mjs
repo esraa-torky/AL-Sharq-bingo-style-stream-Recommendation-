@@ -119,6 +119,26 @@ try {
       const drawn = await page.evaluate(() => new Promise((done) => { const web = window.__landing.web, from = web.frames; setTimeout(() => done(web.frames - from), 500); }));
       if (drawn < 2) failures.push(`${label}: the web behind the headline is not moving`);
       if (!(await page.isVisible('.stats dt'))) failures.push(`${label}: the numbers in the hero are missing`);
+      // the section links: in the bar on a laptop, behind the menu button on a phone
+      if (dev.name === 'phone') {
+        if (await page.isVisible('.site-nav')) failures.push(`${label}: the menu is open before it is asked for`);
+        await page.click('#menu');
+        if (!(await page.isVisible('.site-nav a[href="#streams"]'))) failures.push(`${label}: the menu button does not open the menu`);
+        await page.click('.site-nav a[href="#streams"]');
+        if (await page.isVisible('.site-nav')) failures.push(`${label}: the menu stays open after choosing a section`);
+      } else if (!(await page.isVisible('.site-nav a[href="#streams"]'))) failures.push(`${label}: the section links are missing from the top bar`);
+      // every part that rises into view must have arrived once the page has been scrolled through
+      const hidden = await page.evaluate(async () => {
+        // jump (the page itself scrolls smoothly) and give each stop time to notice what came into view
+        for (let y = 0; y <= document.documentElement.scrollHeight; y += innerHeight / 2) { scrollTo({ top: y, behavior: 'instant' }); await new Promise((r) => setTimeout(r, 200)); }
+        await new Promise((r) => setTimeout(r, 300));
+        return document.querySelectorAll('.reveal:not(.in)').length;
+      });
+      if (hidden) failures.push(`${label}: ${hidden} parts of the landing page stay hidden after scrolling`);
+      if (await sideways(page)) failures.push(`${label}: landing page scrolls sideways after scrolling through`);
+      // a stream card opens its form
+      await page.click('#stream-H');
+      await page.waitForSelector('#form-join-hub', { timeout: 3000 }).catch(() => failures.push(`${label}: the Hubs card did not open the Join a hub form`));
       for (const f of forms.forms) {
         await page.goto(`${BASE}?lang=${lang}`);
         await page.click(`#go-${f.id}`);
