@@ -78,13 +78,13 @@
     ]
   ],
   "choices": {
-    "at-the-forum": {
-      "q": "Böyle bir forumda seni nerede buluruz?",
+    "free-evening": {
+      "q": "Boş bir akşamda seni nerede buluruz?",
       "answers": {
-        "a": "Ön sırada not alırken",
-        "b": "Oturumdan sonra bir konuşmacıyla sohbet ederken",
-        "c": "Proje fikrimi ilgilenenlere anlatırken",
-        "d": "Şehrimden gençlerle tanışırken"
+        "a": "Kütüphanede, ümmetin tarihini okurken",
+        "b": "Bir söyleşi ya da sohbet halkasında",
+        "c": "Bilgisayarımda, kendi projemi geliştirirken",
+        "d": "Şehrimdeki gençlerle gönüllü bir etkinlikte"
       }
     },
     "ummah-crisis": {
