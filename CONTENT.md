@@ -73,8 +73,8 @@ Keep each pull request small and about one thing (for example "reword question 3
   `{name}` and `{stream}` are placeholders; keep them.
 - **Headline**: in `hero.title`, the words between `<em>` and `</em>` are shown in gold on their own line.
   Keep the two tags when rewording, around the words to highlight.
-- **Numbers** in the header: `hero.stats`, a list of six `[number, label]` pairs, shown six across on a wide
-  screen and three across on tablets and phones. A number may carry a plus sign before or after it (`800+`,
+- **Numbers** in the header: `hero.stats`, a list of `[number, label]` pairs (two at the moment). Up to three sit
+  together in one row; four to six spread across a wide screen and go three across on tablets and phones. A number may carry a plus sign before or after it (`800+`,
   `+800`); the digits count up when the page opens. Keep each label to a few words: it sits in a narrow column.
 - The links in the top bar and the footer reuse the small section headings (`about.eyebrow`, `path.eyebrow`),
   so keep those short. `nav.test` is the link that opens the test, `nav.menu` names the menu button on
