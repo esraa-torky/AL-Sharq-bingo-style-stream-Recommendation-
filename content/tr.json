@@ -87,13 +87,13 @@
         "d": "Haftalık gençlik buluşmamızda"
       }
     },
-    "upsetting-news": {
-      "q": "Seni üzen bir haber okudun. Ne yaparsın?",
+    "families-struggling": {
+      "q": "Topluluğunda bazı ailelerin zor durumda olduğunu duydun. İlk ne yaparsın?",
       "answers": {
-        "a": "Nedenini araştırırım",
-        "b": "Pratik bir çözüm düşünürüm",
-        "c": "Arkadaşlarımla yardıma koşarız",
-        "d": "Çevremle konuşurum"
+        "a": "Arkasındaki nedeni araştırırım",
+        "b": "Pratik bir yardım planı yaparım",
+        "c": "Arkadaşlarımla onlara destek oluruz",
+        "d": "Çevremdekilerle konuşurum"
       }
     },
     "group-role": {

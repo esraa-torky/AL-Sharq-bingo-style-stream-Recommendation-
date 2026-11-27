@@ -87,13 +87,13 @@
         "d": "At our weekly youth gathering"
       }
     },
-    "upsetting-news": {
-      "q": "You read news that upsets you. What do you do?",
+    "families-struggling": {
+      "q": "You hear some families in your community are struggling. What do you do first?",
       "answers": {
-        "a": "Dig into why it happened",
-        "b": "Think of a practical fix",
-        "c": "Gather friends to help",
-        "d": "Talk it through with others"
+        "a": "Find out what’s behind it",
+        "b": "Plan a practical way to help",
+        "c": "Get friends together to support them",
+        "d": "Discuss it with people around me"
       }
     },
     "group-role": {
