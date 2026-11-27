@@ -3,9 +3,10 @@
 The site has three pages:
 
 - **`index.html`, the landing page**, top to bottom:
-  - **Opening screen:** on the first page of a visit the Al Sharq Youth logo wipes in on the wine background, a
-    gold line draws under it, and the screen lifts away after about two seconds (a tap skips it). It is left out
-    for devices set to reduce motion. Add `?intro=1` to the address to see it again.
+  - **Opening screen** (`src/intro.js`): on the first page of a visit the network gathers. Points fly in and link
+    into a ring, gold signals run to the middle, the Al Sharq Youth logo appears where they meet, and then the
+    logo travels up into the top bar as the page opens behind it (about two and a half seconds; a tap skips it).
+    It is left out for devices set to reduce motion. Add `?intro=1` to the address to see it again.
   - **Hero:** dark wine in both light and dark mode, with a living web of people and hubs moving across its
     whole background (`src/web.js`): points drift, lines join whoever is close, gold signals travel between
     hubs, and the web leans towards a mouse pointer. The headline rises in word by word and the numbers count up.

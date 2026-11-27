@@ -1,6 +1,6 @@
 // Offline cache so the iPad at the stand (test.html) and the landing page keep working if the venue Wi-Fi drops.
 // Content files are fetched fresh when online (network first), and the cached copy is used offline.
-const VERSION = 'finder-v20';
+const VERSION = 'finder-v21';
 const SHELL = [
   './',
   'index.html',
@@ -10,6 +10,7 @@ const SHELL = [
   'src/site.js',
   'src/landing.js',
   'src/web.js',
+  'src/intro.js',
   'src/form.js',
   'manifest.webmanifest',
   'src/styles.css',
