@@ -8,6 +8,7 @@ import { createWeb } from './web.js';
 const page = document.getElementById('page');
 const calm = matchMedia('(prefers-reduced-motion: reduce)');
 const icon = (paths, cls = 'icon') => '<svg class="' + cls + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + paths + '</svg>';
+const DOWN = icon('<path d="M12 5v14M6 13l6 6 6-6"/>', 'arrow down');
 const OUT = icon('<path d="M7 17 17 7M9 7h8v8"/>', 'arrow out');
 let site, lang, bar, heroEl, first = true, appear, spy;
 const webs = {}; // the canvases live on through language changes, so the web never restarts
@@ -100,20 +101,22 @@ function hero(t, config) {
   copy.appendChild(h('p', 'lede', t.hero.lede));
   const ctas = h('div', 'ctas');
   const involve = h('a', 'btn primary', t.hero.ctaInvolve + ARROW); involve.href = '#journey'; involve.id = 'cta-involve';
-  const learn = h('a', 'btn secondary', t.hero.ctaLearn + OUT); learn.href = t.links.learnMore; learn.rel = 'noopener'; learn.target = '_blank'; learn.id = 'cta-learn';
+  const learn = h('a', 'btn secondary', t.hero.ctaLearn + DOWN); learn.href = '#about'; learn.id = 'cta-learn'; // down the page, to Who we are
   ctas.appendChild(involve); ctas.appendChild(learn);
   if (config.draftLanguages.includes(lang) && t.draftNote) ctas.appendChild(h('p', 'draft', t.draftNote));
   copy.appendChild(ctas);
   s.appendChild(copy);
-  const stats = h('dl', 'stats');
+  const stats = h('dl', 'stats' + (t.hero.stats.length <= 3 ? ' few' : '')); stats.style.setProperty('--n', t.hero.stats.length);
   t.hero.stats.forEach(([n, label]) => { const d = h('div'); d.appendChild(figure(n)); d.appendChild(h('dd', null, label)); stats.appendChild(d); });
   s.appendChild(stats);
   return s;
 }
 
-// who we are: the three-word statement beside the introduction, then the values set large in one running line
+// who we are: a vivid burgundy band with a bold title, the three-word statement beside the introduction,
+// then the values set large in one running line
 function about(t) {
-  const s = section('about');
+  const s = section('about', 'about band');
+  s.appendChild(echo('about'));
   const head = h('div', 'about-head');
   const lead = reveal(h('div'));
   lead.appendChild(h('p', 'eyebrow', t.about.eyebrow));
@@ -214,10 +217,10 @@ function next(t) {
   return s;
 }
 
-// closing statement, then the footer: logo, section links, the three forms, languages and the Al Sharq Forum link
+// the footer: logo, section links and the three forms; then the link to the Al Sharq Youth website with the
+// closing statement under it; then the languages
 function foot(t, config, forms) {
   const f = h('footer', 'site-foot');
-  f.appendChild(reveal(h('p', 'closing', sentences(t.closing))));
   const grid = h('div', 'foot-grid');
   const brand = h('div', 'foot-brand', '<img class="logo" alt="' + t.nav.home + '" src="assets/logo-dark.png" width="472" height="189" loading="lazy">');
   brand.appendChild(h('p', null, t.footer.line));
@@ -232,6 +235,12 @@ function foot(t, config, forms) {
   grid.appendChild(column(t.nav.home, [...sectionLinks(t), testLink(t)]));
   grid.appendChild(column(t.journey.eyebrow, forms.forms.map((x) => { const a = h('a', null, t.forms[x.id].title); a.href = href('form.html', lang, { f: x.id }); return a; })));
   f.appendChild(grid);
+  // the page ends on the link to the Al Sharq Youth website, with the closing statement under it
+  const end = h('div', 'foot-end');
+  const out = h('a', 'foot-out', '<span>' + t.footer.site + '</span>' + OUT); out.href = 'https://youth.sharqforum.org/'; out.rel = 'noopener';
+  end.appendChild(out);
+  end.appendChild(reveal(h('p', 'closing', sentences(t.closing))));
+  f.appendChild(end);
   const base = h('div', 'foot-base');
   const langs = h('ul', 'foot-langs');
   config.languages.forEach((l) => {
@@ -240,8 +249,6 @@ function foot(t, config, forms) {
     li.appendChild(a); langs.appendChild(li);
   });
   base.appendChild(langs);
-  const out = h('a', 'foot-out', '<span>' + t.footer.site + '</span>' + OUT); out.href = 'https://youth.sharqforum.org/'; out.rel = 'noopener';
-  base.appendChild(out);
   f.appendChild(base);
   return f;
 }

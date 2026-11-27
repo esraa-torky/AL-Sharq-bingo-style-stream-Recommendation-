@@ -69,6 +69,8 @@ section h2{font-size:clamp(30px,4.4vw,52px);font-weight:700;margin-top:12px;max-
 .btn .arrow{width:18px;height:18px;flex:none;transition:transform .15s}
 .btn:hover .arrow{transform:translateX(3px)}
 .btn:hover .arrow.out{transform:translate(2px,-2px)}
+.btn:hover .arrow.down,[dir="rtl"] .btn:hover .arrow.down{transform:translateY(3px)}
+[dir="rtl"] .btn .arrow.down{transform:none}
 [dir="rtl"] .btn .arrow{transform:scaleX(-1)}
 [dir="rtl"] .btn:hover .arrow{transform:scaleX(-1) translateX(3px)}
 [dir="rtl"] .btn:hover .arrow.out{transform:scaleX(-1) translate(2px,-2px)}
@@ -174,7 +176,11 @@ main>section.hero+section::before{background:transparent}
 .hero .btn.secondary:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 .hero .draft{margin:0;margin-inline-start:10px;color:var(--hero-soft);opacity:.75}
 /* the numbers: six across on a wide screen, each with its label underneath, ruled off from its neighbour */
-.stats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid var(--hero-rule)}
+.stats{display:grid;grid-template-columns:repeat(var(--n,6),minmax(0,1fr));border-top:1px solid var(--hero-rule)}
+/* two or three numbers: larger, and kept together at the starting side instead of spread across the page */
+.stats.few{max-width:calc(var(--n,3) * 300px)}
+.stats.few dt{font-size:clamp(38px,5vw,68px)}
+.stats.few dd{font-size:13px;letter-spacing:.14em}
 .stats div{display:flex;flex-direction:column;gap:8px;padding:clamp(16px,2.4vh,24px) clamp(10px,1.4vw,20px) clamp(18px,3vh,30px);border-inline-start:1px solid var(--hero-rule)}
 .stats div:first-child{padding-inline-start:0;border-inline-start:0}
 .stats dt{font-family:var(--font-display);font-weight:700;font-size:clamp(30px,3.7vw,54px);line-height:1;letter-spacing:-0.03em;font-variant-numeric:tabular-nums}
@@ -190,7 +196,16 @@ main>section.hero+section::before{background:transparent}
 .hero.intro .ctas{animation:rise .8s cubic-bezier(.2,.7,.1,1) .85s both}
 .hero.intro .stats{animation:appear 1s ease 1s both}
 
-/* who we are: the statement beside the introduction, then the values */
+/* who we are: a vivid burgundy band; its title is set bold and large, in gold */
+main>section.about{background:radial-gradient(70% 90% at 100% 0%,#c21f52 0%,transparent 62%),radial-gradient(60% 80% at 0% 100%,#5c0d24 0%,transparent 70%),linear-gradient(135deg,#a3163f 0%,#7a1030 100%)}
+[dir="rtl"] main>section.about{background:radial-gradient(70% 90% at 0% 0%,#c21f52 0%,transparent 62%),radial-gradient(60% 80% at 100% 100%,#5c0d24 0%,transparent 70%),linear-gradient(225deg,#a3163f 0%,#7a1030 100%)}
+.about .band-web{opacity:.5}
+.about .eyebrow{font-size:clamp(22px,2.6vw,34px);font-weight:800;letter-spacing:.04em;color:var(--hero-gold)}
+[lang="ar"] .about .eyebrow{font-size:clamp(24px,2.8vw,36px)}
+.about .dot{color:var(--hero-gold)}
+.about .values{border-top-color:rgba(255,255,255,.3)}
+.about .values h3{color:var(--hero-soft)}
+.about .values li:not(:last-child)::after{background:var(--hero-gold)}
 .about-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:end}
 .statement{margin-top:18px;max-width:none;font-size:clamp(44px,7vw,96px);font-weight:800;line-height:1;letter-spacing:-0.015em}
 [lang="ar"] .statement{font-size:clamp(40px,6vw,84px);font-weight:700;line-height:1.35}
@@ -288,7 +303,8 @@ main>section.next::before{display:none}
 .closing{display:flex;flex-wrap:wrap;gap:0 .32em;font-family:var(--font-display);font-weight:800;font-size:clamp(40px,6.6vw,96px);line-height:1.04;letter-spacing:-0.025em}
 [lang="ar"] .closing{font-weight:700;line-height:1.4}
 .closing .dot{color:var(--hero-gold)}
-.foot-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr);gap:40px;margin-top:clamp(48px,7vw,96px);padding-top:40px;border-top:1px solid var(--hero-rule)}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr);gap:40px}
+.foot-end{display:flex;flex-direction:column;align-items:flex-start;gap:18px;margin-top:clamp(48px,7vw,96px);padding-top:40px;border-top:1px solid var(--hero-rule)}
 .foot-brand .logo{height:52px;width:auto}
 .foot-brand p{max-width:34ch;margin-top:16px;color:var(--hero-soft);font-size:15px}
 .foot-title{font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--hero-gold)}
@@ -299,8 +315,8 @@ main>section.next::before{display:none}
 .foot-base{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;margin-top:48px;padding-top:20px;border-top:1px solid var(--hero-rule);font-size:14px}
 .foot-langs{display:flex;flex-wrap:wrap;gap:6px 20px}
 .foot-langs a[aria-current]{opacity:1;color:var(--hero-gold)}
-.foot-out{display:inline-flex;align-items:center;gap:8px;font-weight:600}
-.foot-out .arrow{width:16px;height:16px}
+.site-foot .foot-out{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:clamp(17px,1.8vw,22px);color:var(--hero-gold);opacity:1}
+.foot-out .arrow{width:18px;height:18px}
 [dir="rtl"] .foot-out .arrow{transform:scaleX(-1)}
 
 /* the simple footer of the form pages */
@@ -371,9 +387,9 @@ main>section.next::before{display:none}
 @media (max-width:820px){
   .hero h1,[lang="ar"] .hero h1{font-size:clamp(40px,11.4vw,76px)}
   /* the numbers sit three across, in two rows */
-  .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .stats div:nth-child(3n+1){padding-inline-start:0;border-inline-start:0}
-  .stats div:nth-child(n+4){border-top:1px solid var(--hero-rule)}
+  .stats:not(.few){grid-template-columns:repeat(3,minmax(0,1fr))}
+  .stats:not(.few) div:nth-child(3n+1){padding-inline-start:0;border-inline-start:0}
+  .stats:not(.few) div:nth-child(n+4){border-top:1px solid var(--hero-rule)}
   .about-head{grid-template-columns:1fr;gap:24px}
   .involve-grid{grid-template-columns:1fr}
   .next-card{grid-template-columns:1fr}

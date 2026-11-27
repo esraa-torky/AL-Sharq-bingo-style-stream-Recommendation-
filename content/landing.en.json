@@ -18,14 +18,10 @@
     "title": "A generation shaping <em>the future.</em>",
     "lede": "Al Sharq Youth is a global ecosystem that connects and empowers young leaders and changemakers. Together, they advance political, economic, and social reform, cooperation, and integration.",
     "stats": [
-      ["47", "hubs"],
-      ["800+", "network members"],
-      ["40+", "countries in the network"],
-      ["21", "countries with active hubs"],
-      ["100+", "activities and initiatives"],
-      ["5", "international camps"]
+      ["47", "countries"],
+      ["2000", "network members"]
     ],
-    "ctaInvolve": "Get involved",
+    "ctaInvolve": "Join us now",
     "ctaLearn": "Learn more",
     "networkLabel": "A network of connected people and hubs"
   },
@@ -66,7 +62,7 @@
     "note": "Applications for the programs and hubs open after Al Sharq Forum 2026. Register your interest below and we will contact you."
   },
   "journey": {
-    "eyebrow": "Get involved",
+    "eyebrow": "Join us now",
     "title": "Your journey starts here"
   },
   "next": {

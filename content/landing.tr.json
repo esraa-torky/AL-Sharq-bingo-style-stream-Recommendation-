@@ -18,14 +18,10 @@
     "title": "<em>Geleceği</em> şekillendiren bir nesil.",
     "lede": "Al Sharq Youth, genç liderleri ve değişim yaratanları birbirine bağlayan ve güçlendiren küresel bir ekosistemdir. Birlikte siyasi, ekonomik ve sosyal reformu, iş birliğini ve bütünleşmeyi ilerletirler.",
     "stats": [
-      ["47", "hub"],
-      ["800+", "ağ üyesi"],
-      ["40+", "ağdaki ülke"],
-      ["21", "aktif hub’ı olan ülke"],
-      ["100+", "etkinlik ve girişim"],
-      ["5", "uluslararası kamp"]
+      ["47", "ülke"],
+      ["2000", "ağ üyesi"]
     ],
-    "ctaInvolve": "Sen de katıl",
+    "ctaInvolve": "Şimdi bize katıl",
     "ctaLearn": "Daha fazla bilgi",
     "networkLabel": "Birbirine bağlı insanlardan ve hub’lardan oluşan bir ağ"
   },
@@ -85,7 +81,7 @@
     "note": "Programlara ve hub’lara başvurular Al Sharq Forum 2026’dan sonra açılacak. Aşağıdan ilgini bildir, seninle iletişime geçelim."
   },
   "journey": {
-    "eyebrow": "Sen de katıl",
+    "eyebrow": "Şimdi bize katıl",
     "title": "Yolculuğun burada başlıyor"
   },
   "next": {
