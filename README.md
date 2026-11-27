@@ -106,18 +106,29 @@ The settings are in the repository: `wrangler.jsonc` (the project name and how f
 (makes the bare address open `index.html`). Pages keep their own addresses (`test.html`, `form.html?f=…`),
 exactly as on GitHub Pages, so links, QR codes and the offline copy work the same on both.
 
-The Cloudflare project is **`al-sharq-bingo-style-stream-recommendation`**, connected to this repository, at
-https://al-sharq-bingo-style-stream-recommendation.salaheddin-jarjour.workers.dev
+Cloudflare publishes from a **copy** of this repository,
+[salaheddinjarjour-ai/al-sharq-bingo-style-stream-recommendation](https://github.com/salaheddinjarjour-ai/al-sharq-bingo-style-stream-recommendation),
+at https://al-sharq-bingo-style-stream-recommendation.salaheddin-jarjour.workers.dev
 
-Every merge into `main` is published by Cloudflare within a minute or two. To publish another branch instead,
-change the production branch in the project's **Settings → Builds**. A domain of your own is added under
-**Settings → Domains & Routes**.
+**This repository is where changes are made.** The copy follows it by itself: every 15 minutes a workflow in the
+copy (`.github/workflows/sync-from-original.yml`) brings in this repository's `main` branch, and Cloudflare
+publishes it a minute or two later. So a change merged into `main` here reaches the Cloudflare address
+within about half an hour, with nothing to do by hand. To bring it across at once, open the copy's
+**Actions** tab, choose **Sync from the original repository** and press **Run workflow**.
 
-If the project is ever made again (Workers & Pages → Create → Import a repository), give it the same name as
-`name` in `wrangler.jsonc`, leave the build command empty and keep the deploy command `npx wrangler deploy`.
+- Anything edited directly in the copy is replaced at the next sync. Edit here.
+- The copy keeps two things of its own: its `.github` folder, and its own address in the link-preview tags.
+- If this repository's content check fails, the copy is left as it was until the content is fixed.
+- GitHub pauses timed workflows in a repository that has had no activity for 60 days; pressing
+  **Run workflow** once starts it again.
 
-If Cloudflare becomes the main address, put it into the `og:` tags at the top of `index.html`
-(see "The link preview") and remake the QR codes (see "The QR codes"); both still point at GitHub Pages.
+The Cloudflare project is named **`al-sharq-bingo-style-stream-recommendation`**, the same as `name` in
+`wrangler.jsonc`. If it is ever made again (Workers & Pages → Create → Import a repository), keep that name,
+leave the build command empty and keep the deploy command `npx wrangler deploy`. A domain of your own is added
+under the project's **Settings → Domains & Routes**.
+
+The QR codes (see "The QR codes") point at the GitHub Pages address; remake them if the Cloudflare address
+is to be the one on printed material.
 
 To try the Cloudflare setup on your own computer: `npm run cloudflare`, then open http://localhost:8787.
 `npm run deploy` publishes from your computer after signing in with `npx wrangler login`.
