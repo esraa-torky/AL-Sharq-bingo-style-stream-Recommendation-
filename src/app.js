@@ -215,9 +215,9 @@ function render(enter) {
     const top = h('div'); top.innerHTML = logos(); c.appendChild(top.firstChild); c.appendChild(top.lastChild);
     c.appendChild(h('p', 'res-k', t.ui.yourMatch));
     c.appendChild(h('h1', 'res-name' + (name.length > 12 ? ' long' : ''), name));
+    c.appendChild(ticket(pr));
     const mix = breakdown(shares(config, res), win);
     if (mix) c.appendChild(mix);
-    c.appendChild(ticket(pr));
     const card = bingoCard(true, win); card.appendChild(papered('banner', 'banner-wrap', 'BINGO!', 1.2));
     (tab ? R : c).appendChild(card);
     c.appendChild(h('div', 'spacer'));

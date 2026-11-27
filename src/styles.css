@@ -350,7 +350,7 @@ body{margin:0;overflow:hidden;-webkit-tap-highlight-color:transparent}
 @keyframes fade-out{to{opacity:0}}
 
 /* ---------- result: how close the visitor is to each stream ---------- */
-.mix{display:flex;flex-direction:column;gap:6px;margin-top:-2px}
+.mix{display:flex;flex-direction:column;gap:6px;margin-top:2px}
 .mix-k{font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);line-height:1.3}
 .mix-rows{display:grid;grid-template-columns:max-content minmax(0,1fr) max-content;column-gap:10px;row-gap:5px}
 /* every row shares the list's columns, so the three bars start and end at the same place */
